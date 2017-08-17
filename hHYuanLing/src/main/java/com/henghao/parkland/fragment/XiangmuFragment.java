@@ -11,31 +11,25 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.benefit.buy.library.utils.tools.ToolsJson;
-import com.benefit.buy.library.utils.tools.ToolsKit;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-import com.henghao.parkland.ProtocolUrl;
+import com.henghao.parkland.BuildConfig;
 import com.henghao.parkland.R;
 import com.henghao.parkland.adapter.ProjectFirstAdapter;
 import com.henghao.parkland.adapter.ProjectSecondAdapter;
 import com.henghao.parkland.model.entity.AppGridEntity;
 import com.henghao.parkland.model.entity.BaseEntity;
 import com.henghao.parkland.model.entity.ProjectInfoEntity;
-import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.view.annotation.ViewInject;
-import com.lidroid.xutils.view.annotation.event.OnClick;
-import com.squareup.okhttp.Call;
-import com.squareup.okhttp.Callback;
-import com.squareup.okhttp.FormEncodingBuilder;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
+import com.henghao.parkland.utils.Requester;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
+import okhttp3.Call;
 
 /**
  * 项目管理〈一句话功能简述〉 〈功能详细描述〉
@@ -47,8 +41,10 @@ import java.util.List;
  */
 public class XiangmuFragment extends FragmentSupport {
 
-    @ViewInject(R.id.gridview)
-    private GridView gridview;
+    @InjectView(R.id.gridview)
+    GridView gridview;
+
+    private static final String TAG = "XiangmuFragment";
 
     private ProjectSecondAdapter mMyAdapter;
     private ProjectFirstAdapter mProAdapter;
@@ -56,7 +52,6 @@ public class XiangmuFragment extends FragmentSupport {
     public static ProjectInfoEntity mInfoEntity;//通用的项目信息
     public static int index;//项目名称索引
 
-    private List<ProjectInfoEntity> mList;//项目信息集合
     private String[] projectNames;//项目名称列表
 
     private List<ProjectInfoEntity> projectInfoEntities;//项目信息数据
@@ -71,7 +66,7 @@ public class XiangmuFragment extends FragmentSupport {
         this.mActivityFragmentView.viewEmpty(R.layout.activity_empty);
         this.mActivityFragmentView.viewEmptyGone();
         this.mActivityFragmentView.viewLoading(View.GONE);
-        ViewUtils.inject(this, this.mActivityFragmentView);
+        ButterKnife.inject(this, this.mActivityFragmentView);
         initWidget();
         initData();
         initClick();
@@ -87,7 +82,7 @@ public class XiangmuFragment extends FragmentSupport {
             public void onClick(View v) {
                 //如果还未添加项目信息，则提示用户，否则弹出选项对话框
                 if (projectNames == null) {
-                    Toast.makeText(getActivity(), mCenterTextView.getText() + "！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "无数据！", Toast.LENGTH_SHORT).show();
                 } else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setIcon(R.drawable.icon_select);
@@ -97,7 +92,7 @@ public class XiangmuFragment extends FragmentSupport {
                         public void onClick(DialogInterface dialog, int which) {
                             //记录当前项目信息
                             index = which;
-                            mInfoEntity = mList.get(index);
+                            mInfoEntity = initProjectInfoEntities.get(index);
                             mCenterTextView.setText(mInfoEntity.getName());
                             dialog.dismiss();
                         }
@@ -112,6 +107,8 @@ public class XiangmuFragment extends FragmentSupport {
     private void initData() {
         projectTop();
         projectMy();
+        projectInfoEntities = new ArrayList<>();
+        initProjectInfoEntities = new ArrayList<>();
     }
 
     /**
@@ -222,118 +219,87 @@ public class XiangmuFragment extends FragmentSupport {
     private void initwithContent() {
         initWithCenterBar();
         this.mCenterTextView.setVisibility(View.VISIBLE);
-        mCenterTextView.setText("项目管理");
+        this.mCenterTextView.setText("项目管理");
         initWithBar();
         this.mLeftImageView.setVisibility(View.VISIBLE);
         this.mLeftImageView.setImageResource(R.drawable.home_liebiao);
         initWithRightBar();
-        mRightTextView.setVisibility(View.VISIBLE);
-        mRightTextView.setText("切换");
+        this.mRightTextView.setVisibility(View.VISIBLE);
+        this.mRightTextView.setText("切换");
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mActivityFragmentView.viewLoading(View.VISIBLE);
-        requestInternet();
+        initProjectInfoEntities.clear();//清空缓存
+        //请求网络，查询个人项目信息
+        findXmxxCall = Requester.findXmxx(page, mActivity.getLoginUid(), "", findXmxxCallBack);
     }
 
-    /**
-     * 访问服务器，请求项目信息
-     */
-    private void requestInternet() {
-        OkHttpClient okHttpClient = new OkHttpClient();
-        Request.Builder builder = new Request.Builder();
-        FormEncodingBuilder requestBodyBuilder = new FormEncodingBuilder();
-        String UID = mActivity.getLoginUid();
-        if (UID != null) requestBodyBuilder.add("uid", UID);
-        RequestBody requestBody = requestBodyBuilder.build();
-        Request request = builder.post(requestBody).url(ProtocolUrl.ROOT_URL + "/" + ProtocolUrl.FIND_XMXX).build();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(Request request, final IOException e) {
-                mActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.e("fail", "请求失败", e);
-                        if (e.toString().indexOf("java.net.SocketTimeoutException") != -1) {
-                            Toast.makeText(mActivity, "网络访问错误！请稍后重试！", Toast.LENGTH_SHORT).show();
-                        } else if (e.toString().indexOf("") != 1) {
-                            Toast.makeText(mActivity, "网络不给力，请检查网络设置。", Toast.LENGTH_SHORT).show();
-                        }
-                        mActivityFragmentView.viewLoading(View.GONE);
-                    }
-                });
-            }
+    private DefaultCallback findXmxxCallBack = new DefaultCallback() {
+        @Override
+        public void onFailure(Exception e, int code) {
+            if (BuildConfig.DEBUG) Log.e(TAG, "onFailure: code = " + code, e);
+            e.printStackTrace();
+            Toast.makeText(mActivity, "网络访问错误！", Toast.LENGTH_SHORT).show();
+        }
 
-            @Override
-            public void onResponse(Response response) throws IOException {
-                String result_str = response.body().string();
-                Type baseEntityTye = new TypeToken<BaseEntity>() {
+        @Override
+        public void onSuccess(String response) {
+            if (BuildConfig.DEBUG) Log.d(TAG, "onSuccess: " + response);
+            try {
+                Type baseType = new TypeToken<BaseEntity>() {
                 }.getType();
-                try {
-                    //解析Json
-                    final BaseEntity baseEntity = ToolsJson.parseObjecta(result_str, baseEntityTye);
-                    if (baseEntity != null) {
-                        String data = ToolsJson.toJson(baseEntity.getData());
-                        if (ToolsKit.isEmpty(data)) {//如果返回数据为空
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    mCenterTextView.setText(baseEntity.getMsg());
-                                    mActivityFragmentView.viewLoading(View.GONE);
-                                    //还原初始化数据
-                                    if (mList != null) {
-                                        mInfoEntity = null;
-                                        index = 0;
-                                        mList.clear();
-                                        projectNames = null;
-                                    }
-                                }
-                            });
-                        } else {
-                            Type type = new TypeToken<List<ProjectInfoEntity>>() {
-                            }.getType();
-                            mList = ToolsJson.parseObjecta(data, type);
-                            //取得返回的项目信息集合名称列表
-                            if (mList != null) {
-                                projectNames = new String[mList.size()];
-                                for (int i = 0; i < mList.size(); i++) {
-                                    projectNames[i] = mList.get(i).getName();
-                                }
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        mActivityFragmentView.viewLoading(View.GONE);
-                                        //默认显示第一个项目信息的名称，如果已选则其他，则显示其他项目信息名称
-                                        mCenterTextView.setText(mList.get(index).getName());
-                                        mInfoEntity = mList.get(index);
-                                    }
-                                });
+                BaseEntity baseEntity = ToolsJson.parseObjecta(response, baseType);
+                if (baseEntity != null) {
+                    int errorCode = baseEntity.getErrorCode();
+                    if (errorCode > 0) {//无数据
+                        if (initProjectInfoEntities.size() == 0) {
+                            //还原初始化数据
+                            if (initProjectInfoEntities != null) {
+                                mInfoEntity = null;
+                                index = 0;
+                                projectNames = null;
                             }
                         }
-                    }
-                } catch (JsonSyntaxException e) {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mActivityFragmentView.viewLoading(View.GONE);
-                            Toast.makeText(mActivity, "服务器错误，请稍后重试！", Toast.LENGTH_SHORT).show();
+                        mActivity.msg(baseEntity.getMsg());
+                        mCenterTextView.setText(baseEntity.getMsg());
+                    } else {//查询结果有数据
+                        String jsonStr = ToolsJson.toJson(baseEntity.getData());
+                        Type infoType = new TypeToken<List<ProjectInfoEntity>>() {
+                        }.getType();
+                        projectInfoEntities.clear();
+                        projectInfoEntities = ToolsJson.parseObjecta(jsonStr, infoType);
+                        for (int i = 0; i < projectInfoEntities.size(); i++) {
+                            ProjectInfoEntity entity = projectInfoEntities.get(i);
+                            initProjectInfoEntities.add(entity);
                         }
-                    });
-                    e.printStackTrace();
+                        //取得返回的项目信息集合名称列表
+                        if (initProjectInfoEntities != null) {
+                            projectNames = new String[initProjectInfoEntities.size() + 1];
+                            for (int i = 0; i < initProjectInfoEntities.size(); i++) {
+                                projectNames[i] = initProjectInfoEntities.get(i).getName();
+                            }
+                            projectNames[initProjectInfoEntities.size()] = "加载更多";
+                            //默认显示第一个项目信息的名称，如果已选则其他，则显示其他项目信息名称
+                            mCenterTextView.setText(initProjectInfoEntities.get(index).getName());
+                            mInfoEntity = initProjectInfoEntities.get(index);
+                        }
+                    }
                 }
+            } catch (JsonSyntaxException e) {
+                e.printStackTrace();
             }
-        });
-    }
+        }
+    };
 
     public void initWidget() {
         initwithContent();
     }
 
     @OnClick({R.id.xm_my, R.id.xm_project})
-    private void viewOnClick(View v) {
+    public void onViewClicked(View v) {
         switch (v.getId()) {
             case R.id.xm_project:
                 //项目管理
@@ -346,5 +312,11 @@ public class XiangmuFragment extends FragmentSupport {
                 mMyAdapter.notifyDataSetChanged();
                 break;
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
     }
 }
