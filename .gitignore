@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gradle/
+.idea/
+/build/
+/hHYuanLing/build/
+/x_library/build/
+/local.properties
+*.iml
+b_library/build/
+/hHYuanLing/hHYuanLing-release.apk

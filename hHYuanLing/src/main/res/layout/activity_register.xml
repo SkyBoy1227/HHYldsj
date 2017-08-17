@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dl_content_bg"
+    android:orientation="vertical">
+
+    <!-- 用户名和密码编辑框 -->
+
+    <LinearLayout
+        android:id="@+id/edit_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/padding_big"
+        android:background="@drawable/dl_content_bg"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_vertical"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
+        android:paddingTop="@dimen/padding_vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/padding_big"
+            android:gravity="center"
+            android:padding="@dimen/padding_normal"
+            android:text="注册享受更贴心的定制服务"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/gj_f" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_normal"
+                android:layout_weight="1"
+                android:text="@string/login_user"
+                android:textColor="@color/text_color_e"
+                android:textSize="@dimen/gj_f" />
+
+            <EditText
+                android:id="@+id/et_userName_register"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/view_height"
+                android:layout_weight="3"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="请输入用户名"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/padding_normal"
+                android:singleLine="true"
+                android:textColor="@color/text_color"
+                android:textColorHint="@color/hint_color"
+                android:textSize="@dimen/gj_f" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_normal"
+                android:layout_weight="1"
+                android:text="@string/login_pass_hint"
+                android:textColor="@color/text_color_e"
+                android:textSize="@dimen/gj_f" />
+
+            <EditText
+                android:id="@+id/et_passWord_register"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/view_height"
+                android:layout_weight="3"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/register_hint_pass"
+                android:inputType="textPassword"
+                android:maxLength="16"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/padding_normal"
+                android:singleLine="true"
+                android:textColor="@color/text_color"
+                android:textColorHint="@color/hint_color"
+                android:textSize="@dimen/gj_f" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_normal"
+                android:layout_weight="1"
+                android:text="@string/register_confirm_pass"
+                android:textColor="@color/text_color_e"
+                android:textSize="@dimen/gj_f" />
+
+            <EditText
+                android:id="@+id/et_passWord_confirm_register"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/view_height"
+                android:layout_weight="3"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/register_hint_pass"
+                android:inputType="textPassword"
+                android:maxLength="16"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/padding_normal"
+                android:singleLine="true"
+                android:textColor="@color/text_color"
+                android:textColorHint="@color/hint_color"
+                android:textSize="@dimen/gj_f" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_normal"
+                android:layout_weight="1"
+                android:text="@string/login_contact"
+                android:textColor="@color/text_color_e"
+                android:textSize="@dimen/gj_f" />
+
+            <EditText
+                android:id="@+id/et_name_register"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/view_height"
+                android:layout_weight="3"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/register_echo_contact"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/padding_normal"
+                android:singleLine="true"
+                android:textColor="@color/text_color"
+                android:textColorHint="@color/hint_color"
+                android:textSize="@dimen/gj_f" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_normal"
+                android:layout_weight="1"
+                android:text="@string/login_phone"
+                android:textColor="@color/text_color_e"
+                android:textSize="@dimen/gj_f" />
+
+            <EditText
+                android:id="@+id/et_tel_register"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/view_height"
+                android:layout_weight="3"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/register_echo_phone"
+                android:inputType="number"
+                android:maxLength="11"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/padding_normal"
+                android:singleLine="true"
+                android:textColor="@color/text_color"
+                android:textColorHint="@color/hint_color"
+                android:textSize="@dimen/gj_f" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_normal"
+                android:layout_weight="1"
+                android:text="@string/login_email"
+                android:textColor="@color/text_color_e"
+                android:textSize="@dimen/gj_f" />
+
+            <EditText
+                android:id="@+id/et_email_register"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/view_height"
+                android:layout_weight="3"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/register_echo_email"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/padding_normal"
+                android:singleLine="true"
+                android:textColor="@color/text_color"
+                android:textColorHint="@color/hint_color"
+                android:textSize="@dimen/gj_f" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/padding_normal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/register_sex"
+                android:textColor="@color/text_color_e"
+                android:textSize="@dimen/gj_f" />
+
+            <com.henghao.parkland.views.FlowRadioGroup
+                android:id="@+id/rg_sex_register"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/view_height"
+                android:layout_weight="3"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_male_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="男" />
+
+                <RadioButton
+                    android:id="@+id/rb_female_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding_big"
+                    android:text="女" />
+
+            </com.henghao.parkland.views.FlowRadioGroup>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_normal"
+                android:layout_weight="1"
+                android:text="@string/login_IDCard"
+                android:textColor="@color/text_color_e"
+                android:textSize="@dimen/gj_f" />
+
+            <EditText
+                android:id="@+id/et_idCard_register"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/view_height"
+                android:layout_weight="3"
+                android:background="@null"
+                android:digits="0123456789X"
+                android:gravity="center_vertical"
+                android:hint="@string/register_echo_IDCard"
+                android:inputType="number"
+                android:maxLength="18"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/padding_normal"
+                android:singleLine="true"
+                android:textColor="@color/text_color"
+                android:textColorHint="@color/hint_color"
+                android:textSize="@dimen/gj_f" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_normal"
+                android:layout_weight="1"
+                android:text="@string/register_company_name"
+                android:textColor="@color/text_color_e"
+                android:textSize="@dimen/gj_f" />
+
+            <EditText
+                android:id="@+id/et_companyName_register"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/view_height"
+                android:layout_weight="3"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/register_echo_companyName"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/padding_normal"
+                android:singleLine="true"
+                android:textColor="@color/text_color"
+                android:textColorHint="@color/hint_color"
+                android:textSize="@dimen/gj_f" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_normal"
+                android:layout_weight="1"
+                android:text="@string/register_confirm_pic"
+                android:textColor="@color/text_color_e"
+                android:textSize="@dimen/gj_f" />
+
+            <TextView
+                android:id="@+id/tv_picture_register"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/view_height"
+                android:layout_weight="3"
+                android:background="@null"
+                android:drawableRight="@drawable/icon_add"
+                android:gravity="center_vertical"
+                android:hint="@string/register_hint_pic"
+                android:paddingLeft="@dimen/padding_normal"
+                android:textColor="@color/text_color_c"
+                android:textColorHint="@color/hint_color"
+                android:textSize="@dimen/gj_f" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_normal"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_userCode_register"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/view_height"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/login_auth_code"
+                android:inputType="text"
+                android:maxLength="16"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/padding_normal"
+                android:singleLine="true"
+                android:textColor="@color/text_color"
+                android:textColorHint="@color/hint_color"
+                android:textSize="@dimen/gj_f" />
+
+            <ImageView
+                android:id="@+id/iv_authCode_register"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="@color/line" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_layout"
+        android:layout_marginBottom="18dip"
+        android:layout_marginLeft="@dimen/padding_big"
+        android:layout_marginRight="@dimen/padding_big"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bluecircleframe"
+            android:gravity="center"
+            android:paddingBottom="@dimen/padding_big"
+            android:paddingLeft="@dimen/padding_vertical_a"
+            android:paddingRight="@dimen/padding_vertical_a"
+            android:paddingTop="@dimen/padding_big"
+            android:text="@string/register_finish"
+            android:textColor="@color/white"
+            android:textSize="@dimen/gj_d" />
+    </LinearLayout>
+</LinearLayout>

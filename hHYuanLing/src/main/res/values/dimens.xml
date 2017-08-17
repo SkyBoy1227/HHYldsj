@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 字体大小 -->
+    <dimen name="gj_a">8sp</dimen>
+    <dimen name="gj_b">10sp</dimen>
+    <dimen name="gj_c">12sp</dimen>
+    <dimen name="gj_d">14sp</dimen>
+    <dimen name="gj_e">15sp</dimen>
+    <dimen name="gj_f">16sp</dimen>
+    <dimen name="gj_g">18sp</dimen>
+
+    <!-- 常用间距 -->
+    <dimen name="padding_normal">8dp</dimen>
+    <dimen name="padding_normal_max">12dp</dimen>
+    <dimen name="padding_small_min">2dp</dimen>
+    <dimen name="padding_small">4dp</dimen>
+    <dimen name="padding_big">16dp</dimen>
+    <dimen name="padding_more">12dp</dimen>
+    <dimen name="padding_vertical">22dp</dimen>
+    <dimen name="padding_vertical_a">36dp</dimen>
+    <dimen name="padding_vertical_b">18dp</dimen>
+    <dimen name="padding_vertical_c">42dp</dimen>
+    <!-- 常用view高度 -->
+    <dimen name="view_btn_height">46dp</dimen>
+    <dimen name="view_height">48dp</dimen>
+    <dimen name="message_wh">75dp</dimen>
+    <dimen name="view_listview">160dp</dimen>
+    <dimen name="view_popwindow">200dp</dimen>
+    <dimen name="view_high">260dp</dimen>
+    <dimen name="viewheader_hieght">55dp</dimen>
+    <dimen name="view_edit">66dp</dimen>
+    <!-- 界面高度 -->
+    <dimen name="view_height_">24dp</dimen>
+    <dimen name="view_height_a">28dp</dimen>
+    <dimen name="view_height_b">34dp</dimen>
+    <dimen name="view_height_c">40dp</dimen>
+    <dimen name="view_height_d">54dp</dimen>
+
+    <!-- 意见反馈 -->
+    <dimen name="opinions_edit_height">100dp</dimen>
+    <dimen name="cart_item_top_height">40dp</dimen>
+
+    <!-- 按钮大小 -->
+    <dimen name="btn_height_lucky">32dp</dimen>
+    <dimen name="btn_height_myfitment">48dp</dimen>
+    <dimen name="btn_width">80dp</dimen>
+    <dimen name="btn_width_applycode">120dp</dimen>
+    <dimen name="btn_height">30dp</dimen>
+
+    <!-- ToggleButton -->
+    <dimen name="togglebutton_w">20dp</dimen>
+
+    <!-- 公司商标 -->
+    <dimen name="fitment_mark">80dp</dimen>
+    <dimen name="fitment_smallmark">60dp</dimen>
+    <dimen name="main_leftmark">100dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="view_mytop">248dp</dimen>
+    <!--<dimen name="info_name_size">16sp</dimen>-->
+    <!--<dimen name="info_enterprise_size">14sp</dimen>-->
+
+</resources>
