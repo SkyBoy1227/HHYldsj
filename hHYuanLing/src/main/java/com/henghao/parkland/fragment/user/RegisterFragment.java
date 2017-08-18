@@ -162,7 +162,7 @@ public class RegisterFragment extends FragmentSupport {
                 addPic();
                 break;
             case R.id.iv_authCode_register:
-                authCodeCall = Requester.authCode(authCodeCallBack);//请求服务器更换验证码
+                authCodeCall = Requester.authCode(null,authCodeCallBack);//请求服务器更换验证码
                 break;
             case R.id.btn_layout:
                 //注册
@@ -370,7 +370,7 @@ public class RegisterFragment extends FragmentSupport {
     public void onResume() {
         super.onResume();
         //刷新验证码，以防失效
-        authCodeCall = Requester.authCode(authCodeCallBack);//请求服务器更换验证码
+        authCodeCall = Requester.authCode(null,authCodeCallBack);//请求服务器更换验证码
     }
 
     @Override

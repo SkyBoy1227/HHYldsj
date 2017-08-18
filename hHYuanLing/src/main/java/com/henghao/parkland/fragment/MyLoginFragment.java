@@ -223,10 +223,12 @@ public class MyLoginFragment extends FragmentSupport {
             editor.remove(Constant.USER)
                     .remove(Constant.USERNAME)
                     .remove(Constant.USERID)
+                    .remove(Constant.USERSESSION)
                     .remove(Constant.USERPHONE);
             editor.putString(Constant.USER, null);
             editor.putString(Constant.USERNAME, null);
             editor.putString(Constant.USERID, null);
+            editor.putString(Constant.USERSESSION, null);
             editor.putString(Constant.USERPHONE, null);
             editor.commit();
             dialog.dismiss();

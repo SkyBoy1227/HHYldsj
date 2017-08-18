@@ -52,7 +52,7 @@ public class ProtocolUrl {
     /**
      * 用户登录
      */
-    public static String APP_LOGIN = "yldsj/login";
+    public static String APP_LOGIN = "yldsj/app/login";
 
     public static String APP_GET_NFCBYID = "login";
     /**

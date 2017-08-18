@@ -21,6 +21,7 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.henghao.parkland.BuildConfig;
 import com.henghao.parkland.Constant;
+import com.henghao.parkland.ProtocolUrl;
 import com.henghao.parkland.R;
 import com.henghao.parkland.activity.MainActivity;
 import com.henghao.parkland.fragment.FragmentSupport;
@@ -29,12 +30,19 @@ import com.henghao.parkland.model.entity.UserLoginEntity;
 import com.henghao.parkland.utils.Requester;
 import com.higdata.okhttphelper.callback.BytesCallback;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static com.henghao.parkland.R.id.iv_eye_login;
 
@@ -62,6 +70,8 @@ public class LoginFragment extends FragmentSupport {
 
     private Call loginCall;//登录请求
     private Call authCodeCall;//验证码请求
+    private String session;//用户Session
+    private Map<String, String> headers;//请求头
 
     public static FragmentSupport newInstance(Object obj) {
         LoginFragment fragment = new LoginFragment();
@@ -81,6 +91,7 @@ public class LoginFragment extends FragmentSupport {
         mActivityFragmentView.getNavitionBarView().setVisibility(View.GONE);
         ButterKnife.inject(this, this.mActivityFragmentView);
         initWidget();
+        initData();
         return this.mActivityFragmentView;
     }
 
@@ -89,6 +100,46 @@ public class LoginFragment extends FragmentSupport {
         mLeftImageView.setImageDrawable(getResources().getDrawable(R.drawable.btn_back));
         mCenterTextView = (TextView) getActivity().findViewById(R.id.bar_center_title);
         mCenterTextView.setText("登录");
+    }
+
+    private void initData() {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder().url(Requester.getRequestURL(ProtocolUrl.AUTHCODE)).build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                if (BuildConfig.DEBUG) Log.e(TAG, "onFailure:  ", e);
+                e.printStackTrace();
+                mActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(mActivity, "网络访问错误！", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (BuildConfig.DEBUG) Log.d(TAG, "onSuccess: ");
+                session = response.header("Set-Cookie");
+                //设置请求头
+                headers = new HashMap<>();
+                headers.put("Cookie", session);
+                //将用户Session保存
+                mActivity.getLoginUserSharedPre().edit()
+                        .putString(Constant.USERSESSION, session)//用户Session
+                        .apply();
+                byte[] bytes = response.body().bytes();
+                final Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                mActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ivAuthCode.setImageBitmap(bitmap);
+                    }
+                });
+            }
+        });
     }
 
     @OnClick({iv_eye_login, R.id.iv_authCode_login, R.id.login_reset_password, R.id.tv_login})
@@ -107,7 +158,9 @@ public class LoginFragment extends FragmentSupport {
                 }
                 break;
             case R.id.iv_authCode_login:
-                authCodeCall = Requester.authCode(authCodeCallBack);//请求服务器更换验证码
+                headers = new HashMap<>();
+                headers.put("Cookie", session);
+                authCodeCall = Requester.authCode(headers, authCodeCallBack);//请求服务器更换验证码
                 break;
             case R.id.login_reset_password:
                 mActivity.msg("未实现");
@@ -115,7 +168,9 @@ public class LoginFragment extends FragmentSupport {
             case R.id.tv_login:
                 //登录
                 if (checkData()) {
-                    loginCall = Requester.login(etUserName.getText().toString().trim(), etPassword.getText().toString().trim(), etUserCode.getText().toString().trim(), loginCallback);
+                    headers = new HashMap<>();
+                    headers.put("Cookie", session);
+                    loginCall = Requester.login(etUserName.getText().toString().trim(), etPassword.getText().toString().trim(), etUserCode.getText().toString().trim(), headers, loginCallback);
                 }
                 break;
         }
@@ -201,8 +256,12 @@ public class LoginFragment extends FragmentSupport {
     @Override
     public void onResume() {
         super.onResume();
-        //刷新验证码，以防失效
-        authCodeCall = Requester.authCode(authCodeCallBack);//请求服务器更换验证码
+        if (!ToolsKit.isEmpty(session)) {
+            headers = new HashMap<>();
+            headers.put("Cookie", session);
+            //刷新验证码，以防失效
+            authCodeCall = Requester.authCode(headers, authCodeCallBack);//请求服务器更换验证码
+        }
     }
 
     @Override
