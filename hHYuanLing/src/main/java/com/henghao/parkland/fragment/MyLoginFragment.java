@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.benefit.buy.library.utils.tools.ToolsKit;
@@ -18,17 +17,21 @@ import com.benefit.buy.library.views.CircularImageView;
 import com.benefit.buy.library.views.dialog.BaseDialog;
 import com.henghao.parkland.BuildConfig;
 import com.henghao.parkland.Constant;
+import com.henghao.parkland.ProtocolUrl;
 import com.henghao.parkland.R;
 import com.henghao.parkland.activity.DebugSettingActivity;
-import com.henghao.parkland.activity.user.QiandaoActivity;
+import com.henghao.parkland.activity.WebviewActivity;
 import com.henghao.parkland.activity.projectmanage.ProjectInfoActivity;
-import com.henghao.parkland.activity.user.CompactManageActivity;
 import com.henghao.parkland.activity.user.LoginAndRegActivity;
 import com.henghao.parkland.activity.user.MyWorkerListActivity;
+import com.henghao.parkland.activity.user.QiandaoActivity;
 import com.henghao.parkland.activity.user.SettingActivity;
+import com.henghao.parkland.utils.Requester;
 import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.view.annotation.ViewInject;
-import com.lidroid.xutils.view.annotation.event.OnClick;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * 我的〈一句话功能简述〉 〈功能详细描述〉
@@ -39,37 +42,26 @@ import com.lidroid.xutils.view.annotation.event.OnClick;
  * @since [产品/模块版本]
  */
 public class MyLoginFragment extends FragmentSupport {
-
     /**
      * 用户头像
      */
-    @ViewInject(R.id.user_header)
-    private CircularImageView user_header;
+    @InjectView(R.id.user_header)
+    CircularImageView user_header;
     /**
      * 用户名称
      */
-    @ViewInject(R.id.tv_userName)
-    private TextView tv_userName;
+    @InjectView(R.id.tv_userName)
+    TextView tv_userName;
     /**
      * 用户电话
      */
-    @ViewInject(R.id.tv_userPhone)
-    private TextView tv_userPhone;
+    @InjectView(R.id.tv_userPhone)
+    TextView tv_userPhone;
     /**
      * 登录
      */
-    @ViewInject(R.id.tv_login)
-    private TextView tv_login;
-    /**
-     * 设置
-     */
-    @ViewInject(R.id.image_setting)
-    private ImageView image_setting;
-    /**
-     * 我的工作
-     */
-    @ViewInject(R.id.tv_myworker)
-    private TextView tv_myworker;
+    @InjectView(R.id.tv_login)
+    TextView tv_login;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -83,6 +75,7 @@ public class MyLoginFragment extends FragmentSupport {
         initWidget();
         initData();
         if (BuildConfig.DEBUG) initButton();
+        ButterKnife.inject(this, this.mActivityFragmentView);
         return this.mActivityFragmentView;
     }
 
@@ -128,7 +121,7 @@ public class MyLoginFragment extends FragmentSupport {
     }
 
     @OnClick({R.id.tv_login, R.id.ll_updatename, R.id.image_setting, R.id.tv_myworker, R.id.tv_qiandao, R.id.tv_myproject, R.id.tv_compactmanage})
-    private void viewClick(View v) {
+    public void onViewClicked(View v) {
         final Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.tv_login:
@@ -179,9 +172,30 @@ public class MyLoginFragment extends FragmentSupport {
                 builder.setItems(data, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        CompactManageActivity.setIndexOfSelect(which);
-                        intent.setClass(mActivity, CompactManageActivity.class);
-                        startActivity(intent);
+                        Intent intent = new Intent();
+                        switch (which) {
+                            case 0:
+                                //商务合同
+                                intent.putExtra("title", "商务合同");
+                                intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_SWHT) + mActivity.getLoginUserName());
+                                intent.setClass(mActivity, WebviewActivity.class);
+                                mActivity.startActivity(intent);
+                                break;
+                            case 1:
+                                //劳务合同
+                                intent.putExtra("title", "劳务合同");
+                                intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_LWHT) + mActivity.getLoginUserName());
+                                intent.setClass(mActivity, WebviewActivity.class);
+                                mActivity.startActivity(intent);
+                                break;
+                            case 2:
+                                //授权合同
+                                intent.putExtra("title", "授权合同");
+                                intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_SQHT) + mActivity.getLoginUserName());
+                                intent.setClass(mActivity, WebviewActivity.class);
+                                mActivity.startActivity(intent);
+                                break;
+                        }
                     }
                 });
                 AlertDialog dialog = builder.create();
@@ -230,4 +244,10 @@ public class MyLoginFragment extends FragmentSupport {
             dialog.dismiss();
         }
     };
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
+    }
 }

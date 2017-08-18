@@ -99,6 +99,11 @@
             android:name=".activity.user.LoginAndRegActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Activity.Theme" />
+        <!-- activity 慧正工作流请求页面 -->
+        <activity
+            android:name=".activity.WebviewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Activity.Theme" />
         <!-- activity 合同管理 -->
         <activity
             android:name=".activity.user.CompactManageActivity"

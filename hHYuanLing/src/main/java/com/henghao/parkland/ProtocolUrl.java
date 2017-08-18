@@ -25,13 +25,22 @@ public class ProtocolUrl {
      */
     public static String ROOT_URL = "";
 
+    /**
+     * 慧正服务器地址
+     */
+    public static String HZ_URL = "";
+
     static {
         if (BuildConfig.DEBUG) {
             // 测试地址/172.16.13.113
             ROOT_URL = "http://172.16.13.113";
+            // 测试地址/172.16.0.8
+            HZ_URL = "http://172.16.0.8/hz7";
         } else {
             // 生产地址
             ROOT_URL = "http://222.85.156.43:81/Garden";
+            // 生产地址
+            HZ_URL = "http://222.85.156.43:81/Garden";
         }
     }
 
@@ -138,7 +147,107 @@ public class ProtocolUrl {
     /**
      * 项目信息提交
      */
-    public static final String ADD_XMXX = "yldsj/project/add/xmxx";
+    public static final String ADD_XMXX = "horizon/template/form/default.wf?formid=HZ90808e5db14771015db14850110026&loginName=";
+
+    /**
+     * 会审结果提交
+     */
+    public static final String ADD_HSJG = "horizon/template/form/default.wf?formid=HZ90808e5db0f880015db0f93f01001c&loginName=";
+
+    /**
+     * 供货方信息提交
+     */
+    public static final String ADD_GHFXX = "horizon/template/form/default.wf?formid=HZ90808e5db17b0b015db17b5dd00023&loginName=";
+
+    /**
+     * 施工人员提交
+     */
+    public static final String ADD_SGRY = "horizon/template/form/default.wf?formid=HZ90808e5db17b0b015db1a5bf6902e7&loginName=";
+
+    /**
+     * 开工报告提交
+     */
+    public static final String ADD_KGBG = "horizon/template/form/default.wf?formid=HZ90808e5db155eb015db15b2f8e011c&loginName=";
+
+    /**
+     * 设备信息提交
+     */
+    public static final String ADD_SBXX = "horizon/template/form/default.wf?formid=HZ90808e5db17b0b015db1c1fc2f0502&loginName=";
+
+    /**
+     * 工序报验提交
+     */
+    public static final String ADD_GXBY = "horizon/template/form/default.wf?formid=HZ90808e5db63543015db6364b120027&loginName=";
+
+    /**
+     * 现场勘察提交
+     */
+    public static final String ADD_XCKC = "horizon/template/form/default.wf?formid=HZ90808e5db63543015db649340f017d&loginName=";
+
+    /**
+     * 变更管理提交
+     */
+    public static final String ADD_BGGL = "horizon/template/form/default.wf?formid=HZ90808e5db63543015db65cd0e2031d&loginName=";
+
+    /**
+     * 竣工验收提交
+     */
+    public static final String ADD_JGYS = "horizon/template/form/default.wf?formid=HZ90808e5db63543015db65cd0e20335&loginName=";
+
+    /**
+     * 进度申报提交
+     */
+    public static final String ADD_JDSB = "horizon/template/form/default.wf?formid=HZ90808e5db123ae015db1286259007c&loginName=";
+
+    /**
+     * 监理日志提交
+     */
+    public static final String ADD_JLRZ = "horizon/template/form/default.wf?formid=HZ90808e5db63543015db66bac4b0435&loginName=";
+
+    /**
+     * 施工日志提交
+     */
+    public static final String ADD_SGRZ = "horizon/template/form/default.wf?formid=HZ90808e5db63543015db67ac9da056b&loginName=";
+
+    /**
+     * 商务合同提交
+     */
+    public static final String ADD_SWHT = "horizon/template/form/default.wf?formid=HZ90808e5db17b0b015db17ed9840080&loginName=";
+
+    /**
+     * 劳务合同提交
+     */
+    public static final String ADD_LWHT = "horizon/template/form/default.wf?formid=HZ90808e5db17b0b015db1a7ed260329&loginName=";
+
+    /**
+     * 授权合同提交
+     */
+    public static final String ADD_SQHT = "horizon/template/form/default.wf?formid=HZ90808e5db17b0b015db1a7ed270341&loginName=";
+
+    /**
+     * 所有流程查看
+     */
+    public static final String XMGL = "horizon/basics/getBasics.wf?loginName=";
+
+    /**
+     * 施工安全日志提交
+     */
+    public static final String ADD_SGAQRZ = "horizon/template/form/default.wf?formid=HZ90808e5db63543015db684f3740620&loginName=";
+
+    /**
+     * 施工钱包提交
+     */
+    public static final String ADD_SGQG = "horizon/template/form/default.wf?formid=HZ9080885df2d10d015df37b41a30213&loginName=";
+
+    /**
+     * 技术交底提交
+     */
+    public static final String ADD_JSJD = "horizon/template/form/default.wf?formid=HZ90808e5db123ae015db12862590091&loginName=";
+
+    /**
+     * 项目结算提交
+     */
+    public static final String ADD_XMJS = "horizon/template/form/default.wf?formid=HZ90808e5db123ae015db12427230016&loginName=";
 
     /**
      * 会审结果查询

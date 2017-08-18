@@ -32,6 +32,19 @@ public class Requester {
         return String.format("%s%s", host, url);
     }
 
+    /**
+     * 获取慧正请求地址
+     *
+     * @param url 接口url
+     * @return 请求url
+     */
+    public static String getRequestHZURL(String url) {
+        String separator = "/";
+        String host = ProtocolUrl.HZ_URL;
+        if (!url.startsWith(separator)) url = "/" + url;
+        return String.format("%s%s", host, url);
+    }
+
     /************************
      * 用户登录相关
      **************************/

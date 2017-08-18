@@ -1,8 +1,7 @@
 package com.henghao.parkland.fragment;
 
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,9 @@ import com.benefit.buy.library.utils.tools.ToolsJson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.henghao.parkland.BuildConfig;
+import com.henghao.parkland.ProtocolUrl;
 import com.henghao.parkland.R;
+import com.henghao.parkland.activity.WebviewActivity;
 import com.henghao.parkland.adapter.ProjectFirstAdapter;
 import com.henghao.parkland.adapter.ProjectSecondAdapter;
 import com.henghao.parkland.model.entity.AppGridEntity;
@@ -29,7 +30,6 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import okhttp3.Call;
 
 /**
  * 项目管理〈一句话功能简述〉 〈功能详细描述〉
@@ -56,8 +56,6 @@ public class XiangmuFragment extends FragmentSupport {
 
     private List<ProjectInfoEntity> projectInfoEntities;//项目信息数据
     private List<ProjectInfoEntity> initProjectInfoEntities;//初始加载项目信息数据
-    private int page = 0;//默认查询页数为0
-    private Call findXmxxCall;//查询项目信息请求
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -80,26 +78,11 @@ public class XiangmuFragment extends FragmentSupport {
         mRightLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //如果还未添加项目信息，则提示用户，否则弹出选项对话框
-                if (projectNames == null) {
-                    Toast.makeText(getActivity(), "无数据！", Toast.LENGTH_SHORT).show();
-                } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setIcon(R.drawable.icon_select);
-                    builder.setTitle("请选择项目名称");
-                    builder.setItems(projectNames, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //记录当前项目信息
-                            index = which;
-                            mInfoEntity = initProjectInfoEntities.get(index);
-                            mCenterTextView.setText(mInfoEntity.getName());
-                            dialog.dismiss();
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                }
+                Intent intent = new Intent();
+                intent.putExtra("title", "项目管理");
+                intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.XMGL) + mActivity.getLoginUserName());
+                intent.setClass(mActivity, WebviewActivity.class);
+                mActivity.startActivity(intent);
             }
         });
     }
@@ -194,19 +177,24 @@ public class XiangmuFragment extends FragmentSupport {
         List<AppGridEntity> mList = new ArrayList<AppGridEntity>();
         //第一个
         AppGridEntity mEntity = new AppGridEntity();
-        mEntity.setImageId(R.drawable.icon_projectsgbw);
+        mEntity.setImageId(R.drawable.icon_projectjlrz);
         mEntity.setName("监理日志");
         mList.add(mEntity);
         //第二个
         AppGridEntity mEntity2 = new AppGridEntity();
-        mEntity2.setImageId(R.drawable.icon_projectrzbw);
+        mEntity2.setImageId(R.drawable.icon_projectsgrz);
         mEntity2.setName("施工日志");
         mList.add(mEntity2);
         //第三个
         AppGridEntity mEntity3 = new AppGridEntity();
-        mEntity3.setImageId(R.drawable.icon_projectsgzj);
-        mEntity3.setName("施工钱包");
+        mEntity3.setImageId(R.drawable.icon_projectsgaqrz);
+        mEntity3.setName("施工安全日志");
         mList.add(mEntity3);
+        //第四个
+        AppGridEntity mEntity4 = new AppGridEntity();
+        mEntity4.setImageId(R.drawable.icon_projectsgzj);
+        mEntity4.setName("施工钱包");
+        mList.add(mEntity4);
         mMyAdapter = new ProjectSecondAdapter(this.mActivity, mList);
     }
 
@@ -225,16 +213,7 @@ public class XiangmuFragment extends FragmentSupport {
         this.mLeftImageView.setImageResource(R.drawable.home_liebiao);
         initWithRightBar();
         this.mRightTextView.setVisibility(View.VISIBLE);
-        this.mRightTextView.setText("切换");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mActivityFragmentView.viewLoading(View.VISIBLE);
-        initProjectInfoEntities.clear();//清空缓存
-        //请求网络，查询个人项目信息
-        findXmxxCall = Requester.findXmxx(page, mActivity.getLoginUid(), "", findXmxxCallBack);
+        this.mRightTextView.setText("管理");
     }
 
     private DefaultCallback findXmxxCallBack = new DefaultCallback() {
@@ -257,14 +236,11 @@ public class XiangmuFragment extends FragmentSupport {
                     if (errorCode > 0) {//无数据
                         if (initProjectInfoEntities.size() == 0) {
                             //还原初始化数据
-                            if (initProjectInfoEntities != null) {
-                                mInfoEntity = null;
-                                index = 0;
-                                projectNames = null;
-                            }
+                            mInfoEntity = null;
+                            index = 0;
+                            projectNames = null;
                         }
                         mActivity.msg(baseEntity.getMsg());
-                        mCenterTextView.setText(baseEntity.getMsg());
                     } else {//查询结果有数据
                         String jsonStr = ToolsJson.toJson(baseEntity.getData());
                         Type infoType = new TypeToken<List<ProjectInfoEntity>>() {

@@ -1,8 +1,6 @@
 package com.henghao.parkland.adapter;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +10,11 @@ import android.widget.TextView;
 
 import com.henghao.parkland.ActivityFragmentSupport;
 import com.henghao.parkland.Constant;
+import com.henghao.parkland.ProtocolUrl;
 import com.henghao.parkland.R;
-import com.henghao.parkland.activity.projectmanage.ProjectMoneyActivity;
-import com.henghao.parkland.activity.projectmanage.ProjectSGLogActivity;
-import com.henghao.parkland.activity.projectmanage.ProjectSGSafeLogActivity;
-import com.henghao.parkland.activity.projectmanage.ProjectSpvLogActivity;
+import com.henghao.parkland.activity.WebviewActivity;
 import com.henghao.parkland.model.entity.AppGridEntity;
+import com.henghao.parkland.utils.Requester;
 import com.lidroid.xutils.BitmapUtils;
 
 import java.util.List;
@@ -88,51 +85,56 @@ public class ProjectSecondAdapter extends ArrayAdapter<AppGridEntity> {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent = new Intent();
+                Intent intent = new Intent();
                 switch (position) {
                     case 0:
                         //监理日志
-                        intent.setClass(mActivityFragmentSupport, ProjectSpvLogActivity.class);
+                        intent.putExtra("title", "监理日志");
+                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_JLRZ) + mActivityFragmentSupport.getLoginUserName());
+                        intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
-//                    case 1:
-//                        //施工备忘
-//                        intent.setClass(mActivityFragmentSupport, ProjectSGBWActivity.class);
-//                        mActivityFragmentSupport.startActivity(intent);
-//                        break;
-//                    case 1:
-//                        //施工资料
-//                        intent.setClass(mActivityFragmentSupport, ProjectSGMaterialActivity.class);
-//                        mActivityFragmentSupport.startActivity(intent);
-//                        break;
                     case 1:
                         //施工日志
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(mActivityFragmentSupport);
-                        builder.setIcon(R.drawable.icon_select);
-                        builder.setTitle("请选择日志类型");
-                        String[] data = {"施工日志", "施工安全日志"};
-                        builder.setItems(data, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent myIntent = new Intent();
-                                switch (which) {
-                                    case 0://施工日志
-                                        myIntent.setClass(mActivityFragmentSupport, ProjectSGLogActivity.class);
-                                        mActivityFragmentSupport.startActivity(myIntent);
-                                        break;
-                                    case 1://施工安全日志
-                                        myIntent.setClass(mActivityFragmentSupport, ProjectSGSafeLogActivity.class);
-                                        mActivityFragmentSupport.startActivity(myIntent);
-                                        break;
-                                }
-                            }
-                        });
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
+                        intent.putExtra("title", "施工日志");
+                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_SGRZ) + mActivityFragmentSupport.getLoginUserName());
+                        intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
+                        mActivityFragmentSupport.startActivity(intent);
+//                        final AlertDialog.Builder builder = new AlertDialog.Builder(mActivityFragmentSupport);
+//                        builder.setIcon(R.drawable.icon_select);
+//                        builder.setTitle("请选择日志类型");
+//                        String[] data = {"施工日志", "施工安全日志"};
+//                        builder.setItems(data, new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                Intent myIntent = new Intent();
+//                                switch (which) {
+//                                    case 0://施工日志
+//                                        myIntent.setClass(mActivityFragmentSupport, ProjectSGLogActivity.class);
+//                                        mActivityFragmentSupport.startActivity(myIntent);
+//                                        break;
+//                                    case 1://施工安全日志
+//                                        myIntent.setClass(mActivityFragmentSupport, ProjectSGSafeLogActivity.class);
+//                                        mActivityFragmentSupport.startActivity(myIntent);
+//                                        break;
+//                                }
+//                            }
+//                        });
+//                        AlertDialog dialog = builder.create();
+//                        dialog.show();
                         break;
                     case 2:
+                        //施工安全日志
+                        intent.putExtra("title", "施工安全日志");
+                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_SGAQRZ) + mActivityFragmentSupport.getLoginUserName());
+                        intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
+                        mActivityFragmentSupport.startActivity(intent);
+                        break;
+                    case 3:
                         //施工钱包
-                        intent.setClass(mActivityFragmentSupport, ProjectMoneyActivity.class);
+                        intent.putExtra("title", "施工钱包");
+                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_SGQG) + mActivityFragmentSupport.getLoginUserName());
+                        intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
                 }
