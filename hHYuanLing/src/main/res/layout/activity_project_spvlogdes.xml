@@ -159,7 +159,7 @@
                     android:textSize="@dimen/gj_d" />
 
                 <TextView
-                    android:id="@+id/tv_question"
+                    android:id="@+id/tv_problem"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"

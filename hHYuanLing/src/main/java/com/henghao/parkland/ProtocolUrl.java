@@ -35,7 +35,7 @@ public class ProtocolUrl {
             // 测试地址/172.16.13.113
             ROOT_URL = "http://172.16.13.113";
             // 测试地址/172.16.0.8
-            HZ_URL = "http://172.16.0.8/hz7";
+            HZ_URL = "http://172.16.0.206/hz7";
         } else {
             // 生产地址
             ROOT_URL = "http://222.85.156.43:81/Garden";
@@ -111,19 +111,24 @@ public class ProtocolUrl {
      **************************/
 
     /**
-     * 查询当天养护状态信息数据访问接口
+     * 查询当天植物养护信息
      */
-    public static final String QUERYYGSTATUSMSG = "/YhManage/queryYhStatusMsg";
+    public static final String FIND_MAINTENANCE_INFO = "http://172.16.0.186/yldsj/maintenance/findMaintenanceInfo";
 
     /**
-     * 通过植物编号查询树木信息访问接口
+     * 养护前植物信息查询
      */
-    public static final String QUERYTREEMSGBYID = "/YhManage/queryTreeMsgById";
+    public static final String FIND_PLANT_INFORMATION = "http://172.16.0.186/yldsj/maintenance/findPlantInformation";
 
     /**
-     * 养护状态信息数据保存接口
+     * 植物管护信息查询
      */
-    public static final String SAVESTATUSMSG = "/YhManage/saveStatusMsg";
+    public static final String FIND_MANAGEMENT_INFO = "http://172.16.0.186/yldsj/maintenance/findManagementInfo";
+
+    /**
+     * 植物养护信息录入
+     */
+    public static final String ADD_MAINTENANCE_INFORMATION = "http://172.16.0.186/yldsj/maintenance/addMaintenanceInformation";
 
     /**
      * 通过植物编号查询管护信息访问接口
@@ -131,10 +136,14 @@ public class ProtocolUrl {
     public static final String APP_GHMANAGEMSGBYID = "/YhManage/queryGhManageMsgByid";
 
     /**
-     * 植物信息录入接口
+     * 养护前植物信息录入
      */
-    public static final String SAVETREE = "/YhManage/saveTreeMsg";
+    public static final String ADD_PLANT_INFORMATION = "http://172.16.0.186/yldsj/maintenance/addPlantInformation";
 
+    /**
+     * 植物管护信息录入
+     */
+    public static final String ADD_INFORMATION = "http://172.16.0.186/yldsj/maintenance/addInformation";
     /************************ 养护管理 end **************************/
     /************************
      * 项目管理相关
@@ -533,11 +542,6 @@ public class ProtocolUrl {
      * 查询进度申报
      */
     public static final String PROJECT_QUERYDECLARATIONMSG = "projectManage/queryDeclarationMsg";
-
-    /**
-     * 管护信息数据保存接口
-     */
-    public static final String SAVEGHMANAGEMSG = "/YhManage/saveGhManageMsg";
 
     /**
      * 添加我的轨迹

@@ -63,7 +63,7 @@ public class WebviewActivity extends ActivityFragmentSupport {
         webView.getSettings().setJavaScriptEnabled(true);//启用JavaScript
         webView.getSettings().setSupportZoom(true);//启用页面的缩放
         webView.getSettings().setBuiltInZoomControls(true);//启用页面缩放的按钮
-        webView.getSettings().setDisplayZoomControls(true);//隐藏缩放按钮
+        webView.getSettings().setDisplayZoomControls(false);//隐藏缩放按钮
         //扩大比例的缩放
         webView.getSettings().setUseWideViewPort(true);
         //自适应屏幕

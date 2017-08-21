@@ -206,26 +206,26 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <!-- 植物养护信息界面 -->
         <activity
-            android:name=".activity.MaintenanceActivity"
+            android:name=".activity.maintenance.MaintenanceActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <!-- 养护主页面 -->
         <!-- 养护管理界面 -->
         <activity
-            android:name=".activity.YhManageActivity"
+            android:name=".activity.maintenance.YhManageActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <!-- 管护信息填写界面 -->
         <activity
-            android:name=".activity.GuanhuSubmitActivity"
+            android:name=".activity.maintenance.GuanhuSubmitActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <!-- 植物信息录入界面 -->
         <activity
-            android:name=".activity.TreeMessageActivity"
+            android:name=".activity.maintenance.TreeMessageActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
@@ -254,7 +254,7 @@
         <!-- 施工资料添加 -->
         <!-- 施工材料 -->
         <activity
-            android:name=".activity.GuanhuDataActivity"
+            android:name=".activity.maintenance.GuanhuDataActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />

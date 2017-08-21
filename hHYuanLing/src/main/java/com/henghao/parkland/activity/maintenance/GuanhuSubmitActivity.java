@@ -1,4 +1,4 @@
-package com.henghao.parkland.activity;
+package com.henghao.parkland.activity.maintenance;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -16,18 +15,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.benefit.buy.library.phoneview.MultiImageSelectorActivity;
+import com.benefit.buy.library.utils.tools.ToolsJson;
 import com.benefit.buy.library.utils.tools.ToolsKit;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.henghao.parkland.ActivityFragmentSupport;
 import com.henghao.parkland.BuildConfig;
 import com.henghao.parkland.R;
+import com.henghao.parkland.model.entity.BaseEntity;
 import com.henghao.parkland.utils.FileUtils;
 import com.henghao.parkland.utils.Requester;
 import com.henghao.parkland.views.FlowRadioGroup;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,52 +40,53 @@ import okhttp3.Call;
 
 /**
  * Created by 晏琦云 on 2017/2/13.
- * 管护信息填写界面
+ * 植物管护信息录入界面
  */
 
 public class GuanhuSubmitActivity extends ActivityFragmentSupport {
-    @InjectView(R.id.tv_treeid_guanhu)
-    TextView tvTreeId;
-    @InjectView(R.id.tv_yhsite_guanhu)
-    TextView tvYhSite;
-    @InjectView(R.id.tv_yhtime_guanhu)
-    TextView tvYhTime;
-    @InjectView(R.id.et_yhWorkder_guanhu)
-    EditText etYhWorkder;
-    @InjectView(R.id.et_yhDetails_guanhu)
-    EditText etYhDetails;
-    @InjectView(R.id.et_comment_guanhu)
-    EditText etComment;
-    @InjectView(R.id.btn_submit_guanhu)
-    Button btnSubmit;
-    @InjectView(R.id.btn_cancel_guanhu)
-    Button btnCancel;
-    @InjectView(R.id.rg_clean_guanhu)
-    RadioGroup rgClean;
-    @InjectView(R.id.rg_treegrowup_guanhu)
-    RadioGroup rgTreegrowup;
-    @InjectView(R.id.rg_question_guanhu)
-    FlowRadioGroup rgQuestion;
-    @InjectView(R.id.tv_yhbefore)
-    TextView tv_yhbefore;
-    @InjectView(R.id.tv_yhafter)
-    TextView tv_yhafter;
+    @InjectView(R.id.tv_code)
+    TextView tvCode;
+    @InjectView(R.id.tv_type)
+    TextView tvType;
+    @InjectView(R.id.tv_address)
+    TextView tvAddress;
+    @InjectView(R.id.tv_time)
+    TextView tvTime;
+    @InjectView(R.id.et_personnel)
+    EditText etPersonnel;
+    @InjectView(R.id.et_content)
+    EditText etContent;
+    @InjectView(R.id.et_remarks)
+    EditText etRemarks;
+    @InjectView(R.id.rg_cleaning)
+    RadioGroup rgCleaning;
+    @InjectView(R.id.rg_plantGrowth)
+    RadioGroup rgPlantGrowth;
+    @InjectView(R.id.rg_problem)
+    FlowRadioGroup rgProblem;
+    @InjectView(R.id.tv_before)
+    TextView tvBefore;
+    @InjectView(R.id.tv_after)
+    TextView tvAfter;
 
-    private int yid;//养护信息ID
-    private String treeId;//植物二维码
-    private String yhSite;//养护地点
-    private String yhTime;//养护时间
-    private String yhWorker;//养护人员
-    private String yhDetails;//养护内容
-    private String yhQuestion = "无";//问题发现
-    private String yhClean = "好";//陆地保洁情况
-    private String treeGrowup = "好";//植物长势
-    private String yhComment;//备注信息
     private static final String TAG = "GuanhuSubmitActivity";
-    private Call call;
 
-    private static final int REQUEST_BEFORE = 0x00;
-    private static final int REQUEST_AFTER = 0x01;
+    private String maintenanceCode;//养护编号
+    private String code;//植物二维码
+    private String type;//养护类型
+    private String address;//养护地点
+    private String time;//养护时间
+    private String personnel;//养护人员
+    private String content;//养护内容
+    private String problem = "无";//问题发现
+    private String cleaning = "好";//陆地保洁情况
+    private String plantGrowth = "好";//植物长势
+    private String remarks;//备注信息
+
+    private Call addInformationCall;//植物管护信息录入请求
+
+    private static final int REQUEST_BEFORE = 0x00;//养护前照片请求
+    private static final int REQUEST_AFTER = 0x01;//养护后照片请求
     private ArrayList<String> mSelectPathBefore;//养护前图片地址
     private ArrayList<String> mSelectPathAfter;//养护后图片地址
     private List<File> mFileList;//图片文件集合
@@ -108,21 +110,9 @@ public class GuanhuSubmitActivity extends ActivityFragmentSupport {
 
     private void request() {
         //访问网络，提交数据
-        call = Requester.guanhuSubmit(
-                String.valueOf(yid),
-                getLoginUid(),
-                treeId,
-                yhSite,
-                yhWorker,
-                yhDetails,
-                yhTime,
-                yhQuestion,
-                yhClean,
-                treeGrowup,
-                yhComment,
-                mFileBefore,
-                mFileAfter,
-                callback);
+        addInformationCall = Requester.addInformation(maintenanceCode, type, getLoginUid(), getLoginUser().getDeptId(),
+                code, address, personnel, content, time, problem,
+                cleaning, plantGrowth, remarks, mFileList, addInformationCallback);
     }
 
     @Override
@@ -135,93 +125,102 @@ public class GuanhuSubmitActivity extends ActivityFragmentSupport {
         this.mActivityFragmentView.getNavitionBarView().setVisibility(View.VISIBLE);
         setContentView(this.mActivityFragmentView);
         ButterKnife.inject(this);
+        initWidget();
         initData();
+    }
+
+    @Override
+    public void initWidget() {
+        initWithBar();
+        mLeftTextView.setVisibility(View.VISIBLE);
+        mLeftTextView.setText("返回");
+        initWithCenterBar();
+        mCenterTextView.setText("管护信息");
     }
 
     /**
      * 初始化数据
      */
     public void initData() {
-        initWithBar();
-        initWithCenterBar();
-        mCenterTextView.setText("管护信息");
         Intent intent = getIntent();
-        yid = intent.getIntExtra("yid", 0);
-        treeId = intent.getStringExtra("treeId");
-        yhSite = intent.getStringExtra("yhSite");
-        yhTime = intent.getStringExtra("yhTime");
-        tvTreeId.setText(treeId);
-        tvYhSite.setText(yhSite);
-        tvYhTime.setText(yhTime);
-        ((RadioButton) rgQuestion.getChildAt(0)).setChecked(true);
-        ((RadioButton) rgTreegrowup.getChildAt(0)).setChecked(true);
-        ((RadioButton) rgClean.getChildAt(0)).setChecked(true);
-        rgQuestion.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        maintenanceCode = intent.getStringExtra("maintenanceCode");
+        code = intent.getStringExtra("code");
+        type = intent.getStringExtra("type");
+        address = intent.getStringExtra("address");
+        time = intent.getStringExtra("time");
+        tvCode.setText(code);
+        tvType.setText(type);
+        tvAddress.setText(address);
+        tvTime.setText(time);
+        ((RadioButton) rgProblem.getChildAt(0)).setChecked(true);
+        ((RadioButton) rgPlantGrowth.getChildAt(0)).setChecked(true);
+        ((RadioButton) rgCleaning.getChildAt(0)).setChecked(true);
+        rgProblem.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                    case R.id.rb_question_one://无
-                        yhQuestion = "无";
+                    case R.id.rb_problem_one://无
+                        problem = "无";
                         break;
-                    case R.id.rb_question_two://有病虫害
-                        yhQuestion = "有病虫害";
+                    case R.id.rb_problem_two://有病虫害
+                        problem = "有病虫害";
                         break;
-                    case R.id.rb_question_three://有病虫害
-                        yhQuestion = "施肥";
+                    case R.id.rb_problem_three://有病虫害
+                        problem = "施肥";
                         break;
-                    case R.id.rb_question_four://有病虫害
-                        yhQuestion = "破坏";
+                    case R.id.rb_problem_four://有病虫害
+                        problem = "破坏";
                         break;
-                    case R.id.rb_question_five://有病虫害
-                        yhQuestion = "须冲洗";
+                    case R.id.rb_problem_five://有病虫害
+                        problem = "须冲洗";
                         break;
                 }
             }
         });
-        rgClean.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        rgCleaning.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                    case R.id.rb_clean_one:
-                        yhClean = "好";
+                    case R.id.rb_cleaning_one:
+                        cleaning = "好";
                         break;
-                    case R.id.rb_clean_two:
-                        yhClean = "良好";
+                    case R.id.rb_cleaning_two:
+                        cleaning = "良好";
                         break;
-                    case R.id.rb_clean_three:
-                        yhClean = "差";
+                    case R.id.rb_cleaning_three:
+                        cleaning = "差";
                         break;
                 }
             }
         });
-        rgTreegrowup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        rgPlantGrowth.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
-                    case R.id.rb_treegroup_one:
-                        treeGrowup = "好";
+                    case R.id.rb_plantGrowth_one:
+                        plantGrowth = "好";
                         break;
-                    case R.id.rb_treegroup_two:
-                        treeGrowup = "良好";
+                    case R.id.rb_plantGrowth_two:
+                        plantGrowth = "良好";
                         break;
-                    case R.id.rb_treegroup_three:
-                        treeGrowup = "差";
+                    case R.id.rb_plantGrowth_three:
+                        plantGrowth = "差";
                         break;
                 }
             }
         });
     }
 
-    @OnClick({R.id.btn_submit_guanhu, R.id.btn_cancel_guanhu, R.id.tv_yhbefore, R.id.tv_yhafter})
+    @OnClick({R.id.tv_submit, R.id.tv_before, R.id.tv_after})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.tv_yhbefore:
+            case R.id.tv_before:
                 addPicBefore();
                 break;
-            case R.id.tv_yhafter:
+            case R.id.tv_after:
                 addPicAfter();
                 break;
-            case R.id.btn_submit_guanhu:
+            case R.id.tv_submit:
                 if (CheckData()) {
                     mActivityFragmentView.viewLoading(View.VISIBLE, getString(R.string.compressing));
                     mFileList = new ArrayList<>();
@@ -230,24 +229,21 @@ public class GuanhuSubmitActivity extends ActivityFragmentSupport {
                     FileUtils.compressImagesFromList(context, handler, mFileList);
                 }
                 break;
-            case R.id.btn_cancel_guanhu:
-                finish();
-                break;
         }
     }
 
     private boolean CheckData() {
-        yhWorker = etYhWorkder.getText().toString().trim();
-        yhDetails = etYhDetails.getText().toString().trim();
-        yhComment = etComment.getText().toString().trim();
-        if (yhWorker.equals("") || yhWorker == null) {
+        personnel = etPersonnel.getText().toString().trim();
+        content = etContent.getText().toString().trim();
+        remarks = etRemarks.getText().toString().trim();
+        if (ToolsKit.isEmpty(personnel)) {
             msg("请输入养护人员！");
-            etYhWorkder.requestFocus();
+            etPersonnel.requestFocus();
             return false;
         }
-        if (yhDetails.equals("") || yhDetails == null) {
+        if (ToolsKit.isEmpty(content)) {
             msg("请输入养护内容！");
-            etYhDetails.requestFocus();
+            etContent.requestFocus();
             return false;
         }
         if (mFileBefore == null) {
@@ -258,8 +254,8 @@ public class GuanhuSubmitActivity extends ActivityFragmentSupport {
             msg("请添加养护后图片！");
             return false;
         }
-        if (yhComment.equals("") || yhComment == null) {
-            yhComment = "无";
+        if (remarks.equals("") || remarks == null) {
+            remarks = "无";
         }
         return true;
     }
@@ -308,7 +304,10 @@ public class GuanhuSubmitActivity extends ActivityFragmentSupport {
         startActivityForResult(picIntent, REQUEST_AFTER);
     }
 
-    private DefaultCallback callback = new DefaultCallback() {
+    /**
+     * 植物管护信息录入回调
+     */
+    private DefaultCallback addInformationCallback = new DefaultCallback() {
         @Override
         public void onFailure(Exception e, int code) {
             if (BuildConfig.DEBUG) Log.e(TAG, "onFailure: code = " + code, e);
@@ -320,16 +319,17 @@ public class GuanhuSubmitActivity extends ActivityFragmentSupport {
         public void onSuccess(String response) {
             if (BuildConfig.DEBUG) Log.i(TAG, "onResponse: " + response);
             try {
-                JSONObject jsonObject = new JSONObject(response);
-                int status = jsonObject.getInt("status");//错误代码 0 正确 1 错误
-                if (status == 0) {
-                    final String result = jsonObject.getString("result");
-                    Toast.makeText(GuanhuSubmitActivity.this, result, Toast.LENGTH_SHORT).show();
+                Type baseType = new TypeToken<BaseEntity>() {
+                }.getType();
+                BaseEntity entity = ToolsJson.parseObjecta(response, baseType);
+                int errorCode = entity.getErrorCode();
+                if (errorCode == 0) {
+                    Toast.makeText(context, "管护信息提交成功！", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    Toast.makeText(GuanhuSubmitActivity.this, "添加失败，请重试！", Toast.LENGTH_SHORT).show();
+                    msg("添加失败，请重试！");
                 }
-            } catch (JSONException e) {
+            } catch (JsonSyntaxException e) {
                 Toast.makeText(GuanhuSubmitActivity.this, "服务器错误，请稍后重试！", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
@@ -339,8 +339,8 @@ public class GuanhuSubmitActivity extends ActivityFragmentSupport {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (call != null && !call.isCanceled()) {
-            call.cancel();
+        if (addInformationCall != null && !addInformationCall.isCanceled()) {
+            addInformationCall.cancel();
         }
     }
 
@@ -349,7 +349,7 @@ public class GuanhuSubmitActivity extends ActivityFragmentSupport {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
-            if (requestCode == REQUEST_BEFORE) {
+            if (requestCode == REQUEST_BEFORE) {//养护前图片
                 if ((resultCode == Activity.RESULT_OK) || (resultCode == Activity.RESULT_CANCELED)) {
                     this.mSelectPathBefore = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
                     if (!ToolsKit.isEmpty(this.mSelectPathBefore)) {
@@ -358,11 +358,11 @@ public class GuanhuSubmitActivity extends ActivityFragmentSupport {
                         mFileBefore = new File(filePath);
                         List<String> imgNames = new ArrayList<>();
                         imgNames.add(imageName);
-                        tv_yhbefore.setText("图片名：" + imgNames.toString());
+                        tvBefore.setText("图片名：" + imgNames.toString());
                     }
                 }
             }
-            if (requestCode == REQUEST_AFTER) {
+            if (requestCode == REQUEST_AFTER) {//养护后图片
                 if ((resultCode == Activity.RESULT_OK) || (resultCode == Activity.RESULT_CANCELED)) {
                     this.mSelectPathAfter = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT);
                     if (!ToolsKit.isEmpty(this.mSelectPathAfter)) {
@@ -371,7 +371,7 @@ public class GuanhuSubmitActivity extends ActivityFragmentSupport {
                         mFileAfter = new File(filePath);
                         List<String> imgNames = new ArrayList<>();
                         imgNames.add(imageName);
-                        tv_yhafter.setText("图片名：" + imgNames.toString());
+                        tvAfter.setText("图片名：" + imgNames.toString());
                     }
                 }
             }

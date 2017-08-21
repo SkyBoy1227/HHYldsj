@@ -68,7 +68,7 @@ public class ProjectMoneyAdapter extends BaseAdapter {
         if (convertView == null) {
             mHodlerView = new HodlerView();
             convertView = this.inflater.inflate(R.layout.item_poject_money, null);
-            mHodlerView.tv_date = (TextView) convertView.findViewById(R.id.tv_data);
+            mHodlerView.tv_date = (TextView) convertView.findViewById(R.id.tv_remarks);
             mHodlerView.tv_money = (TextView) convertView.findViewById(R.id.tv_value);
             mHodlerView.tv_context = (TextView) convertView.findViewById(R.id.tv_context);
             convertView.setTag(mHodlerView);

@@ -1,15 +1,14 @@
-package com.henghao.parkland.activity;
+package com.henghao.parkland.activity.maintenance;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -17,22 +16,23 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.benefit.buy.library.utils.tools.ToolsJson;
+import com.benefit.buy.library.utils.tools.ToolsKit;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.henghao.parkland.ActivityFragmentSupport;
 import com.henghao.parkland.BuildConfig;
 import com.henghao.parkland.R;
 import com.henghao.parkland.adapter.YhAdapter;
-import com.henghao.parkland.model.entity.YhBean;
+import com.henghao.parkland.model.entity.BaseEntity;
+import com.henghao.parkland.model.entity.MaintenanceInfoEntity;
 import com.henghao.parkland.utils.Requester;
 import com.henghao.parkland.views.dialog.DialogList;
 import com.henghao.parkland.views.dialog.DialogYanghu;
 import com.zbar.lib.zxing.CaptureActivity;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -49,32 +49,27 @@ import okhttp3.Call;
 
 public class YhManageActivity extends ActivityFragmentSupport {
 
+    @InjectView(R.id.lv_yhmanage)
+    ListView listView;
 
     private static final int REQUEST_CODE_TREEMESSAGE = 0x0000;//植物信息录入request code
     private static final int REQUEST_CODE_YANGHU = 0x0001;//植物养护request code
 
-    private static final String DECODED_CONTENT_KEY = "codedContent";
-    private static final String DECODED_BITMAP_KEY = "codedBitmap";
-
     // 定位相关声明
     public LocationClient locationClient = null;
-    private String addrStr;//获取到的GPS定位地理位置信息
+    private String address;//获取到的GPS定位地理位置信息
 
-    @InjectView(R.id.lv_yhmanage)
-    ListView listView;
     private YhAdapter adapter;
-    private List<YhBean> dataList;//数据信息列表
+    private String code;//植物编号
     /**
      * 网络访问相关
      */
     private static final String TAG = "YhManageActivity";
 
-    private String[] state_array = {"施肥", "浇水", "除草", "除虫", "修枝", "防风防汛", "防寒防冻", "防日灼", "扶正", "补栽"};//养护状态选项
-    private ArrayAdapter<String> state_Adapter;
-    private String str_state;//养护状态
+    private String state;//养护状态
     private DialogYanghu dialogYanghu;
-    private Call queryCall;
-    private Call idCall;
+    private Call findMaintenanceInfoCall;//查询植物养护信息请求
+    private Call findPlantInformationCall;//查询植物信息请求
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -93,34 +88,17 @@ public class YhManageActivity extends ActivityFragmentSupport {
     public void initWidget() {
         super.initWidget();
         mActivityFragmentView.viewMainGone();
-        /**
-         * 定位
-         */
+        //定位
         locationClient = new LocationClient(getApplicationContext()); // 实例化LocationClient类
         locationClient.registerLocationListener(this.myListener); // 注册监听函数
         setLocationOption(); // 设置定位参数
         locationClient.start(); // 开始定位
-
-        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                YhBean bean = dataList.get(position);
-                Intent intent = new Intent(YhManageActivity.this, GuanhuSubmitActivity.class);
-                intent.putExtra("yid", bean.getId());//养护信息ID
-                intent.putExtra("treeId", bean.getTreeId());//植物二维码
-                intent.putExtra("yhSite", bean.getYhStatussite());//养护地点
-                intent.putExtra("yhTime", bean.getYhStatustime());//养护时间
-                startActivity(intent);
-            }
-        });*/
     }
 
-
-    private void getDataReq() {
-        queryCall = Requester.yhManageQueryList(getLoginUid(), listCallback);
-    }
-
-    private DefaultCallback listCallback = new DefaultCallback() {
+    /**
+     * 查询植物养护信息回调
+     */
+    private DefaultCallback findMaintenanceInfoCallback = new DefaultCallback() {
         @Override
         public void onFailure(Exception e, int code) {
             if (BuildConfig.DEBUG) Log.e(TAG, "onFailure: code = " + code, e);
@@ -131,13 +109,36 @@ public class YhManageActivity extends ActivityFragmentSupport {
 
         @Override
         public void onSuccess(String response) {
-            Log.i(TAG, "onResponse: " + response);
-            dataList = parseJson(response);
-            Collections.reverse(dataList);
-            if (dataList.size() != 0) {
-                mActivityFragmentView.viewEmptyGone();
-                adapter = new YhAdapter(dataList, YhManageActivity.this);
-                listView.setAdapter(adapter);
+            if (BuildConfig.DEBUG) Log.d(TAG, "onSuccess: " + response);
+            try {
+                Type baseType = new TypeToken<BaseEntity>() {
+                }.getType();
+                BaseEntity entity = ToolsJson.parseObjecta(response, baseType);
+                int errorCode = entity.getErrorCode();//错误代码 0 正确 1 错误
+                if (errorCode == 0) {
+                    mRightImageView.setVisibility(View.VISIBLE);
+                    String jsonStr = ToolsJson.toJson(entity.getData());
+                    Type infoType = new TypeToken<List<MaintenanceInfoEntity>>() {
+                    }.getType();
+                    List<MaintenanceInfoEntity> maintenanceInfoEntities = ToolsJson.parseObjecta(jsonStr, infoType);
+                    Collections.reverse(maintenanceInfoEntities);
+                    mActivityFragmentView.viewEmptyGone();
+                    adapter = new YhAdapter(maintenanceInfoEntities, YhManageActivity.this);
+                    listView.setAdapter(adapter);
+                } else {
+                    //如果未登录，则不可以进行养护
+                    if (ToolsKit.isEmpty(getLoginUid())) {
+                        mRightImageView.setVisibility(View.GONE);
+                        Toast.makeText(context, "请登录！", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        mRightImageView.setVisibility(View.VISIBLE);
+                    }
+                    mActivityFragmentView.viewMainGone();
+                    msg(entity.getMsg());
+                }
+            } catch (JsonSyntaxException e) {
+                e.printStackTrace();
             }
         }
     };
@@ -161,11 +162,10 @@ public class YhManageActivity extends ActivityFragmentSupport {
     }
 
     /**
-     * 弹出对话框
+     * 弹出养护状态选择对话框
      *
      * @return
      */
-    @NonNull
     private DialogYanghu getDialogYanghu() {
         return new DialogYanghu(YhManageActivity.this, new DialogYanghu.DialogAlertListener() {
             @Override
@@ -175,6 +175,7 @@ public class YhManageActivity extends ActivityFragmentSupport {
 
             @Override
             public void onDialogOk(Dialog dlg) {
+                //选择养护状态
                 DialogList mdialogList = dialogList();
                 dialogYanghu.cancel();
                 mdialogList.show();
@@ -182,7 +183,7 @@ public class YhManageActivity extends ActivityFragmentSupport {
 
             @Override
             public void onDialogCancel(Dialog dlg) {
-                //录入
+                //植物信息录入
                 Intent intent = new Intent(YhManageActivity.this, CaptureActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_TREEMESSAGE);
             }
@@ -200,7 +201,7 @@ public class YhManageActivity extends ActivityFragmentSupport {
 
             @Override
             public void onDialogOk(Dialog dlg, String par) {
-                str_state = par;
+                state = par;
                 Intent intent = new Intent(YhManageActivity.this, CaptureActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_YANGHU);
             }
@@ -210,53 +211,6 @@ public class YhManageActivity extends ActivityFragmentSupport {
 
             }
         });
-    }
-
-    /**
-     * 解析Json字符串
-     */
-    private List<YhBean> parseJson(String str_result) {
-        List<YhBean> data = new ArrayList<>();
-        try {
-            JSONObject jsonObject = new JSONObject(str_result);
-            int status = jsonObject.getInt("status");//错误代码 0 正确 1 错误
-            if (status == 0) {
-                JSONArray dataArray = jsonObject.getJSONArray("data");
-                for (int i = 0; i < dataArray.length(); i++) {
-                    JSONObject yhObject = dataArray.getJSONObject(i);
-                    YhBean bean = new YhBean();
-                    int id = yhObject.getInt("yid");//养护信息ID
-                    String treeId = yhObject.getString("treeId");//植物二维码
-                    String yhStatusname = yhObject.getString("yhStatusname");//养护行为
-                    String yhStatussite = yhObject.getString("yhStatussite");//养护地点
-                    String yhStatustime = yhObject.getString("yhStatustime");//养护时间
-                    int isNo = yhObject.getInt("isNo");//养护信息ID
-                    bean.setId(id);
-                    bean.setTreeId(treeId);
-                    bean.setYhStatusname(yhStatusname);
-                    bean.setYhStatussite(yhStatussite);
-                    bean.setYhStatustime(yhStatustime);
-                    bean.setIsNo(isNo);
-                    data.add(bean);
-                }
-                mRightImageView.setVisibility(View.VISIBLE);
-            } else {
-                /**
-                 * 如果未登录，则不可以进行养护
-                 */
-                String result = jsonObject.getString("result");
-                if (result.equals("请登录")) {
-                    mRightImageView.setVisibility(View.GONE);
-                    Toast.makeText(context, "请登录！", Toast.LENGTH_SHORT).show();
-                } else {
-                    mRightImageView.setVisibility(View.VISIBLE);
-                }
-            }
-        } catch (JSONException e) {
-            Toast.makeText(YhManageActivity.this, "服务器错误，请稍后重试！", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-        return data;
     }
 
     /**
@@ -275,6 +229,19 @@ public class YhManageActivity extends ActivityFragmentSupport {
         return flag;
     }
 
+    /**
+     * 判断GPS是否开启
+     *
+     * @param context
+     * @return true 表示开启
+     */
+    private boolean isOPenGPS(Context context) {
+        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        // 通过GPS卫星定位，定位级别可以精确到街（通过24颗卫星定位，在室外和空旷的地方定位准确、速度快）
+        boolean gps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        return gps;
+    }
+
     public BDLocationListener myListener = new BDLocationListener() {
         @Override
         public void onReceiveLocation(BDLocation location) {
@@ -282,12 +249,12 @@ public class YhManageActivity extends ActivityFragmentSupport {
             if (location == null) {
                 return;
             }
-            addrStr = location.getAddrStr();
+            address = location.getAddrStr();
             /**
              * 如果GPS未打开且无网络
              */
-            if (!checkNetworkState()) {
-                addrStr = null;
+            if (!checkNetworkState() && !isOPenGPS(getContext())) {
+                address = null;
                 Toast.makeText(YhManageActivity.this,
                         "对不起，获取不到当前的地理位置！请开启GPS和网络", Toast.LENGTH_SHORT).show();
             }
@@ -314,11 +281,11 @@ public class YhManageActivity extends ActivityFragmentSupport {
         // 退出时销毁定位
         this.locationClient.stop();
         super.onDestroy();
-        if (queryCall != null && !queryCall.isCanceled()) {
-            queryCall.cancel();
+        if (findMaintenanceInfoCall != null && !findMaintenanceInfoCall.isCanceled()) {
+            findMaintenanceInfoCall.cancel();
         }
-        if (idCall != null && !idCall.isCanceled()) {
-            idCall.cancel();
+        if (findPlantInformationCall != null && !findPlantInformationCall.isCanceled()) {
+            findPlantInformationCall.cancel();
         }
     }
 
@@ -332,32 +299,33 @@ public class YhManageActivity extends ActivityFragmentSupport {
     public void onResume() {
         super.onResume();
         this.locationClient.start(); // 开始定位
-        getDataReq();
+        //请求网络，查询当天养护信息
+        findMaintenanceInfoCall = Requester.findMaintenanceInfo(getLoginUid(), findMaintenanceInfoCallback);
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // 扫描二维码/条码回传------植物养护信息
+        // 扫描二维码/条码回传------植物养护信息录入
         if (requestCode == REQUEST_CODE_YANGHU && resultCode == RESULT_OK) {
             if (data != null) {
-                if (addrStr == null) {
+                if (address == null) {
                     Toast.makeText(YhManageActivity.this,
                             "对不起，获取不到当前的地理位置！请开启GPS和网络", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Bundle bundle = data.getExtras();
                 // 显示扫描到的内容
-                content = bundle.getString("result");
-                idCall = Requester.yhManageQueryId(content, idCallback);
+                code = bundle.getString("result");
+                findPlantInformationCall = Requester.findPlantInformation(code, findPlantInformationCallback);
             }
-        } else if (requestCode == REQUEST_CODE_TREEMESSAGE && resultCode == RESULT_OK) {
+        } else if (requestCode == REQUEST_CODE_TREEMESSAGE && resultCode == RESULT_OK) {//扫描二维码/条码回传------植物信息录入
             if (data != null) {
                 Bundle bundle = data.getExtras();
                 // 显示扫描到的内容
                 String content = bundle.getString("result");
-                if (addrStr == null) {
+                if (address == null) {
                     Toast.makeText(YhManageActivity.this,
                             "对不起，获取不到当前的地理位置！请开启GPS和网络", Toast.LENGTH_SHORT).show();
                     return;
@@ -365,15 +333,17 @@ public class YhManageActivity extends ActivityFragmentSupport {
 
                 //跳转到植物信息录入界面
                 Intent intent = new Intent(YhManageActivity.this, TreeMessageActivity.class);
-                intent.putExtra("treeId", content);
-                intent.putExtra("treeSite", addrStr);
+                intent.putExtra("code", content);
+                intent.putExtra("address", address);
                 startActivity(intent);
             }
         }
     }
 
-    private String content;
-    private DefaultCallback idCallback = new DefaultCallback() {
+    /**
+     * 查询植物信息回调
+     */
+    private DefaultCallback findPlantInformationCallback = new DefaultCallback() {
         @Override
         public void onFailure(Exception e, int code) {
             if (BuildConfig.DEBUG) Log.e(TAG, "onFailure: code = " + code, e);
@@ -385,25 +355,27 @@ public class YhManageActivity extends ActivityFragmentSupport {
         public void onSuccess(String response) {
             if (BuildConfig.DEBUG) Log.d(TAG, "onSuccess: " + response);
             try {
-                JSONObject jsonObject = new JSONObject(response);
-                int status = jsonObject.getInt("status");
-                if (status > 0) {
-                    final String result = jsonObject.getString("result");
-                    Toast.makeText(YhManageActivity.this, result, Toast.LENGTH_SHORT).show();
-                } else {
+                Type baseType = new TypeToken<BaseEntity>() {
+                }.getType();
+                BaseEntity entity = ToolsJson.parseObjecta(response, baseType);
+                int errorCode = entity.getErrorCode();
+                if (errorCode > 0) {//未查询到数据
+                    msg("当前植物信息未录入！请先录入！");
+                    return;
+                } else {//查询有数据
                     //获取养护时间
                     Date date = new Date(System.currentTimeMillis());
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                    String time_format = dateFormat.format(date);//格式化时间
+                    String time = dateFormat.format(date);//格式化时间
                     //跳转到植物养护信息界面
                     Intent intent = new Intent(YhManageActivity.this, MaintenanceActivity.class);
-                    intent.putExtra("treeId", content);
-                    intent.putExtra("yhStatusname", str_state);
-                    intent.putExtra("yhStatustime", time_format);
-                    intent.putExtra("yhStatussite", addrStr);
+                    intent.putExtra("code", code);
+                    intent.putExtra("state", state);
+                    intent.putExtra("time", time);
+                    intent.putExtra("address", address);
                     startActivity(intent);
                 }
-            } catch (JSONException e) {
+            } catch (JsonSyntaxException e) {
                 Toast.makeText(YhManageActivity.this, "服务器错误，请稍后重试！", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }

@@ -9,9 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.henghao.parkland.R;
-import com.henghao.parkland.activity.GuanhuSubmitActivity;
-import com.henghao.parkland.activity.GuanhuDataActivity;
-import com.henghao.parkland.model.entity.YhBean;
+import com.henghao.parkland.activity.maintenance.GuanhuSubmitActivity;
+import com.henghao.parkland.activity.maintenance.GuanhuDataActivity;
+import com.henghao.parkland.model.entity.MaintenanceInfoEntity;
 
 import java.util.List;
 
@@ -23,11 +23,11 @@ import butterknife.InjectView;
  */
 
 public class YhAdapter extends BaseAdapter {
-    private List<YhBean> list;
+    private List<MaintenanceInfoEntity> list;
     private Context context;
     private LayoutInflater inflater;
 
-    public YhAdapter(List<YhBean> list, Context context) {
+    public YhAdapter(List<MaintenanceInfoEntity> list, Context context) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -52,52 +52,46 @@ public class YhAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.list_yanghu_item, null);
+            convertView = inflater.inflate(R.layout.list_item_maintenace, null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        final YhBean bean = list.get(position);
-        viewHolder.tvTreeid.setText(bean.getTreeId());
-        viewHolder.tvBehavior.setText(bean.getYhStatusname());
-        viewHolder.tvPlace.setText(bean.getYhStatussite());
-        viewHolder.tvTime.setText(bean.getYhStatustime());
-        if (bean.getIsNo() == null) {
-            viewHolder.btnWrite.setVisibility(View.VISIBLE);
+        MaintenanceInfoEntity bean = list.get(position);
+        viewHolder.tvCode.setText(bean.getCode());
+        viewHolder.tvState.setText(bean.getState());
+        viewHolder.tvAddress.setText(bean.getAddress());
+        viewHolder.tvTime.setText(bean.getTime());
+        if (bean.getStatus().equals("0")) {
+            viewHolder.tvWrite.setVisibility(View.VISIBLE);
         } else {
-            if (bean.getIsNo() == 1) {
-                viewHolder.btnWrite.setVisibility(View.GONE);
-            } else {
-                viewHolder.btnWrite.setVisibility(View.VISIBLE);
-            }
+            viewHolder.tvWrite.setVisibility(View.GONE);
         }
         viewOnclick(viewHolder, convertView, position, bean);
         return convertView;
     }
 
-    private void viewOnclick(ViewHolder viewHolder, View convertView, int position, final YhBean bean) {
+    private void viewOnclick(ViewHolder viewHolder, View convertView, int position, final MaintenanceInfoEntity bean) {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (bean.getIsNo() != null) {
-                    if (bean.getIsNo() == 1) {
-                        Intent intent = new Intent(context, GuanhuDataActivity.class);
-                        intent.putExtra("yid", bean.getId());//养护信息ID
-                        intent.putExtra("treeId", bean.getTreeId());//植物二维码
-                        context.startActivity(intent);
-                    }
+                if (bean.getStatus().equals("1")) {
+                    Intent intent = new Intent(context, GuanhuDataActivity.class);
+                    intent.putExtra("code", bean.getId());//养护编号
+                    context.startActivity(intent);
                 }
             }
         });
-        viewHolder.btnWrite.setOnClickListener(new View.OnClickListener() {
+        viewHolder.tvWrite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, GuanhuSubmitActivity.class);
-                intent.putExtra("yid", bean.getId());//养护信息ID
-                intent.putExtra("treeId", bean.getTreeId());//植物二维码
-                intent.putExtra("yhSite", bean.getYhStatussite());//养护地点
-                intent.putExtra("yhTime", bean.getYhStatustime());//养护时间
+                intent.putExtra("maintenanceCode", bean.getId());//养护编号
+                intent.putExtra("code", bean.getCode());//植物编号
+                intent.putExtra("type", bean.getState());//养护类型
+                intent.putExtra("address", bean.getAddress());//养护地点
+                intent.putExtra("time", bean.getTime());//养护时间
                 context.startActivity(intent);
             }
         });
@@ -105,16 +99,16 @@ public class YhAdapter extends BaseAdapter {
 
 
     static class ViewHolder {
-        @InjectView(R.id.tv_treeid_yanghuitem)
-        TextView tvTreeid;
-        @InjectView(R.id.tv_behavior_yanghuitem)
-        TextView tvBehavior;
-        @InjectView(R.id.tv_place_yanghuitem)
-        TextView tvPlace;
-        @InjectView(R.id.tv_time_yanghuitem)
+        @InjectView(R.id.tv_code_item)
+        TextView tvCode;
+        @InjectView(R.id.tv_state_item)
+        TextView tvState;
+        @InjectView(R.id.tv_address_item)
+        TextView tvAddress;
+        @InjectView(R.id.tv_time_item)
         TextView tvTime;
-        @InjectView(R.id.btn_write_yanghuitem)
-        TextView btnWrite;
+        @InjectView(R.id.tv_write_item)
+        TextView tvWrite;
 
         ViewHolder(View view) {
             ButterKnife.inject(this, view);

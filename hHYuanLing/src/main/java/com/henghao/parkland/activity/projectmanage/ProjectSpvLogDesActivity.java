@@ -25,7 +25,7 @@ public class ProjectSpvLogDesActivity extends ActivityFragmentSupport {
     TextView tvProgressSituation;
     @InjectView(R.id.tv_workingSitustion)
     TextView tvWorkingSitustion;
-    @InjectView(R.id.tv_question)
+    @InjectView(R.id.tv_problem)
     TextView tvQuestion;
     @InjectView(R.id.tv_other)
     TextView tvOther;

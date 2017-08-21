@@ -19,7 +19,7 @@ public class MyWorkerListDesActivity extends ActivityFragmentSupport {
 
     @InjectView(R.id.tv_workType)
     TextView tvWorkType;
-    @InjectView(R.id.tv_details)
+    @InjectView(R.id.tv_content)
     TextView tvDetails;
     @InjectView(R.id.tv_dates)
     TextView tvDates;

@@ -9,281 +9,295 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/include_projecttop" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_normal"
             android:background="@color/white"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/padding_more">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dip"
+                    android:layout_width="120dip"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="植物编号：" />
+                    android:padding="@dimen/padding_big"
+                    android:text="植物编号"
+                    android:textSize="@dimen/gj_d" />
 
                 <TextView
-                    android:id="@+id/tv_treeid_maintenance"
-                    android:layout_width="0dip"
+                    android:id="@+id/tv_code"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:textSize="16sp" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/text_color_c"
+                    android:textSize="@dimen/gj_d" />
+
             </LinearLayout>
 
             <View
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="1dip"
                 android:background="@color/line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/padding_more">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dip"
+                    android:layout_width="120dip"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="养护地址：" />
+                    android:padding="@dimen/padding_big"
+                    android:text="养护地址"
+                    android:textSize="@dimen/gj_d" />
 
                 <TextView
                     android:id="@+id/tv_address"
-                    android:layout_width="0dip"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:textSize="16sp" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/text_color_c"
+                    android:textSize="@dimen/gj_d" />
+
             </LinearLayout>
 
             <View
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="1dip"
                 android:background="@color/line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/padding_more">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dip"
+                    android:layout_width="120dip"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="养护时间：" />
+                    android:padding="@dimen/padding_big"
+                    android:text="养护时间"
+                    android:textSize="@dimen/gj_d" />
 
                 <TextView
                     android:id="@+id/tv_time"
-                    android:layout_width="0dip"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:textSize="16sp" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/text_color_c"
+                    android:textSize="@dimen/gj_d" />
+
             </LinearLayout>
 
             <View
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="1dip"
                 android:background="@color/line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/padding_more">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dip"
+                    android:layout_width="120dip"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="养护人员：" />
+                    android:padding="@dimen/padding_big"
+                    android:text="养护人员"
+                    android:textSize="@dimen/gj_d" />
 
                 <TextView
-                    android:id="@+id/tv_worker"
-                    android:layout_width="0dip"
+                    android:id="@+id/tv_personnel"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:textSize="16sp" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/text_color_c"
+                    android:textSize="@dimen/gj_d" />
+
             </LinearLayout>
 
             <View
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="1dip"
                 android:background="@color/line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/padding_more">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dip"
+                    android:layout_width="120dip"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="养护内容：" />
+                    android:padding="@dimen/padding_big"
+                    android:text="养护内容"
+                    android:textSize="@dimen/gj_d" />
 
                 <TextView
-                    android:id="@+id/tv_details"
-                    android:layout_width="0dip"
+                    android:id="@+id/tv_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:textSize="16sp" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/text_color_c"
+                    android:textSize="@dimen/gj_d" />
+
             </LinearLayout>
 
             <View
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="1dip"
                 android:background="@color/line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/padding_more">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dip"
+                    android:layout_width="120dip"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="问题发现：" />
+                    android:padding="@dimen/padding_big"
+                    android:text="发现问题"
+                    android:textSize="@dimen/gj_d" />
 
                 <TextView
-                    android:id="@+id/tv_question"
-                    android:layout_width="0dip"
+                    android:id="@+id/tv_problem"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:textSize="16sp" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/text_color_c"
+                    android:textSize="@dimen/gj_d" />
+
             </LinearLayout>
 
             <View
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="1dip"
                 android:background="@color/line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/padding_more">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dip"
+                    android:layout_width="120dip"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="植物长势：" />
+                    android:padding="@dimen/padding_big"
+                    android:text="植物长势"
+                    android:textSize="@dimen/gj_d" />
 
                 <TextView
-                    android:id="@+id/tv_growup"
-                    android:layout_width="0dip"
+                    android:id="@+id/tv_plantGrowth"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:textSize="16sp" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/text_color_c"
+                    android:textSize="@dimen/gj_d" />
+
             </LinearLayout>
 
             <View
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="1dip"
                 android:background="@color/line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/padding_more">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dip"
+                    android:layout_width="120dip"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="保洁情况：" />
+                    android:padding="@dimen/padding_big"
+                    android:text="保洁情况"
+                    android:textSize="@dimen/gj_d" />
 
                 <TextView
-                    android:id="@+id/tv_clen"
-                    android:layout_width="0dip"
+                    android:id="@+id/tv_cleaning"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:textSize="16sp" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/text_color_c"
+                    android:textSize="@dimen/gj_d" />
+
             </LinearLayout>
 
             <View
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="1dip"
                 android:background="@color/line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/padding_more">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dip"
+                    android:layout_width="120dip"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="备注信息：" />
+                    android:padding="@dimen/padding_big"
+                    android:text="备注"
+                    android:textSize="@dimen/gj_d" />
 
                 <TextView
-                    android:id="@+id/tv_data"
-                    android:layout_width="0dip"
+                    android:id="@+id/tv_remarks"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:textSize="16sp" />
+                    android:padding="@dimen/padding_big"
+                    android:textColor="@color/text_color_c"
+                    android:textSize="@dimen/gj_d" />
+
             </LinearLayout>
 
             <View
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="1dip"
                 android:background="@color/line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/padding_more">
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dip"
+                    android:layout_width="120dip"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="养护前：" />
+                    android:padding="@dimen/padding_big"
+                    android:text="养护前"
+                    android:textSize="@dimen/gj_d" />
 
                 <ImageView
                     android:id="@+id/iv_before"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    android:layout_weight="5"
                     android:scaleType="centerCrop" />
             </LinearLayout>
 
             <View
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="1dip"
                 android:background="@color/line" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="@dimen/padding_more">
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="0dip"
+                    android:layout_width="120dip"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="养护后：" />
+                    android:padding="@dimen/padding_big"
+                    android:text="养护后"
+                    android:textSize="@dimen/gj_d" />
 
                 <ImageView
                     android:id="@+id/iv_after"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    android:layout_weight="5"
                     android:scaleType="centerCrop" />
             </LinearLayout>
         </LinearLayout>

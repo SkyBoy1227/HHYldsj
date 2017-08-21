@@ -7,7 +7,6 @@ import com.higdata.okhttphelper.OkHttpController;
 import com.higdata.okhttphelper.callback.BaseCallback;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -280,113 +279,136 @@ public class Requester {
         return OkHttpController.doRequest(getRequestURL(ProtocolUrl.FIND_HSJG), params, null, callback);
     }
     /************************ 项目管理相关end **************************/
+    /************************
+     * 养护管理
+     **************************/
     /**
-     * 养护信息填写
+     * 植物管护信息录入
      *
-     * @param yid        养护信息ID
-     * @param uid        uid
-     * @param treeId     植物二维码
-     * @param yhSite     养护地点
-     * @param yhWorker   养护人员
-     * @param yhDetails  养护内容
-     * @param yhTime     养护时间
-     * @param yhQuestion 问题发现
-     * @param yhClean    陆地保洁情况
-     * @param treeGrowup 植物长势
-     * @param yhComment  备注信息
-     * @param fileBefore 养护前图片
-     * @param fileAfter  养护后图片
-     * @param callback   回调
+     * @param maintenanceCode 养护编号
+     * @param type            养护类型
+     * @param userId          用户ID
+     * @param deptId          部门ID
+     * @param code            植物二维码
+     * @param address         养护地点
+     * @param personnel       养护人员
+     * @param content         养护内容
+     * @param time            养护时间
+     * @param problem         发现问题
+     * @param cleaning        陆地保洁情况
+     * @param plantGrowth     植物长势
+     * @param remarks         备注信息
+     * @param files           养护前后图片
+     * @param callback        回调
      * @return {@link Call}
      */
-    public static Call guanhuSubmit(String yid, String uid, String treeId, String yhSite, String yhWorker, String yhDetails, String yhTime, String yhQuestion, String yhClean, String treeGrowup, String yhComment, File fileBefore, File fileAfter, BaseCallback callback) {
+    public static Call addInformation(String maintenanceCode, String type, String userId, String deptId, String code, String address, String personnel, String content, String time, String problem, String cleaning, String plantGrowth, String remarks, List<File> files, BaseCallback callback) {
         Map<String, Object> params = new HashMap<>();
-        params.put("yid", yid);
-        params.put("uid", uid);
-        params.put("treeId", treeId);
-        params.put("yhSite", yhSite);
-        params.put("yhWorker", yhWorker);
-        params.put("yhDetails", yhDetails);
-        params.put("yhTime", yhTime);
-        params.put("yhQuestion", yhQuestion);
-        params.put("yhClean", yhClean);
-        params.put("treeGrowup", treeGrowup);
-        params.put("yhComment", yhComment);
-        List<File> files = new ArrayList<>();
-        files.add(fileBefore);
-        files.add(fileAfter);
-        return OkHttpController.doRequest(getRequestURL(ProtocolUrl.SAVEGHMANAGEMSG), params, files, null, callback);
+        params.put("maintenanceCode", maintenanceCode);
+        params.put("type", type);
+        params.put("userId", userId);
+        params.put("deptId", deptId);
+        params.put("code", code);
+        params.put("address", address);
+        params.put("personnel", personnel);
+        params.put("content", content);
+        params.put("time", time);
+        params.put("problem", problem);
+        params.put("cleaning", cleaning);
+        params.put("plantGrowth", plantGrowth);
+        params.put("remarks", remarks);
+        return OkHttpController.doRequest(ProtocolUrl.ADD_INFORMATION, params, files, null, callback);
     }
 
     /**
-     * 管护内容提交
+     * 植物养护信息录入
      *
-     * @param treeId       植物二维码
-     * @param yhStatusname 养护状态
-     * @param yhStatustime 养护时间
-     * @param yhStatussite 养护地点
-     * @param uid          uid
-     * @param callback     回调
-     * @return {@link Call}
-     */
-    public static Call maintenanceSubmit(String treeId, String yhStatusname, String yhStatustime, String yhStatussite, String uid, BaseCallback callback) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("treeId", treeId);
-        params.put("yhStatusname", yhStatusname);
-        params.put("yhStatustime", yhStatustime);
-        params.put("yhStatussite", yhStatussite);
-        params.put("uid", uid);
-        return OkHttpController.doRequest(getRequestURL(ProtocolUrl.SAVESTATUSMSG), params, null, callback);
-    }
-
-    /**
-     * 提交植物信息
-     *
-     * @param treeId            植物二维码
-     * @param treeName          植物名称
-     * @param treeUse           植物用途
-     * @param treeSpecification 植物规格
-     * @param treeSite          种植地点
-     * @param treeTime          录入时间
-     * @param callback          回调
-     * @return {@link Call}
-     */
-    public static Call treeSumit(String treeId, String treeName, String treeUse, String treeSpecification, String treeSite, String treeTime, BaseCallback callback) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("treeId", treeId);
-        params.put("treeName", treeName);
-        params.put("treeUse", treeUse);
-        params.put("treeSpecification", treeSpecification);
-        params.put("treeSite", treeSite);
-        params.put("treeTime", treeTime);
-        return OkHttpController.doRequest(getRequestURL(ProtocolUrl.SAVETREE), params, null, callback);
-    }
-
-    /**
-     * 查询养护管理信息
-     *
-     * @param uid      uid
+     * @param code     植物二维码
+     * @param state    养护状态
+     * @param time     养护时间
+     * @param address  养护地点
+     * @param userId   userId
+     * @param deptId   部门ID
      * @param callback 回调
      * @return {@link Call}
      */
-    public static Call yhManageQueryList(String uid, BaseCallback callback) {
+    public static Call addMaintenanceInformation(String code, String state, String time, String address, String userId, String deptId, BaseCallback callback) {
         Map<String, Object> params = new HashMap<>();
-        params.put("uid", uid);
-        return OkHttpController.doRequest(getRequestURL(ProtocolUrl.QUERYYGSTATUSMSG), params, null, callback);
+        params.put("code", code);
+        params.put("state", state);
+        params.put("time", time);
+        params.put("address", address);
+        params.put("userId", userId);
+        params.put("deptId", deptId);
+        return OkHttpController.doRequest(ProtocolUrl.ADD_MAINTENANCE_INFORMATION, params, null, callback);
     }
 
     /**
-     * 根据ID查询植物是否录入
+     * 养护前植物信息录入
      *
-     * @param treeId   植物二维码
+     * @param code           植物二维码
+     * @param name           植物名称
+     * @param purpose        植物用途
+     * @param specifications 植物规格
+     * @param address        种植地点
+     * @param time           录入时间
+     * @param deptId         部门ID
+     * @param callback       回调
+     * @return {@link Call}
+     */
+    public static Call addPlantInformation(String code, String name, String purpose, String specifications, String address, String time, String deptId, BaseCallback callback) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("code", code);
+        params.put("name", name);
+        params.put("purpose", purpose);
+        params.put("specifications", specifications);
+        params.put("address", address);
+        params.put("time", time);
+        params.put("deptId", deptId);
+        return OkHttpController.doRequest(ProtocolUrl.ADD_PLANT_INFORMATION, params, null, callback);
+    }
+
+    /**
+     * 植物养护信息查询
+     *
+     * @param userId   用户ID
      * @param callback 回调
      * @return {@link Call}
      */
-    public static Call yhManageQueryId(String treeId, BaseCallback callback) {
+    public static Call findMaintenanceInfo(String userId, BaseCallback callback) {
         Map<String, Object> params = new HashMap<>();
-        params.put("treeId", treeId);
-        return OkHttpController.doRequest(getRequestURL(ProtocolUrl.QUERYTREEMSGBYID), params, null, callback);
+        params.put("userId", userId);
+        return OkHttpController.doRequest(ProtocolUrl.FIND_MAINTENANCE_INFO, params, null, callback);
     }
+
+    /**
+     * 养护前植物信息查询
+     *
+     * @param code     植物二维码
+     * @param callback 回调
+     * @return {@link Call}
+     */
+    public static Call findPlantInformation(String code, BaseCallback callback) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("code", code);
+        return OkHttpController.doRequest(ProtocolUrl.FIND_PLANT_INFORMATION, params, null, callback);
+    }
+
+    /**
+     * 植物管护信息查询
+     *
+     * @param userId   用户ID
+     * @param code     养护编号
+     * @param callback 回调
+     * @return
+     */
+    public static Call findManagementInfo(String userId, String code, BaseCallback callback) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("userId", userId);
+        params.put("code", code);
+        return OkHttpController.doRequest(ProtocolUrl.FIND_MANAGEMENT_INFO, params, null, callback);
+    }
+    /************************ 养护管理 end **************************/
 
     /**
      * 删除变更管理条目

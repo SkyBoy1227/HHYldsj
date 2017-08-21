@@ -48,9 +48,7 @@ public class DialogList extends Dialog {
         setCancelable(true);
         this.dialog_ok = (NoScrollListView) findViewById(R.id.common_list);
         TextView txtTitle = (TextView) findViewById(R.id.dialog_title);
-        /**
-         * 初始化养护状态下拉列表框
-         */
+        //初始化养护状态下拉列表框
         List<String> mlist = new ArrayList<>();
         for (int i = 0; i < state_array.length; i++) {
             mlist.add(state_array[i]);

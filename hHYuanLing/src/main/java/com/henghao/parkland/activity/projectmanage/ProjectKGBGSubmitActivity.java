@@ -54,7 +54,7 @@ public class ProjectKGBGSubmitActivity extends ActivityFragmentSupport {
     @ViewInject(R.id.tv_wenjian)
     private TextView tv_wenjian;
 
-    @ViewInject(R.id.tv_data)
+    @ViewInject(R.id.tv_remarks)
     private TextView tv_data;
 
     @ViewInject(R.id.tv_time)
@@ -89,10 +89,10 @@ public class ProjectKGBGSubmitActivity extends ActivityFragmentSupport {
         super.initData();
     }
 
-    @OnClick({R.id.tv_data, R.id.tv_time, R.id.tv_wenjian, R.id.tv_sub})
+    @OnClick({R.id.tv_remarks, R.id.tv_time, R.id.tv_wenjian, R.id.tv_sub})
     private void viewClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_data:
+            case R.id.tv_remarks:
                 getDialogTime("请选择时间", 0);
                 break;
             case R.id.tv_time:

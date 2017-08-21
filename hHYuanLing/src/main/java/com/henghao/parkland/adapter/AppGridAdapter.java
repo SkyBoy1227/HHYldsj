@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.henghao.parkland.ActivityFragmentSupport;
 import com.henghao.parkland.Constant;
 import com.henghao.parkland.R;
-import com.henghao.parkland.activity.YhManageActivity;
+import com.henghao.parkland.activity.maintenance.YhManageActivity;
 import com.henghao.parkland.model.entity.AppGridEntity;
 import com.lidroid.xutils.BitmapUtils;
 

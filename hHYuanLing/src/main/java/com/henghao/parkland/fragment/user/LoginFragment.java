@@ -102,6 +102,9 @@ public class LoginFragment extends FragmentSupport {
         mCenterTextView.setText("登录");
     }
 
+    /**
+     * 第一次进入获得验证码，并获取用户Session
+     */
     private void initData() {
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder().url(Requester.getRequestURL(ProtocolUrl.AUTHCODE)).build();
