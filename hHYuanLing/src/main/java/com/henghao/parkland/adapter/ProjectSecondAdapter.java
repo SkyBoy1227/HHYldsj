@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.benefit.buy.library.utils.tools.ToolsKit;
 import com.henghao.parkland.ActivityFragmentSupport;
 import com.henghao.parkland.Constant;
 import com.henghao.parkland.ProtocolUrl;
@@ -85,6 +86,10 @@ public class ProjectSecondAdapter extends ArrayAdapter<AppGridEntity> {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (ToolsKit.isEmpty(mActivityFragmentSupport.getLoginUid())) {
+                    mActivityFragmentSupport.msg("请先登录！");
+                    return;
+                }
                 Intent intent = new Intent();
                 switch (position) {
                     case 0:

@@ -10,6 +10,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.benefit.buy.library.utils.tools.ToolsJson;
+import com.benefit.buy.library.utils.tools.ToolsKit;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.henghao.parkland.BuildConfig;
@@ -78,6 +79,10 @@ public class XiangmuFragment extends FragmentSupport {
         mRightLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (ToolsKit.isEmpty(mActivity.getLoginUid())) {
+                    mActivity.msg("请先登录！");
+                    return;
+                }
                 Intent intent = new Intent();
                 intent.putExtra("title", "项目管理");
                 intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.XMGL) + mActivity.getLoginUserName());

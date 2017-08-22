@@ -113,37 +113,32 @@ public class ProtocolUrl {
     /**
      * 查询当天植物养护信息
      */
-    public static final String FIND_MAINTENANCE_INFO = "http://172.16.0.186/yldsj/maintenance/findMaintenanceInfo";
+    public static final String FIND_MAINTENANCE_INFO = "yldsj/maintenance/findMaintenanceInfo";
 
     /**
      * 养护前植物信息查询
      */
-    public static final String FIND_PLANT_INFORMATION = "http://172.16.0.186/yldsj/maintenance/findPlantInformation";
+    public static final String FIND_PLANT_INFORMATION = "yldsj/maintenance/findPlantInformation";
 
     /**
      * 植物管护信息查询
      */
-    public static final String FIND_MANAGEMENT_INFO = "http://172.16.0.186/yldsj/maintenance/findManagementInfo";
+    public static final String FIND_MANAGEMENT_INFO = "yldsj/maintenance/findManagementInfo";
 
     /**
      * 植物养护信息录入
      */
-    public static final String ADD_MAINTENANCE_INFORMATION = "http://172.16.0.186/yldsj/maintenance/addMaintenanceInformation";
-
-    /**
-     * 通过植物编号查询管护信息访问接口
-     */
-    public static final String APP_GHMANAGEMSGBYID = "/YhManage/queryGhManageMsgByid";
+    public static final String ADD_MAINTENANCE_INFORMATION = "yldsj/maintenance/addMaintenanceInformation";
 
     /**
      * 养护前植物信息录入
      */
-    public static final String ADD_PLANT_INFORMATION = "http://172.16.0.186/yldsj/maintenance/addPlantInformation";
+    public static final String ADD_PLANT_INFORMATION = "yldsj/maintenance/addPlantInformation";
 
     /**
      * 植物管护信息录入
      */
-    public static final String ADD_INFORMATION = "http://172.16.0.186/yldsj/maintenance/addInformation";
+    public static final String ADD_INFORMATION = "yldsj/maintenance/addInformation";
     /************************ 养护管理 end **************************/
     /************************
      * 项目管理相关

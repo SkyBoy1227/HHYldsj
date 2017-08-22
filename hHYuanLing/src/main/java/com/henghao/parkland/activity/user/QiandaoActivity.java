@@ -109,7 +109,7 @@ public class QiandaoActivity extends ActivityFragmentSupport {
             case R.id.iv_qiandao:
                 String uid = getLoginUid();
                 if (ToolsKit.isEmpty(uid)) {
-                    Toast.makeText(QiandaoActivity.this, "当前没有登录，请先登录！！", Toast.LENGTH_SHORT).show();
+                    msg("当前没有登录，请先登录！！");
                     return;
                 }
                 String name = getLoginUser().getName();//姓名
@@ -211,6 +211,10 @@ public class QiandaoActivity extends ActivityFragmentSupport {
         mRightLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (ToolsKit.isEmpty(getLoginUid())) {
+                    msg("当前没有登录，请先登录！！");
+                    return;
+                }
                 Intent intent = new Intent(context, QiandaoInfoActivity.class);
                 startActivity(intent);
             }

@@ -317,7 +317,7 @@ public class Requester {
         params.put("cleaning", cleaning);
         params.put("plantGrowth", plantGrowth);
         params.put("remarks", remarks);
-        return OkHttpController.doRequest(ProtocolUrl.ADD_INFORMATION, params, files, null, callback);
+        return OkHttpController.doRequest(getRequestURL(ProtocolUrl.ADD_INFORMATION), params, files, null, callback);
     }
 
     /**
@@ -340,7 +340,7 @@ public class Requester {
         params.put("address", address);
         params.put("userId", userId);
         params.put("deptId", deptId);
-        return OkHttpController.doRequest(ProtocolUrl.ADD_MAINTENANCE_INFORMATION, params, null, callback);
+        return OkHttpController.doRequest(getRequestURL(ProtocolUrl.ADD_MAINTENANCE_INFORMATION), params, null, callback);
     }
 
     /**
@@ -365,7 +365,7 @@ public class Requester {
         params.put("address", address);
         params.put("time", time);
         params.put("deptId", deptId);
-        return OkHttpController.doRequest(ProtocolUrl.ADD_PLANT_INFORMATION, params, null, callback);
+        return OkHttpController.doRequest(getRequestURL(ProtocolUrl.ADD_PLANT_INFORMATION), params, null, callback);
     }
 
     /**
@@ -378,7 +378,7 @@ public class Requester {
     public static Call findMaintenanceInfo(String userId, BaseCallback callback) {
         Map<String, Object> params = new HashMap<>();
         params.put("userId", userId);
-        return OkHttpController.doRequest(ProtocolUrl.FIND_MAINTENANCE_INFO, params, null, callback);
+        return OkHttpController.doRequest(getRequestURL(ProtocolUrl.FIND_MAINTENANCE_INFO), params, null, callback);
     }
 
     /**
@@ -391,7 +391,7 @@ public class Requester {
     public static Call findPlantInformation(String code, BaseCallback callback) {
         Map<String, Object> params = new HashMap<>();
         params.put("code", code);
-        return OkHttpController.doRequest(ProtocolUrl.FIND_PLANT_INFORMATION, params, null, callback);
+        return OkHttpController.doRequest(getRequestURL(ProtocolUrl.FIND_PLANT_INFORMATION), params, null, callback);
     }
 
     /**
@@ -406,7 +406,7 @@ public class Requester {
         Map<String, Object> params = new HashMap<>();
         params.put("userId", userId);
         params.put("code", code);
-        return OkHttpController.doRequest(ProtocolUrl.FIND_MANAGEMENT_INFO, params, null, callback);
+        return OkHttpController.doRequest(getRequestURL(ProtocolUrl.FIND_MANAGEMENT_INFO), params, null, callback);
     }
     /************************ 养护管理 end **************************/
 
