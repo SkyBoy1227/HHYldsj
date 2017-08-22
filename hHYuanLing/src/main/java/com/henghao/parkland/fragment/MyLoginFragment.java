@@ -21,11 +21,11 @@ import com.henghao.parkland.ProtocolUrl;
 import com.henghao.parkland.R;
 import com.henghao.parkland.activity.DebugSettingActivity;
 import com.henghao.parkland.activity.WebviewActivity;
-import com.henghao.parkland.activity.projectmanage.ProjectInfoActivity;
 import com.henghao.parkland.activity.user.LoginAndRegActivity;
-import com.henghao.parkland.activity.user.MyWorkerListActivity;
+import com.henghao.parkland.activity.user.MyCenterActivity;
 import com.henghao.parkland.activity.user.QiandaoActivity;
 import com.henghao.parkland.activity.user.SettingActivity;
+import com.henghao.parkland.activity.user.TaskActivity;
 import com.henghao.parkland.utils.Requester;
 import com.lidroid.xutils.ViewUtils;
 
@@ -120,10 +120,21 @@ public class MyLoginFragment extends FragmentSupport {
         }
     }
 
-    @OnClick({R.id.tv_login, R.id.ll_updatename, R.id.image_setting, R.id.tv_myworker, R.id.tv_qiandao, R.id.tv_myproject, R.id.tv_compactmanage})
+    @OnClick({R.id.tv_mywallet, R.id.tv_login, R.id.ll_updatename, R.id.image_setting,
+            R.id.tv_my_center, R.id.tv_qiandao, R.id.tv_myproject, R.id.tv_task, R.id.tv_compactmanage})
     public void onViewClicked(View v) {
-        final Intent intent = new Intent();
+        Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.tv_mywallet://我的钱包
+                if (!isLogin()) {
+                    mActivity.msg("请先登录！");
+                    return;
+                }
+                intent.putExtra("title", "施工钱包");
+                intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.FIND_SGQB) + mActivity.getLoginUserName());
+                intent.setClass(mActivity, WebviewActivity.class);
+                mActivity.startActivity(intent);
+                break;
             case R.id.tv_login:
                 if (isLogin()) {
                     Resources mResources = getResources();
@@ -148,9 +159,14 @@ public class MyLoginFragment extends FragmentSupport {
                 intent.setClass(mActivity, SettingActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.tv_myworker:
-                //我的轨迹
-                intent.setClass(mActivity, MyWorkerListActivity.class);
+            case R.id.tv_my_center:
+                //个人中心
+                intent.setClass(mActivity, MyCenterActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.tv_task:
+                //任务安排
+                intent.setClass(mActivity, TaskActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_qiandao:
@@ -160,12 +176,22 @@ public class MyLoginFragment extends FragmentSupport {
                 break;
             case R.id.tv_myproject:
                 //我的项目
-                intent.setClass(mActivity, ProjectInfoActivity.class);
-                startActivity(intent);
+                if (!isLogin()) {
+                    mActivity.msg("请先登录！");
+                    return;
+                }
+                intent.putExtra("title", "我的项目");
+                intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.FIND_XMXX) + mActivity.getLoginUserName());
+                intent.setClass(mActivity, WebviewActivity.class);
+                mActivity.startActivity(intent);
                 break;
             case R.id.tv_compactmanage:
                 //合同管理
-                final AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+                if (!isLogin()) {
+                    mActivity.msg("请先登录！");
+                    return;
+                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
                 builder.setIcon(R.drawable.icon_select);
                 builder.setTitle("请选择合同类型");
                 String[] data = {"商务合同", "劳务合同", "授权合同"};
@@ -205,7 +231,11 @@ public class MyLoginFragment extends FragmentSupport {
 
     }
 
-
+    /**
+     * 判断是否登录
+     *
+     * @return
+     */
     private boolean isLogin() {
         if (!ToolsKit.isEmpty(mActivity.getLoginUserName())) {
             return true;

@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/tv_mywallet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_listback"
@@ -63,7 +64,7 @@
         android:background="@color/line" />
 
     <TextView
-        android:id="@+id/tv_myworker"
+        android:id="@+id/tv_my_center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_listback"
@@ -72,7 +73,7 @@
         android:drawableRight="@drawable/arrow_right"
         android:gravity="center_vertical"
         android:padding="@dimen/padding_big"
-        android:text="我的轨迹"
+        android:text="个人中心"
         android:textColor="@color/text_color_b"
         android:textSize="@dimen/gj_d" />
 
@@ -82,6 +83,7 @@
         android:background="@color/line" />
 
     <TextView
+        android:id="@+id/tv_task"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_big"
@@ -91,7 +93,7 @@
         android:drawableRight="@drawable/arrow_right"
         android:gravity="center_vertical"
         android:padding="@dimen/padding_big"
-        android:text="我的备忘"
+        android:text="任务安排"
         android:textColor="@color/text_color_b"
         android:textSize="@dimen/gj_d" />
 

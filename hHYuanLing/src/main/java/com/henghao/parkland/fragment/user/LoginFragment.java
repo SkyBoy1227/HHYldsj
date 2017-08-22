@@ -133,8 +133,7 @@ public class LoginFragment extends FragmentSupport {
                 mActivity.getLoginUserSharedPre().edit()
                         .putString(Constant.USERSESSION, session)//用户Session
                         .apply();
-                byte[] bytes = response.body().bytes();
-                final Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                final Bitmap bitmap = BitmapFactory.decodeStream(response.body().byteStream());
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

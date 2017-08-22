@@ -133,14 +133,14 @@
             android:screenOrientation="portrait"
             android:theme="@style/Activity.Theme"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <!-- activity 我的工作轨迹 -->
+        <!-- activity 个人中心 -->
         <activity
-            android:name=".activity.user.MyWorkerListActivity"
+            android:name=".activity.user.MyCenterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Activity.Theme" />
-        <!-- activity 我的工作轨迹详情 -->
+        <!-- activity 任务安排 -->
         <activity
-            android:name=".activity.user.MyWorkerListDesActivity"
+            android:name=".activity.user.TaskActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Activity.Theme" />
         <!-- activity 巡检界面 -->

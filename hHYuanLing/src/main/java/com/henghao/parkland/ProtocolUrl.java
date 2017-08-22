@@ -34,7 +34,7 @@ public class ProtocolUrl {
         if (BuildConfig.DEBUG) {
             // 测试地址/172.16.13.113
             ROOT_URL = "http://172.16.13.113";
-            // 测试地址/172.16.0.8
+            // 测试地址/172.16.0.206
             HZ_URL = "http://172.16.0.206/hz7";
         } else {
             // 生产地址
@@ -149,11 +149,6 @@ public class ProtocolUrl {
      * 项目管理相关
      **************************/
     /**
-     * 项目信息查询
-     */
-    public static final String FIND_XMXX = "yldsj/project/find/xmxx";
-
-    /**
      * 项目信息提交
      */
     public static final String ADD_XMXX = "horizon/template/form/default.wf?formid=HZ90808e5db14771015db14850110026&loginName=";
@@ -242,7 +237,6 @@ public class ProtocolUrl {
      * 施工安全日志提交
      */
     public static final String ADD_SGAQRZ = "horizon/template/form/default.wf?formid=HZ90808e5db63543015db684f3740620&loginName=";
-
     /**
      * 施工钱包提交
      */
@@ -257,6 +251,16 @@ public class ProtocolUrl {
      * 项目结算提交
      */
     public static final String ADD_XMJS = "horizon/template/form/default.wf?formid=HZ90808e5db123ae015db12427230016&loginName=";
+
+    /**
+     * 施工钱包查看
+     */
+    public static final String FIND_SGQB = "resource/skins/bootstrap/view/datatables/view.datatables.jsp?viewid=HZ9080885df2d10d015df37db8bc028a&loginName=";
+
+    /**
+     * 项目信息查看
+     */
+    public static final String FIND_XMXX = "resource/skins/bootstrap/view/datatables/view.datatables.jsp?viewid=HZ90808e5db155eb015db16b88dd0251&loginName=";
 
     /**
      * 会审结果查询
@@ -381,10 +385,6 @@ public class ProtocolUrl {
      */
     public static final String PROJECT_WORKBEIWANG = "projectManage/saveWorkMemoMsg";
 
-    /**
-     * 施工资料查询
-     */
-    public static final String PROJECT_QUARYSGZL = "projectManage/queryBuildDateMsg";
     /**
      * 现场勘查
      */
@@ -635,6 +635,26 @@ public class ProtocolUrl {
     public static final String DELETECOMPACT_ENGINEERING = "deleteCompact/engineering";
 
     /************************ 合同管理 end **************************/
+
+    /************************
+     * 任务安排
+     **************************/
+    /**
+     * 工作任务提交
+     */
+    public static final String ADD_WORK_TASK = "horizon/template/form/default.wf?formid=HZ90808e5db6db88015db7022cc503df&loginName=";
+
+    /**
+     * 工作安排提交
+     */
+    public static final String ADD_WORK_ARRANGE = "horizon/template/form/default.wf?formid=HZ90808e5db6db88015db7157e94058c&loginName=";
+
+    /**
+     * 我的计划提交
+     */
+    public static final String ADD_MY_PLAN = "horizon/template/form/default.wf?formid=HZ90808e5db6db88015db7157e9405a5&loginName=";
+
+    /************************ 任务安排 end **************************/
 
     /**
      * 上传错误日志到服务器

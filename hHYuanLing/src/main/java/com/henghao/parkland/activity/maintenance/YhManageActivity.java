@@ -299,6 +299,10 @@ public class YhManageActivity extends ActivityFragmentSupport {
     public void onResume() {
         super.onResume();
         this.locationClient.start(); // 开始定位
+        if (ToolsKit.isEmpty(getLoginUid())) {
+            msg("请先登录！");
+            return;
+        }
         //请求网络，查询当天养护信息
         findMaintenanceInfoCall = Requester.findMaintenanceInfo(getLoginUid(), findMaintenanceInfoCallback);
     }
