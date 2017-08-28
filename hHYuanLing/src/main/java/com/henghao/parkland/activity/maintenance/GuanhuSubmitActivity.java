@@ -110,7 +110,7 @@ public class GuanhuSubmitActivity extends ActivityFragmentSupport {
 
     private void request() {
         //访问网络，提交数据
-        addInformationCall = Requester.addInformation(maintenanceCode, type, getLoginUid(), getLoginUser().getDeptId(),
+        addInformationCall = Requester.addInformation(maintenanceCode, type, getLoginUid(), getLoginUser().getDept(),
                 code, address, personnel, content, time, problem,
                 cleaning, plantGrowth, remarks, mFileList, addInformationCallback);
     }

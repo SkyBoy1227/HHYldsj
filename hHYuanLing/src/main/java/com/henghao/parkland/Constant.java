@@ -126,6 +126,11 @@ public class Constant {
      */
     public static final String USERSESSION = "Cookie";
 
+    /**
+     * 用户所属企业
+     */
+    public static final String USERCOMP = "comp";
+
     public static final String USERIMG = "user_image";
 
     public static final String USERSTATE = "user_state";

@@ -22,18 +22,18 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 /**
- * Created by ASUS on 2017/8/22.
- * 任务安排
+ * Created by ASUS on 2017/8/23.
+ * 合同管理
  */
 
-public class TaskAdapter extends ArrayAdapter<AppGridEntity> {
+public class ContractAdapter extends ArrayAdapter<AppGridEntity> {
     private final LayoutInflater inflater;
 
     private final ActivityFragmentSupport mActivityFragmentSupport;
 
     private final List<AppGridEntity> mList;
 
-    public TaskAdapter(ActivityFragmentSupport activityFragment, List<AppGridEntity> list) {
+    public ContractAdapter(ActivityFragmentSupport activityFragment, List<AppGridEntity> list) {
         super(activityFragment, R.layout.item_gridview_textimage, list);
         this.mActivityFragmentSupport = activityFragment;
         this.mList = list;
@@ -68,23 +68,23 @@ public class TaskAdapter extends ArrayAdapter<AppGridEntity> {
                 Intent intent = new Intent();
                 switch (position) {
                     case 0:
-                        // 工作任务
-                        intent.putExtra("title", "工作任务");
-                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_WORK_TASK) + mActivityFragmentSupport.getLoginUserName());
+                        // 商务合同
+                        intent.putExtra("title", "商务合同");
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_SWHT) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
                     case 1:
-                        // 工作安排
-                        intent.putExtra("title", "工作安排");
-                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_WORK_ARRANGE) + mActivityFragmentSupport.getLoginUserName());
+                        // 劳务合同
+                        intent.putExtra("title", "劳务合同");
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_LWHT) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
                     case 2:
-                        // 我的计划
-                        intent.putExtra("title", "我的计划");
-                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_MY_PLAN) + mActivityFragmentSupport.getLoginUserName());
+                        // 授权合同
+                        intent.putExtra("title", "授权合同");
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_SQHT) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;

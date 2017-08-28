@@ -96,7 +96,7 @@ public class ProjectHSResultActivity extends ActivityFragmentSupport implements 
                                 break;
                             case 1://企业信息
                                 initProjectHSResultEntities.clear();//清空缓存
-                                findHsjgCall = Requester.findHsjg(page, "", getLoginUser().getDeptId(), findHsjgCallBack);
+                                findHsjgCall = Requester.findHsjg(page, "", getLoginUser().getDept(), findHsjgCallBack);
                                 listView.setAdapter(mAdapter);
                                 listView.setPullLoadEnable(true);//设置可上滑加载更多
                                 indexOfSelect = 0;
@@ -265,7 +265,7 @@ public class ProjectHSResultActivity extends ActivityFragmentSupport implements 
                 listView.setAdapter(mAdapter);
                 break;
             case 1://企业信息
-                findHsjgCall = Requester.findHsjg(page, "", getLoginUser().getDeptId(), findHsjgCallBack);
+                findHsjgCall = Requester.findHsjg(page, "", getLoginUser().getDept(), findHsjgCallBack);
                 listView.setPullLoadEnable(true);//设置可上滑加载更多
                 listView.setAdapter(mAdapter);
                 break;
@@ -290,7 +290,7 @@ public class ProjectHSResultActivity extends ActivityFragmentSupport implements 
                     @Override
                     public void run() {
                         page++;//页数加1
-                        findHsjgCall = Requester.findHsjg(page, "", getLoginUser().getDeptId(), findHsjgCallBack);
+                        findHsjgCall = Requester.findHsjg(page, "", getLoginUser().getDept(), findHsjgCallBack);
                     }
                 }, 1000);
                 break;

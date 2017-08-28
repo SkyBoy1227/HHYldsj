@@ -110,7 +110,7 @@ public class TreeMessageActivity extends ActivityFragmentSupport {
                 specifications = etSpecifications.getText().toString().trim();//植物规格
                 if (checkData()) {
                     //访问网络
-                    call = Requester.addPlantInformation(code, name, purpose, specifications, address, time, getLoginUser().getDeptId(), callback);
+                    call = Requester.addPlantInformation(code, name, purpose, specifications, address, time, getLoginUser().getDept(), callback);
                 }
                 break;
         }

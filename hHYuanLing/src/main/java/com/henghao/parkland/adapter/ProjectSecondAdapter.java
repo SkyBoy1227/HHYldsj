@@ -95,14 +95,14 @@ public class ProjectSecondAdapter extends ArrayAdapter<AppGridEntity> {
                     case 0:
                         //监理日志
                         intent.putExtra("title", "监理日志");
-                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_JLRZ) + mActivityFragmentSupport.getLoginUserName());
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_JLRZ) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
                     case 1:
                         //施工日志
                         intent.putExtra("title", "施工日志");
-                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_SGRZ) + mActivityFragmentSupport.getLoginUserName());
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_SGRZ) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
 //                        final AlertDialog.Builder builder = new AlertDialog.Builder(mActivityFragmentSupport);
@@ -131,14 +131,14 @@ public class ProjectSecondAdapter extends ArrayAdapter<AppGridEntity> {
                     case 2:
                         //施工安全日志
                         intent.putExtra("title", "施工安全日志");
-                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_SGAQRZ) + mActivityFragmentSupport.getLoginUserName());
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_SGAQRZ) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
                     case 3:
                         //施工钱包
                         intent.putExtra("title", "施工钱包");
-                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_SGQG) + mActivityFragmentSupport.getLoginUserName());
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_SGQG) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;

@@ -88,14 +88,14 @@ public class QiandaoInfoActivity extends ActivityFragmentSupport implements XLis
                         switch (which) {
                             case 0://个人信息
                                 initQiandaoInfoEntities.clear();//清空缓存
-                                findSignInCall = Requester.findSignIn(page, getLoginUid(), "", findSignInCallBaclk);
+                                findSignInCall = Requester.findSignIn(page, getLoginUid(), "", "", getLoginUser().getLev(), findSignInCallBaclk);
                                 listView.setAdapter(mAdapter);
                                 listView.setPullLoadEnable(true);//设置可上滑加载更多
                                 indexOfSelect = 0;
                                 break;
                             case 1://企业信息
                                 initQiandaoInfoEntities.clear();//清空缓存
-                                findSignInCall = Requester.findSignIn(page, "", getLoginUser().getDeptId(), findSignInCallBaclk);
+                                findSignInCall = Requester.findSignIn(page, "", getLoginUser().getComp(), getLoginUser().getDept(), getLoginUser().getLev(), findSignInCallBaclk);
                                 listView.setAdapter(mAdapter);
                                 listView.setPullLoadEnable(true);//设置可上滑加载更多
                                 indexOfSelect = 0;
@@ -117,7 +117,7 @@ public class QiandaoInfoActivity extends ActivityFragmentSupport implements XLis
         initQiandaoInfoEntities = new ArrayList<>();
         mAdapter = new QiandaoInfoAdapter(this, initQiandaoInfoEntities);
         //请求网络，查询签到情况，默认查询个人信息
-        findSignInCall = Requester.findSignIn(page, getLoginUid(), "", findSignInCallBaclk);
+        findSignInCall = Requester.findSignIn(page, getLoginUid(), "", "", getLoginUser().getLev(), findSignInCallBaclk);
         listView.setAdapter(mAdapter);
     }
 
@@ -179,13 +179,13 @@ public class QiandaoInfoActivity extends ActivityFragmentSupport implements XLis
         switch (indexOfSelect) {
             case 0://个人信息
                 initQiandaoInfoEntities.clear();//清空缓存
-                findSignInCall = Requester.findSignIn(page, getLoginUid(), "", findSignInCallBaclk);
+                findSignInCall = Requester.findSignIn(page, getLoginUid(), "", "", getLoginUser().getLev(), findSignInCallBaclk);
                 listView.setPullLoadEnable(true);//设置可上滑加载更多
                 listView.setAdapter(mAdapter);
                 break;
             case 1://企业信息
                 initQiandaoInfoEntities.clear();//清空缓存
-                findSignInCall = Requester.findSignIn(page, "", getLoginUser().getDeptId(), findSignInCallBaclk);
+                findSignInCall = Requester.findSignIn(page, "", getLoginUser().getComp(), getLoginUser().getDept(), getLoginUser().getLev(), findSignInCallBaclk);
                 listView.setPullLoadEnable(true);//设置可上滑加载更多
                 listView.setAdapter(mAdapter);
                 break;
@@ -201,7 +201,7 @@ public class QiandaoInfoActivity extends ActivityFragmentSupport implements XLis
                     @Override
                     public void run() {
                         page++;//页数加1
-                        findSignInCall = Requester.findSignIn(page, getLoginUid(), "", findSignInCallBaclk);
+                        findSignInCall = Requester.findSignIn(page, getLoginUid(), "", "", getLoginUser().getLev(), findSignInCallBaclk);
                     }
                 }, 1000);
                 break;
@@ -210,7 +210,7 @@ public class QiandaoInfoActivity extends ActivityFragmentSupport implements XLis
                     @Override
                     public void run() {
                         page++;//页数加1
-                        findSignInCall = Requester.findSignIn(page, "", getLoginUser().getDeptId(), findSignInCallBaclk);
+                        findSignInCall = Requester.findSignIn(page, getLoginUid(), "", "", getLoginUser().getLev(), findSignInCallBaclk);
                     }
                 }, 1000);
                 break;

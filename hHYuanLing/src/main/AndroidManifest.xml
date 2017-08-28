@@ -29,6 +29,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <!-- 百度地图 -->
     <!-- 这个权限用于进行网络定位 -->
@@ -141,6 +142,11 @@
         <!-- activity 任务安排 -->
         <activity
             android:name=".activity.user.TaskActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Activity.Theme" />
+        <!-- activity 合同管理 -->
+        <activity
+            android:name=".activity.user.ContractActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Activity.Theme" />
         <!-- activity 巡检界面 -->

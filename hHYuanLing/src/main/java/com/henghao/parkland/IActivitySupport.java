@@ -193,4 +193,11 @@ public interface IActivitySupport {
      */
     String getUserSession();
 
+    /**
+     * 取得用户所属企业，用于动态拼接慧正URL地址
+     *
+     * @return
+     */
+    String getUserComp();
+
 }

@@ -85,7 +85,7 @@ public class XiangmuFragment extends FragmentSupport {
                 }
                 Intent intent = new Intent();
                 intent.putExtra("title", "项目管理");
-                intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.XMGL) + mActivity.getLoginUserName());
+                intent.putExtra("url", Requester.getRequestHZURL(mActivity.getUserComp() + "/" + ProtocolUrl.XMGL) + mActivity.getLoginUserName());
                 intent.setClass(mActivity, WebviewActivity.class);
                 mActivity.startActivity(intent);
             }

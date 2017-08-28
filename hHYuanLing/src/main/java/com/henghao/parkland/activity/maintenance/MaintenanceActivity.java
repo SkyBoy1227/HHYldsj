@@ -90,7 +90,7 @@ public class MaintenanceActivity extends ActivityFragmentSupport {
         switch (view.getId()) {
             case R.id.tv_submit:
                 // 访问网络
-                addMaintenanceInformationCall = Requester.addMaintenanceInformation(code, state, time, address, getLoginUid(), getLoginUser().getDeptId(), addMaintenanceInformationCallback);
+                addMaintenanceInformationCall = Requester.addMaintenanceInformation(code, state, time, address, getLoginUid(), getLoginUser().getDept(), addMaintenanceInformationCallback);
                 break;
         }
     }

@@ -28,26 +28,25 @@ public class ProtocolUrl {
     /**
      * 慧正服务器地址
      */
-    public static String HZ_URL = "";
+    public static String HZ_ROOT_URL = "";
 
     static {
         if (BuildConfig.DEBUG) {
             // 测试地址/172.16.13.113
             ROOT_URL = "http://172.16.13.113";
-            // 测试地址/172.16.0.206
-            HZ_URL = "http://172.16.0.206/hz7";
+            // 测试地址/172.16.0.121
+            HZ_ROOT_URL = "http://172.16.0.121";
         } else {
             // 生产地址
             ROOT_URL = "http://222.85.156.43:81/Garden";
             // 生产地址
-            HZ_URL = "http://222.85.156.43:81/Garden";
+            HZ_ROOT_URL = "http://222.85.156.43:81/Garden";
         }
     }
 
     /************************
      * 用户相关
      **************************/
-    public static final String USER = "user/";
 
     /**
      * 用户登录
@@ -86,6 +85,7 @@ public class ProtocolUrl {
      */
     public static final String APP_SYS_UPDATE = SYSTEM + "appUserUpdate";
     /************************ app系统 end **************************/
+
     /************************
      * 签到相关
      **************************/
@@ -106,6 +106,7 @@ public class ProtocolUrl {
     public static final String FIND_SIGNIN = "yldsj/find/signIn";
 
     /************************ 签到相关 end **************************/
+
     /************************
      * 养护管理
      **************************/
@@ -140,88 +141,95 @@ public class ProtocolUrl {
      */
     public static final String ADD_INFORMATION = "yldsj/maintenance/addInformation";
     /************************ 养护管理 end **************************/
+
     /************************
      * 项目管理相关
      **************************/
+
     /**
      * 项目信息提交
      */
-    public static final String ADD_XMXX = "horizon/template/form/default.wf?formid=HZ90808e5db14771015db14850110026&loginName=";
+    public static final String ADD_XMXX = "horizon/template/form/default.wf?formid=HZ90804e5e1719f9015e174e52b604fa&loginName=";
 
     /**
      * 会审结果提交
      */
-    public static final String ADD_HSJG = "horizon/template/form/default.wf?formid=HZ90808e5db0f880015db0f93f01001c&loginName=";
+    public static final String ADD_HSJG = "horizon/template/form/default.wf?formid=HZ90804e5e1765cd015e17740b410153&loginName=";
 
     /**
      * 供货方信息提交
      */
-    public static final String ADD_GHFXX = "horizon/template/form/default.wf?formid=HZ90808e5db17b0b015db17b5dd00023&loginName=";
+    public static final String ADD_GHFXX = "horizon/template/form/default.wf?formid=HZ90804e5e178180015e178418dd003c&loginName=";
 
     /**
      * 施工人员提交
      */
-    public static final String ADD_SGRY = "horizon/template/form/default.wf?formid=HZ90808e5db17b0b015db1a5bf6902e7&loginName=";
+    public static final String ADD_SGRY = "horizon/template/form/default.wf?formid=HZ90804e5e17f143015e17ff0702010f&loginName=";
 
     /**
      * 开工报告提交
      */
-    public static final String ADD_KGBG = "horizon/template/form/default.wf?formid=HZ90808e5db155eb015db15b2f8e011c&loginName=";
+    public static final String ADD_KGBG = "horizon/template/form/default.wf?formid=HZ90804e5e17f143015e180f811a028c&loginName=";
 
     /**
      * 设备信息提交
      */
-    public static final String ADD_SBXX = "horizon/template/form/default.wf?formid=HZ90808e5db17b0b015db1c1fc2f0502&loginName=";
+    public static final String ADD_SBXX = "horizon/template/form/default.wf?formid=HZ90804e5e17f143015e1827a8f90422&loginName=";
 
     /**
      * 工序报验提交
      */
-    public static final String ADD_GXBY = "horizon/template/form/default.wf?formid=HZ90808e5db63543015db6364b120027&loginName=";
+    public static final String ADD_GXBY = "horizon/template/form/default.wf?formid=HZ90804e5e17f143015e1835a39f054e&loginName=";
 
     /**
      * 现场勘察提交
      */
-    public static final String ADD_XCKC = "horizon/template/form/default.wf?formid=HZ90808e5db63543015db649340f017d&loginName=";
+    public static final String ADD_XCKC = "horizon/template/form/default.wf?formid=HZ90804e5e17f143015e183c55f20642&loginName=";
 
     /**
      * 变更管理提交
      */
-    public static final String ADD_BGGL = "horizon/template/form/default.wf?formid=HZ90808e5db63543015db65cd0e2031d&loginName=";
+    public static final String ADD_BGGL = "horizon/template/form/default.wf?formid=HZ90804e5e17f143015e184c55fd082a&loginName=";
 
     /**
      * 竣工验收提交
      */
-    public static final String ADD_JGYS = "horizon/template/form/default.wf?formid=HZ90808e5db63543015db65cd0e20335&loginName=";
+    public static final String ADD_JGYS = "horizon/template/form/default.wf?formid=HZ90804e5e1852f8015e18545b94005c&loginName=";
 
     /**
      * 进度申报提交
      */
-    public static final String ADD_JDSB = "horizon/template/form/default.wf?formid=HZ90808e5db123ae015db1286259007c&loginName=";
+    public static final String ADD_JDSB = "horizon/template/form/default.wf?formid=HZ90804e5e1852f8015e185ca8f9015b&loginName=";
+
+    /**
+     * 技术交底提交
+     */
+    public static final String ADD_JSJD = "horizon/template/form/default.wf?formid=HZ90804e5e1852f8015e186ba5a7028c&loginName=";
+
+    /**
+     * 项目结算提交
+     */
+    public static final String ADD_XMJS = "horizon/template/form/default.wf?formid=HZ90804e5e1852f8015e1877bdd903d1&loginName=";
 
     /**
      * 监理日志提交
      */
-    public static final String ADD_JLRZ = "horizon/template/form/default.wf?formid=HZ90808e5db63543015db66bac4b0435&loginName=";
+    public static final String ADD_JLRZ = "horizon/template/form/default.wf?formid=HZ90804e5e1852f8015e188171bc051d&loginName=";
 
     /**
      * 施工日志提交
      */
-    public static final String ADD_SGRZ = "horizon/template/form/default.wf?formid=HZ90808e5db63543015db67ac9da056b&loginName=";
+    public static final String ADD_SGRZ = "horizon/template/form/default.wf?formid=HZ90804e5e1852f8015e18ab526c099c&loginName=";
 
     /**
-     * 商务合同提交
+     * 施工安全日志提交
      */
-    public static final String ADD_SWHT = "horizon/template/form/default.wf?formid=HZ90808e5db17b0b015db17ed9840080&loginName=";
+    public static final String ADD_SGAQRZ = "horizon/template/form/default.wf?formid=HZ90804e5e1852f8015e18b549e20a86&loginName=";
 
     /**
-     * 劳务合同提交
+     * 施工钱包提交
      */
-    public static final String ADD_LWHT = "horizon/template/form/default.wf?formid=HZ90808e5db17b0b015db1a7ed260329&loginName=";
-
-    /**
-     * 授权合同提交
-     */
-    public static final String ADD_SQHT = "horizon/template/form/default.wf?formid=HZ90808e5db17b0b015db1a7ed270341&loginName=";
+    public static final String ADD_SGQG = "horizon/template/form/default.wf?formid=HZ90804e5e1852f8015e18c318380c67&loginName=";
 
     /**
      * 所有流程查看
@@ -229,33 +237,57 @@ public class ProtocolUrl {
     public static final String XMGL = "horizon/basics/getBasics.wf?loginName=";
 
     /**
-     * 施工安全日志提交
-     */
-    public static final String ADD_SGAQRZ = "horizon/template/form/default.wf?formid=HZ90808e5db63543015db684f3740620&loginName=";
-    /**
-     * 施工钱包提交
-     */
-    public static final String ADD_SGQG = "horizon/template/form/default.wf?formid=HZ9080885df2d10d015df37b41a30213&loginName=";
-
-    /**
-     * 技术交底提交
-     */
-    public static final String ADD_JSJD = "horizon/template/form/default.wf?formid=HZ90808e5db123ae015db12862590091&loginName=";
-
-    /**
-     * 项目结算提交
-     */
-    public static final String ADD_XMJS = "horizon/template/form/default.wf?formid=HZ90808e5db123ae015db12427230016&loginName=";
-
-    /**
      * 施工钱包查看
      */
-    public static final String FIND_SGQB = "resource/skins/bootstrap/view/datatables/view.datatables.jsp?viewid=HZ9080885df2d10d015df37db8bc028a&loginName=";
+    public static final String FIND_SGQB = "resource/skins/bootstrap/view/datatables/view.datatables.jsp?viewid=HZ90804e5e1852f8015e18c8fc7a0d19&loginName=";
 
     /**
      * 项目信息查看
      */
-    public static final String FIND_XMXX = "resource/skins/bootstrap/view/datatables/view.datatables.jsp?viewid=HZ90808e5db155eb015db16b88dd0251&loginName=";
+    public static final String FIND_XMXX = "resource/skins/bootstrap/view/datatables/view.datatables.jsp?viewid=HZ90804e5e1719f9015e176357c3064f&loginName=";
+
+    /************************ 项目管理相关 end **************************/
+
+    /************************
+     * 合同管理相关
+     **************************/
+
+    /**
+     * 商务合同提交
+     */
+    public static final String ADD_SWHT = "horizon/template/form/default.wf?formid=HZ90804e5e17f143015e180a6ec501f0&loginName=";
+
+    /**
+     * 劳务合同提交
+     */
+    public static final String ADD_LWHT = "horizon/template/form/default.wf?formid=HZ90804e5e17f143015e183a3a5c05fc&loginName=";
+
+    /**
+     * 授权合同提交
+     */
+    public static final String ADD_SQHT = "horizon/template/form/default.wf?formid=HZ90804e5e17f143015e184ab31c07ea&loginName=";
+
+    /************************ 合同管理相关 end **************************/
+
+    /************************
+     * 任务安排
+     **************************/
+    /**
+     * 工作任务提交
+     */
+    public static final String ADD_WORK_TASK = "horizon/template/form/default.wf?formid=HZ90804e5e1852f8015e185ac79f00fc&loginName=";
+
+    /**
+     * 工作安排提交
+     */
+    public static final String ADD_WORK_ARRANGE = "horizon/template/form/default.wf?formid=HZ90804e5e1852f8015e18c48c4b0ca7&loginName=";
+
+    /**
+     * 我的计划提交
+     */
+    public static final String ADD_MY_PLAN = "horizon/template/form/default.wf?formid=HZ9080f95e26636a015e2681e67d02ca&loginName=";
+
+    /************************ 任务安排 end **************************/
 
     /**
      * 会审结果查询
@@ -630,26 +662,6 @@ public class ProtocolUrl {
     public static final String DELETECOMPACT_ENGINEERING = "deleteCompact/engineering";
 
     /************************ 合同管理 end **************************/
-
-    /************************
-     * 任务安排
-     **************************/
-    /**
-     * 工作任务提交
-     */
-    public static final String ADD_WORK_TASK = "horizon/template/form/default.wf?formid=HZ90808e5db6db88015db7022cc503df&loginName=";
-
-    /**
-     * 工作安排提交
-     */
-    public static final String ADD_WORK_ARRANGE = "horizon/template/form/default.wf?formid=HZ90808e5db6db88015db7157e94058c&loginName=";
-
-    /**
-     * 我的计划提交
-     */
-    public static final String ADD_MY_PLAN = "horizon/template/form/default.wf?formid=HZ90808e5db6db88015db7157e9405a5&loginName=";
-
-    /************************ 任务安排 end **************************/
 
     /**
      * 上传错误日志到服务器

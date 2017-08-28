@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +20,7 @@ import com.henghao.parkland.ProtocolUrl;
 import com.henghao.parkland.R;
 import com.henghao.parkland.activity.DebugSettingActivity;
 import com.henghao.parkland.activity.WebviewActivity;
+import com.henghao.parkland.activity.user.ContractActivity;
 import com.henghao.parkland.activity.user.LoginAndRegActivity;
 import com.henghao.parkland.activity.user.MyCenterActivity;
 import com.henghao.parkland.activity.user.QiandaoActivity;
@@ -131,7 +131,7 @@ public class MyLoginFragment extends FragmentSupport {
                     return;
                 }
                 intent.putExtra("title", "施工钱包");
-                intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.FIND_SGQB) + mActivity.getLoginUserName());
+                intent.putExtra("url", Requester.getRequestHZURL(mActivity.getUserComp() + "/" + ProtocolUrl.FIND_SGQB) + mActivity.getLoginUserName());
                 intent.setClass(mActivity, WebviewActivity.class);
                 mActivity.startActivity(intent);
                 break;
@@ -181,51 +181,14 @@ public class MyLoginFragment extends FragmentSupport {
                     return;
                 }
                 intent.putExtra("title", "我的项目");
-                intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.FIND_XMXX) + mActivity.getLoginUserName());
+                intent.putExtra("url", Requester.getRequestHZURL(mActivity.getUserComp() + "/" + ProtocolUrl.FIND_XMXX) + mActivity.getLoginUserName());
                 intent.setClass(mActivity, WebviewActivity.class);
                 mActivity.startActivity(intent);
                 break;
             case R.id.tv_compactmanage:
                 //合同管理
-                if (!isLogin()) {
-                    mActivity.msg("请先登录！");
-                    return;
-                }
-                AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
-                builder.setIcon(R.drawable.icon_select);
-                builder.setTitle("请选择合同类型");
-                String[] data = {"商务合同", "劳务合同", "授权合同"};
-                builder.setItems(data, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent();
-                        switch (which) {
-                            case 0:
-                                //商务合同
-                                intent.putExtra("title", "商务合同");
-                                intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_SWHT) + mActivity.getLoginUserName());
-                                intent.setClass(mActivity, WebviewActivity.class);
-                                mActivity.startActivity(intent);
-                                break;
-                            case 1:
-                                //劳务合同
-                                intent.putExtra("title", "劳务合同");
-                                intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_LWHT) + mActivity.getLoginUserName());
-                                intent.setClass(mActivity, WebviewActivity.class);
-                                mActivity.startActivity(intent);
-                                break;
-                            case 2:
-                                //授权合同
-                                intent.putExtra("title", "授权合同");
-                                intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_SQHT) + mActivity.getLoginUserName());
-                                intent.setClass(mActivity, WebviewActivity.class);
-                                mActivity.startActivity(intent);
-                                break;
-                        }
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                intent.setClass(mActivity, ContractActivity.class);
+                startActivity(intent);
                 break;
         }
 

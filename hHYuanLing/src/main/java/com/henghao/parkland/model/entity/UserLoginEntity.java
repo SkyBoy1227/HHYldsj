@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by ASUS on 2017/8/13.
@@ -13,14 +12,17 @@ import java.util.List;
  * name :       姓名
  * userName :   用户名
  * tel :        联系方式
+ * member :     是否为会员（0：是 1：否）
  * email :      邮箱
  * sex :        性别（0：男 1：女）
  * date :       注册时间
  * idCard :     身份证号
- * picture :    身份证图片
- * deptId :     部门编号
+ * comp :       所属企业
+ * dept :       所属部门
+ * lev :        用户等级（0~10依次递减）
  */
 public class UserLoginEntity implements Serializable {
+
     // 用户编号
     @Expose
     @SerializedName("uid")
@@ -37,6 +39,10 @@ public class UserLoginEntity implements Serializable {
     @Expose
     @SerializedName("tel")
     private String tel;
+    // 是否为会员（0：是 1：否）
+    @Expose
+    @SerializedName("member")
+    private String member;
     // 邮箱
     @Expose
     @SerializedName("email")
@@ -53,14 +59,18 @@ public class UserLoginEntity implements Serializable {
     @Expose
     @SerializedName("idCard")
     private String idCard;
-    // 部门编号
+    // 所属企业
     @Expose
-    @SerializedName("deptId")
-    private String deptId;
-    // 身份证图片
+    @SerializedName("comp")
+    private String comp;
+    // 所属部门
     @Expose
-    @SerializedName("picture")
-    private List<String> picture;
+    @SerializedName("dept")
+    private String dept;
+    // 等级（0~10依次递减）
+    @Expose
+    @SerializedName("lev")
+    private int lev;
 
     public String getUid() {
         return uid;
@@ -92,6 +102,14 @@ public class UserLoginEntity implements Serializable {
 
     public void setTel(String tel) {
         this.tel = tel;
+    }
+
+    public String getMember() {
+        return member;
+    }
+
+    public void setMember(String member) {
+        this.member = member;
     }
 
     public String getEmail() {
@@ -126,19 +144,27 @@ public class UserLoginEntity implements Serializable {
         this.idCard = idCard;
     }
 
-    public String getDeptId() {
-        return deptId;
+    public String getComp() {
+        return comp;
     }
 
-    public void setDeptId(String deptId) {
-        this.deptId = deptId;
+    public void setComp(String comp) {
+        this.comp = comp;
     }
 
-    public List<String> getPicture() {
-        return picture;
+    public String getDept() {
+        return dept;
     }
 
-    public void setPicture(List<String> picture) {
-        this.picture = picture;
+    public void setDept(String dept) {
+        this.dept = dept;
+    }
+
+    public int getLev() {
+        return lev;
+    }
+
+    public void setLev(int lev) {
+        this.lev = lev;
     }
 }

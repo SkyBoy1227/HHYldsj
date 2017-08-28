@@ -117,6 +117,7 @@ public class LoginFragment extends FragmentSupport {
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        ivAuthCode.setImageResource(R.drawable.img_loading_empty_big);
                         Toast.makeText(mActivity, "网络访问错误！", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -126,6 +127,15 @@ public class LoginFragment extends FragmentSupport {
             public void onResponse(Call call, Response response) throws IOException {
                 if (BuildConfig.DEBUG) Log.d(TAG, "onSuccess: ");
                 session = response.header("Set-Cookie");
+                if (ToolsKit.isEmpty(session)) {
+                    mActivity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ivAuthCode.setImageResource(R.drawable.img_loading_empty_big);
+                        }
+                    });
+                    return;
+                }
                 //设置请求头
                 headers = new HashMap<>();
                 headers.put("Cookie", session);
@@ -137,7 +147,11 @@ public class LoginFragment extends FragmentSupport {
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ivAuthCode.setImageBitmap(bitmap);
+                        if (bitmap != null) {
+                            ivAuthCode.setImageBitmap(bitmap);
+                        } else {
+                            ivAuthCode.setImageResource(R.drawable.img_loading_empty_big);
+                        }
                     }
                 });
             }
@@ -160,9 +174,11 @@ public class LoginFragment extends FragmentSupport {
                 }
                 break;
             case R.id.iv_authCode_login:
-                headers = new HashMap<>();
-                headers.put("Cookie", session);
-                authCodeCall = Requester.authCode(headers, authCodeCallBack);//请求服务器更换验证码
+                if (!ToolsKit.isEmpty(session)) {
+//                    headers = new HashMap<>();
+//                    headers.put("Cookie", session);
+                    authCodeCall = Requester.authCode(headers, authCodeCallBack);//请求服务器更换验证码
+                }
                 break;
             case R.id.login_reset_password:
                 mActivity.msg("未实现");
@@ -170,8 +186,8 @@ public class LoginFragment extends FragmentSupport {
             case R.id.tv_login:
                 //登录
                 if (checkData()) {
-                    headers = new HashMap<>();
-                    headers.put("Cookie", session);
+//                    headers = new HashMap<>();
+//                    headers.put("Cookie", session);
                     loginCall = Requester.login(etUserName.getText().toString().trim(), etPassword.getText().toString().trim(), etUserCode.getText().toString().trim(), headers, loginCallback);
                 }
                 break;
@@ -243,6 +259,7 @@ public class LoginFragment extends FragmentSupport {
                         .putString(Constant.USERID, userLogin.getUid())//保存用户ID
                         .putString(Constant.USERNAME, userLogin.getUserName())//保存用户名
                         .putString(Constant.USERPHONE, userLogin.getTel())//保存用户联系电话
+                        .putString(Constant.USERCOMP, userLogin.getComp())//保存用户所属企业
                         .apply();
                 Intent intent = new Intent();
                 intent.setClass(mActivity, MainActivity.class);
@@ -259,8 +276,8 @@ public class LoginFragment extends FragmentSupport {
     public void onResume() {
         super.onResume();
         if (!ToolsKit.isEmpty(session)) {
-            headers = new HashMap<>();
-            headers.put("Cookie", session);
+//            headers = new HashMap<>();
+//            headers.put("Cookie", session);
             //刷新验证码，以防失效
             authCodeCall = Requester.authCode(headers, authCodeCallBack);//请求服务器更换验证码
         }

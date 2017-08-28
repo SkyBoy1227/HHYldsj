@@ -136,6 +136,7 @@ public class MainActivity extends ActivityFragmentSupport {
         if (BuildConfig.DEBUG) {
             SharedPreferences sp = getSharedPreferences("DebugSetting", MODE_PRIVATE);
             ProtocolUrl.ROOT_URL = sp.getString(DebugSettingActivity.KEY_HOST, ProtocolUrl.ROOT_URL);
+            ProtocolUrl.HZ_ROOT_URL = sp.getString(DebugSettingActivity.KEY_HZ_HOST, ProtocolUrl.HZ_ROOT_URL);
         }
 
     }

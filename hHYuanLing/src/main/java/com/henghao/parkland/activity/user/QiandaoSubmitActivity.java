@@ -108,11 +108,12 @@ public class QiandaoSubmitActivity extends ActivityFragmentSupport {
     public void onViewClicked(View v) {
         switch (v.getId()) {
             case R.id.tv_submit_qiandaosubmit:
-                String comments = etComments.getText().toString().trim();
-                String compId = getLoginUser().getDeptId();
-                String uid = getLoginUid();
+                String comments = etComments.getText().toString().trim();//备注
+                String comp = getLoginUser().getComp();//所属企业
+                String uid = getLoginUid();//用户ID
+                String dept = getLoginUser().getDept();//所属部门
                 // 提交
-                qiandaoCall = Requester.signIn(address, comments, compId, uid, name, latitude, longitude, company, qiandaoCallBack);
+                qiandaoCall = Requester.signIn(address, comments, comp, uid, name, latitude, longitude, company, dept, qiandaoCallBack);
                 break;
         }
     }
@@ -137,7 +138,7 @@ public class QiandaoSubmitActivity extends ActivityFragmentSupport {
                     msg(baseEntity.getMsg());
                     return;
                 } else {//签到成功
-                    Toast.makeText(context, baseEntity.getMsg(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "签到成功！", Toast.LENGTH_SHORT).show();
                 }
                 onBackPressed();
             } catch (JsonSyntaxException e) {
@@ -146,4 +147,12 @@ public class QiandaoSubmitActivity extends ActivityFragmentSupport {
             }
         }
     };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (qiandaoCall != null && !qiandaoCall.isCanceled()) {
+            qiandaoCall.cancel();
+        }
+    }
 }

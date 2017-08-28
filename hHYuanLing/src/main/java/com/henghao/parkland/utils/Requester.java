@@ -39,7 +39,7 @@ public class Requester {
      */
     public static String getRequestHZURL(String url) {
         String separator = "/";
-        String host = ProtocolUrl.HZ_URL;
+        String host = ProtocolUrl.HZ_ROOT_URL;
         if (!url.startsWith(separator)) url = "/" + url;
         return String.format("%s%s", host, url);
     }
@@ -128,28 +128,48 @@ public class Requester {
      *
      * @param page     页数
      * @param uid      用户ID
-     * @param deptId   部门编号
+     * @param comp     所属企业
+     * @param dept     所属部门
+     * @param lev      用户等级（0~10依次递减）
      * @param callback 回调
      * @return {@link Call}
      */
-    public static Call findSignIn(int page, String uid, String deptId, BaseCallback callback) {
+    public static Call findSignIn(int page, String uid, String comp, String dept, int lev, BaseCallback callback) {
         Map<String, Object> params = new HashMap<>();
         params.put("page", page);
         params.put("uid", uid);
-        params.put("deptId", deptId);
+        params.put("comp", comp);
+        params.put("dept", dept);
+        params.put("lev", lev);
         return OkHttpController.doRequest(getRequestURL(ProtocolUrl.FIND_SIGNIN), params, null, callback);
     }
 
-    public static Call signIn(String address, String comments, String compId, String uid, String name, double latitude, double longitude, String company, BaseCallback callback) {
+    /**
+     * 用户签到
+     *
+     * @param address   签到地址
+     * @param comments  备注
+     * @param comp      所属企业
+     * @param uid       用户ID
+     * @param name      姓名
+     * @param latitude  纬度
+     * @param longitude 经度
+     * @param company   当前企业
+     * @param dept      所属部门
+     * @param callback  回调
+     * @return
+     */
+    public static Call signIn(String address, String comments, String comp, String uid, String name, double latitude, double longitude, String company, String dept, BaseCallback callback) {
         Map<String, Object> params = new HashMap<>();
         params.put("address", address);
         params.put("comments", comments);
-        params.put("compId", compId);
+        params.put("comp", comp);
         params.put("uid", uid);
         params.put("name", name);
         params.put("latitude", latitude);
         params.put("longitude", longitude);
         params.put("company", company);
+        params.put("dept", dept);
         return OkHttpController.doRequest(getRequestURL(ProtocolUrl.SIGNIN), params, null, callback);
     }
     /************************ 签到相关end **************************/
@@ -288,7 +308,7 @@ public class Requester {
      * @param maintenanceCode 养护编号
      * @param type            养护类型
      * @param userId          用户ID
-     * @param deptId          部门ID
+     * @param dept            所属部门
      * @param code            植物二维码
      * @param address         养护地点
      * @param personnel       养护人员
@@ -302,12 +322,12 @@ public class Requester {
      * @param callback        回调
      * @return {@link Call}
      */
-    public static Call addInformation(String maintenanceCode, String type, String userId, String deptId, String code, String address, String personnel, String content, String time, String problem, String cleaning, String plantGrowth, String remarks, List<File> files, BaseCallback callback) {
+    public static Call addInformation(String maintenanceCode, String type, String userId, String dept, String code, String address, String personnel, String content, String time, String problem, String cleaning, String plantGrowth, String remarks, List<File> files, BaseCallback callback) {
         Map<String, Object> params = new HashMap<>();
         params.put("maintenanceCode", maintenanceCode);
         params.put("type", type);
         params.put("userId", userId);
-        params.put("deptId", deptId);
+        params.put("dept", dept);
         params.put("code", code);
         params.put("address", address);
         params.put("personnel", personnel);
@@ -327,19 +347,19 @@ public class Requester {
      * @param state    养护状态
      * @param time     养护时间
      * @param address  养护地点
-     * @param userId   userId
-     * @param deptId   部门ID
+     * @param userId   用户ID
+     * @param dept     所属部门
      * @param callback 回调
      * @return {@link Call}
      */
-    public static Call addMaintenanceInformation(String code, String state, String time, String address, String userId, String deptId, BaseCallback callback) {
+    public static Call addMaintenanceInformation(String code, String state, String time, String address, String userId, String dept, BaseCallback callback) {
         Map<String, Object> params = new HashMap<>();
         params.put("code", code);
         params.put("state", state);
         params.put("time", time);
         params.put("address", address);
         params.put("userId", userId);
-        params.put("deptId", deptId);
+        params.put("dept", dept);
         return OkHttpController.doRequest(getRequestURL(ProtocolUrl.ADD_MAINTENANCE_INFORMATION), params, null, callback);
     }
 
@@ -352,11 +372,11 @@ public class Requester {
      * @param specifications 植物规格
      * @param address        种植地点
      * @param time           录入时间
-     * @param deptId         部门ID
+     * @param dept           所属部门
      * @param callback       回调
      * @return {@link Call}
      */
-    public static Call addPlantInformation(String code, String name, String purpose, String specifications, String address, String time, String deptId, BaseCallback callback) {
+    public static Call addPlantInformation(String code, String name, String purpose, String specifications, String address, String time, String dept, BaseCallback callback) {
         Map<String, Object> params = new HashMap<>();
         params.put("code", code);
         params.put("name", name);
@@ -364,7 +384,7 @@ public class Requester {
         params.put("specifications", specifications);
         params.put("address", address);
         params.put("time", time);
-        params.put("deptId", deptId);
+        params.put("dept", dept);
         return OkHttpController.doRequest(getRequestURL(ProtocolUrl.ADD_PLANT_INFORMATION), params, null, callback);
     }
 

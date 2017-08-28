@@ -96,7 +96,7 @@ public class ProjectInfoActivity extends ActivityFragmentSupport implements XLis
                                 break;
                             case 1://企业信息
                                 initProjectInfoEntities.clear();//清空缓存
-                                findXmxxCall = Requester.findXmxx(page, "", getLoginUser().getDeptId(), findXmxxCallBack);
+                                findXmxxCall = Requester.findXmxx(page, "", getLoginUser().getDept(), findXmxxCallBack);
                                 listView.setAdapter(mAdapter);
                                 listView.setPullLoadEnable(true);//设置可上滑加载更多
                                 indexOfSelect = 0;
@@ -261,7 +261,7 @@ public class ProjectInfoActivity extends ActivityFragmentSupport implements XLis
                 listView.setAdapter(mAdapter);
                 break;
             case 1://企业信息
-                findXmxxCall = Requester.findXmxx(page, "", getLoginUser().getDeptId(), findXmxxCallBack);
+                findXmxxCall = Requester.findXmxx(page, "", getLoginUser().getDept(), findXmxxCallBack);
                 listView.setPullLoadEnable(true);//设置可上滑加载更多
                 listView.setAdapter(mAdapter);
                 break;
@@ -286,7 +286,7 @@ public class ProjectInfoActivity extends ActivityFragmentSupport implements XLis
                     @Override
                     public void run() {
                         page++;//页数加1
-                        findXmxxCall = Requester.findXmxx(page, "", getLoginUser().getDeptId(), findXmxxCallBack);
+                        findXmxxCall = Requester.findXmxx(page, "", getLoginUser().getDept(), findXmxxCallBack);
                     }
                 }, 1000);
                 break;

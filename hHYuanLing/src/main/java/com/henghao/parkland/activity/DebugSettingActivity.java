@@ -25,6 +25,8 @@ public class DebugSettingActivity extends Activity {
 
     @InjectView(R.id.et_host)
     EditText etHost;
+    @InjectView(R.id.et_hz_host)
+    EditText etHzHost;
     @InjectView(R.id.bt_apply)
     Button btApply;
 
@@ -36,6 +38,7 @@ public class DebugSettingActivity extends Activity {
 
     //Preferences键
     public static final String KEY_HOST = "setting.host";
+    public static final String KEY_HZ_HOST = "setting.hz.host";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,13 @@ public class DebugSettingActivity extends Activity {
         sp = getSharedPreferences("DebugSetting", MODE_PRIVATE);
         etHost.setText(sp.getString(KEY_HOST, ProtocolUrl.ROOT_URL));
         etHost.addTextChangedListener(new TextWatcherAdapter() {
+            @Override
+            public void onChanged() {
+                changes |= HOST;
+            }
+        });
+        etHzHost.setText(sp.getString(KEY_HZ_HOST, ProtocolUrl.HZ_ROOT_URL));
+        etHzHost.addTextChangedListener(new TextWatcherAdapter() {
             @Override
             public void onChanged() {
                 changes |= HOST;
@@ -60,6 +70,8 @@ public class DebugSettingActivity extends Activity {
         if ((changes & HOST) != 0) {
             ProtocolUrl.ROOT_URL = etHost.getText().toString().trim();
             edit.putString(KEY_HOST, etHost.getText().toString().trim());
+            ProtocolUrl.HZ_ROOT_URL = etHzHost.getText().toString().trim();
+            edit.putString(KEY_HZ_HOST, etHzHost.getText().toString().trim());
         }
         edit.apply();
         changes = 0;

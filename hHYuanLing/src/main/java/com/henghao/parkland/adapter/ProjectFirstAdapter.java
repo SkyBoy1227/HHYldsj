@@ -88,91 +88,91 @@ public class ProjectFirstAdapter extends ArrayAdapter<AppGridEntity> {
                     case 0:
                         //项目信息
                         intent.putExtra("title", "项目信息");
-                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_XMXX) + mActivityFragmentSupport.getLoginUserName());
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_XMXX) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
                     case 1:
                         //会审结果
                         intent.putExtra("title", "会审结果");
-                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_HSJG) + mActivityFragmentSupport.getLoginUserName());
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_HSJG) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
                     case 2:
                         //供货方信息
                         intent.putExtra("title", "供货方信息");
-                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_GHFXX) + mActivityFragmentSupport.getLoginUserName());
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_GHFXX) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
                     case 3:
                         //施工人员
                         intent.putExtra("title", "施工人员");
-                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_SGRY) + mActivityFragmentSupport.getLoginUserName());
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_SGRY) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
                     case 4:
                         //开工报告
                         intent.putExtra("title", "开工报告");
-                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_KGBG) + mActivityFragmentSupport.getLoginUserName());
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_KGBG) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
                     case 5:
                         //设备信息
                         intent.putExtra("title", "设备信息");
-                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_SBXX) + mActivityFragmentSupport.getLoginUserName());
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_SBXX) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
                     case 6:
                         //工序报验
                         intent.putExtra("title", "工序报验");
-                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_GXBY) + mActivityFragmentSupport.getLoginUserName());
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_GXBY) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
                     case 7:
                         //现场勘察
                         intent.putExtra("title", "现场勘察");
-                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_XCKC) + mActivityFragmentSupport.getLoginUserName());
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_XCKC) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
                     case 8:
                         //变更管理
                         intent.putExtra("title", "变更管理");
-                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_BGGL) + mActivityFragmentSupport.getLoginUserName());
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_BGGL) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
                     case 9:
                         //竣工验收
                         intent.putExtra("title", "竣工验收");
-                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_JGYS) + mActivityFragmentSupport.getLoginUserName());
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_JGYS) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
                     case 10:
                         //进度申报
                         intent.putExtra("title", "进度申报");
-                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_JDSB) + mActivityFragmentSupport.getLoginUserName());
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_JDSB) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
                     case 11:
                         //技术交底
                         intent.putExtra("title", "技术交底");
-                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_JSJD) + mActivityFragmentSupport.getLoginUserName());
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_JSJD) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
                     case 12:
                         //项目结算
                         intent.putExtra("title", "项目结算");
-                        intent.putExtra("url", Requester.getRequestHZURL(ProtocolUrl.ADD_XMJS) + mActivityFragmentSupport.getLoginUserName());
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_XMJS) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;

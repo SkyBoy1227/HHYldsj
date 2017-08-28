@@ -536,6 +536,11 @@ public class ActivityFragmentSupport extends FragmentActivity implements IActivi
     }
 
     @Override
+    public String getUserComp() {
+        return this.mSharedPreferences.getString(Constant.USERCOMP, null);
+    }
+
+    @Override
     public void closeKeyBoard(EditText mEdit) {
         mEdit.clearFocus();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

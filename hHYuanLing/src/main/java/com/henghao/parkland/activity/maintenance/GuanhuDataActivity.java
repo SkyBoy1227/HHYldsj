@@ -193,4 +193,12 @@ public class GuanhuDataActivity extends ActivityFragmentSupport implements View.
                 break;
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (findManagementInfoCall != null && !findManagementInfoCall.isCanceled()) {
+            findManagementInfoCall.cancel();
+        }
+    }
 }
