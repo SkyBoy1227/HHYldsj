@@ -158,7 +158,7 @@ public class LoginFragment extends FragmentSupport {
         });
     }
 
-    @OnClick({iv_eye_login, R.id.iv_authCode_login, R.id.login_reset_password, R.id.tv_login})
+    @OnClick({iv_eye_login, R.id.iv_authCode_login, R.id.tv_login})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case iv_eye_login:
@@ -179,9 +179,6 @@ public class LoginFragment extends FragmentSupport {
 //                    headers.put("Cookie", session);
                     authCodeCall = Requester.authCode(headers, authCodeCallBack);//请求服务器更换验证码
                 }
-                break;
-            case R.id.login_reset_password:
-                mActivity.msg("未实现");
                 break;
             case R.id.tv_login:
                 //登录

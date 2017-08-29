@@ -52,19 +52,17 @@ public class YhManageActivity extends ActivityFragmentSupport {
     @InjectView(R.id.lv_yhmanage)
     ListView listView;
 
+    private static final String TAG = "YhManageActivity";
+
     private static final int REQUEST_CODE_TREEMESSAGE = 0x0000;//植物信息录入request code
     private static final int REQUEST_CODE_YANGHU = 0x0001;//植物养护request code
-
     // 定位相关声明
     public LocationClient locationClient = null;
-    private String address;//获取到的GPS定位地理位置信息
 
+    private String address;//获取到的GPS定位地理位置信息
     private YhAdapter adapter;
+
     private String code;//植物编号
-    /**
-     * 网络访问相关
-     */
-    private static final String TAG = "YhManageActivity";
 
     private String state;//养护状态
     private DialogYanghu dialogYanghu;
@@ -88,11 +86,14 @@ public class YhManageActivity extends ActivityFragmentSupport {
     public void initWidget() {
         super.initWidget();
         mActivityFragmentView.viewMainGone();
-        //定位
-        locationClient = new LocationClient(getApplicationContext()); // 实例化LocationClient类
-        locationClient.registerLocationListener(this.myListener); // 注册监听函数
-        setLocationOption(); // 设置定位参数
-        locationClient.start(); // 开始定位
+        initWithBar();
+        mLeftTextView.setVisibility(View.VISIBLE);
+        mLeftTextView.setText("返回");
+        initWithCenterBar();
+        mCenterTextView.setText("养护管理");
+        initWithRightBar();
+        mRightImageView.setVisibility(View.GONE);
+        mRightImageView.setImageResource(R.drawable.scan);
     }
 
     /**
@@ -145,12 +146,6 @@ public class YhManageActivity extends ActivityFragmentSupport {
 
     @Override
     public void initData() {
-        initWithBar();
-        initWithCenterBar();
-        mCenterTextView.setText("养护管理");
-        initWithRightBar();
-        mRightImageView.setVisibility(View.GONE);
-        mRightImageView.setImageResource(R.drawable.scan);
         mRightImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -159,6 +154,11 @@ public class YhManageActivity extends ActivityFragmentSupport {
                 dialogYanghu.show();
             }
         });
+        //定位
+        locationClient = new LocationClient(getApplicationContext()); // 实例化LocationClient类
+        locationClient.registerLocationListener(this.myListener); // 注册监听函数
+        setLocationOption(); // 设置定位参数
+        locationClient.start(); // 开始定位
     }
 
     /**

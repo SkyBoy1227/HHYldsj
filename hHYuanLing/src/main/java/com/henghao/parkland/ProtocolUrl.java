@@ -38,9 +38,9 @@ public class ProtocolUrl {
             HZ_ROOT_URL = "http://172.16.0.121";
         } else {
             // 生产地址
-            ROOT_URL = "http://222.85.156.43:81/Garden";
+            ROOT_URL = "http://222.85.156.43:81";
             // 生产地址
-            HZ_ROOT_URL = "http://222.85.156.43:81/Garden";
+            HZ_ROOT_URL = "http://222.85.156.43:81";
         }
     }
 
@@ -51,17 +51,17 @@ public class ProtocolUrl {
     /**
      * 用户登录
      */
-    public static String APP_LOGIN = "yldsj/app/login";
+    public static String APP_LOGIN = "ylcx/app/login";
 
     public static String APP_GET_NFCBYID = "login";
     /**
      * 用户注册
      */
-    public static String APP_REG = "yldsj/register";
+    public static String APP_REG = "ylcx/register";
     /**
      * 验证码
      */
-    public static String AUTHCODE = "yldsj/authCode";
+    public static String AUTHCODE = "ylcx/authCode";
 
     /************************ 用户相关 end **************************/
 
@@ -93,7 +93,7 @@ public class ProtocolUrl {
     /**
      * 签到
      */
-    public static final String SIGNIN = "yldsj/signIn";
+    public static final String SIGNIN = "ylcx/signIn";
 
     /**
      * 查询签到次数
@@ -103,7 +103,7 @@ public class ProtocolUrl {
     /**
      * 查询签到情况
      */
-    public static final String FIND_SIGNIN = "yldsj/find/signIn";
+    public static final String FIND_SIGNIN = "ylcx/find/signIn";
 
     /************************ 签到相关 end **************************/
 
@@ -114,32 +114,32 @@ public class ProtocolUrl {
     /**
      * 查询当天植物养护信息
      */
-    public static final String FIND_MAINTENANCE_INFO = "yldsj/maintenance/findMaintenanceInfo";
+    public static final String FIND_MAINTENANCE_INFO = "ylcx/maintenance/findMaintenanceInfo";
 
     /**
      * 养护前植物信息查询
      */
-    public static final String FIND_PLANT_INFORMATION = "yldsj/maintenance/findPlantInformation";
+    public static final String FIND_PLANT_INFORMATION = "ylcx/maintenance/findPlantInformation";
 
     /**
      * 植物管护信息查询
      */
-    public static final String FIND_MANAGEMENT_INFO = "yldsj/maintenance/findManagementInfo";
+    public static final String FIND_MANAGEMENT_INFO = "ylcx/maintenance/findManagementInfo";
 
     /**
      * 植物养护信息录入
      */
-    public static final String ADD_MAINTENANCE_INFORMATION = "yldsj/maintenance/addMaintenanceInformation";
+    public static final String ADD_MAINTENANCE_INFORMATION = "ylcx/maintenance/addMaintenanceInformation";
 
     /**
      * 养护前植物信息录入
      */
-    public static final String ADD_PLANT_INFORMATION = "yldsj/maintenance/addPlantInformation";
+    public static final String ADD_PLANT_INFORMATION = "ylcx/maintenance/addPlantInformation";
 
     /**
      * 植物管护信息录入
      */
-    public static final String ADD_INFORMATION = "yldsj/maintenance/addInformation";
+    public static final String ADD_INFORMATION = "ylcx/maintenance/addInformation";
     /************************ 养护管理 end **************************/
 
     /************************
@@ -292,7 +292,7 @@ public class ProtocolUrl {
     /**
      * 会审结果查询
      */
-    public static final String FIND_HSJG = "yldsj/project/find/hsjg";
+    public static final String FIND_HSJG = "ylcx/project/find/hsjg";
 
     /**
      * 项目信息删除
@@ -589,12 +589,12 @@ public class ProtocolUrl {
     /**
      * 设备租赁查询
      */
-    public static final String FIND_EQUIPMENT = "yldsj/xqfb/find/equipment";
+    public static final String FIND_EQUIPMENT = "ylcx/xqfb/find/equipment";
 
     /**
      * 苗木信息查询
      */
-    public static final String FIND_SEEDLING = "yldsj/xqfb/find/seedling";
+    public static final String FIND_SEEDLING = "ylcx/xqfb/find/seedling";
 
     /**
      * 招标信息查询
@@ -604,12 +604,12 @@ public class ProtocolUrl {
     /**
      * 人员招聘查询
      */
-    public static final String FIND_RECRUIT = "yldsj/xqfb/find/recruit";
+    public static final String FIND_RECRUIT = "ylcx/xqfb/find/recruit";
 
     /**
      * 人员招聘查询
      */
-    public static final String FIND_BID = "yldsj/xqfb/find/bid";
+    public static final String FIND_BID = "ylcx/xqfb/find/bid";
 
     /************************ 工作台 end **************************/
 
