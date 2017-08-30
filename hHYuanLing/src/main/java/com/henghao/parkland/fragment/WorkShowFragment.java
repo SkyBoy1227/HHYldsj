@@ -54,13 +54,13 @@ public class WorkShowFragment extends FragmentSupport implements XListView.IXLis
     private XListView listview_xuqiu;
     private static final String TAG = "WorkShowFragment";
 
-    private int indexOfSelect = 2;//选中的板块 1设备租赁 2苗木信息 3招标信息 4人员招聘
+    private int indexOfSelect = 2;//选中的板块 1设备租赁 2苗木信息 3招标信息 4人才招聘
 
     private TextView tv_title;//标题
     private int page = 0;//默认查询页数为0
     private Call seedlingCall;//苗木信息查询请求
     private Call equipmentCall;//设备租赁查询请求
-    private Call recruitCall;//人员招聘查询请求
+    private Call recruitCall;//人才招聘查询请求
     private Call bidCall;//招标信息查询请求
 
     private EquipmentAdapter equipmentAdapter;//设备租赁适配器
@@ -75,9 +75,9 @@ public class WorkShowFragment extends FragmentSupport implements XListView.IXLis
     private List<BidEntity> bidEntities;//招标信息数据
     private List<BidEntity> initBidEntities;//初始加载招标信息数据
 
-    private RecruitAdapter recruitAdapter;//人员招聘适配器
-    private List<RecruitEntity> recruitEntities;//人员招聘数据
-    private List<RecruitEntity> initRecruitEntities;//初始加载人员招聘数据
+    private RecruitAdapter recruitAdapter;//人才招聘适配器
+    private List<RecruitEntity> recruitEntities;//人才招聘数据
+    private List<RecruitEntity> initRecruitEntities;//初始加载人才招聘数据
     private DialogWorkShow dialog;//选择对话框
 
     @Override
@@ -110,7 +110,7 @@ public class WorkShowFragment extends FragmentSupport implements XListView.IXLis
         bidEntities = new ArrayList<>();
         initBidEntities = new ArrayList<>();
         bidAdapter = new BidAdapter(this.mActivity, initBidEntities);
-        //人员招聘
+        //人才招聘
         recruitEntities = new ArrayList<>();
         initRecruitEntities = new ArrayList<>();
         recruitAdapter = new RecruitAdapter(this.mActivity, initRecruitEntities);
@@ -179,8 +179,8 @@ public class WorkShowFragment extends FragmentSupport implements XListView.IXLis
                         listview_xuqiu.setPullLoadEnable(true);//设置可上滑加载更多
                         indexOfSelect = 3;
                         break;
-                    case R.id.tv_dialog4://人员招聘
-                        tv_title.setText("人员招聘");
+                    case R.id.tv_dialog4://人才招聘
+                        tv_title.setText("人才招聘");
                         initRecruitEntities.clear();//清空缓存
                         recruitCall = Requester.findRecruit(page, recruitCallBack);
                         listview_xuqiu.setAdapter(recruitAdapter);
@@ -240,7 +240,7 @@ public class WorkShowFragment extends FragmentSupport implements XListView.IXLis
                     }
                 }, 1000);
                 break;
-            case 4://人员招聘
+            case 4://人才招聘
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -274,7 +274,7 @@ public class WorkShowFragment extends FragmentSupport implements XListView.IXLis
                 listview_xuqiu.setPullLoadEnable(true);//设置可上滑加载更多
                 listview_xuqiu.setAdapter(bidAdapter);
                 break;
-            case 4://人员招聘
+            case 4://人才招聘
                 initRecruitEntities.clear();//清空缓存
                 recruitCall = Requester.findRecruit(page, recruitCallBack);
                 listview_xuqiu.setPullLoadEnable(true);//设置可上滑加载更多
@@ -381,7 +381,7 @@ public class WorkShowFragment extends FragmentSupport implements XListView.IXLis
         }
     };
     /**
-     * 人员招聘查询回调
+     * 人才招聘查询回调
      */
     private DefaultCallback recruitCallBack = new DefaultCallback() {
         @Override

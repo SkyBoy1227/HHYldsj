@@ -45,8 +45,25 @@ public class Requester {
     }
 
     /************************
+     * 轮播图
+     **************************/
+
+    /**
+     * 轮播图请求
+     *
+     * @param callback 回调
+     * @return
+     */
+    public static Call carousel(BaseCallback callback) {
+        return OkHttpController.doRequest(getRequestURL(ProtocolUrl.CAROUSEL), null, callback);
+    }
+
+    /************************ 轮播图end **************************/
+
+    /************************
      * 用户登录相关
      **************************/
+
     /**
      * 获取验证码
      *
@@ -204,7 +221,7 @@ public class Requester {
     }
 
     /**
-     * 人员招聘查询
+     * 人才招聘查询
      *
      * @param page     页数
      * @param callback 回调

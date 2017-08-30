@@ -2,14 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.youth.banner.Banner xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:indicator_drawable_selected="@drawable/selected_radius"
+        app:indicator_drawable_unselected="@drawable/unselected_radius"
+        app:indicator_height="10dp"
+        app:indicator_margin="4dp"
+        app:indicator_width="10dp" />
 
     <GridView
         android:id="@+id/gridview_app"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:horizontalSpacing="1dip"
-        android:verticalSpacing="1dip" >
-    </GridView>
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="-1px"
+        android:layout_marginRight="-1px"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="3"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth" />
 
 </LinearLayout>

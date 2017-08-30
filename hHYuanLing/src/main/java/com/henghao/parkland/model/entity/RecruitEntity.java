@@ -7,7 +7,7 @@ import com.henghao.parkland.model.IdEntity;
 
 /**
  * Created by 晏琦云 on 2017/8/10.
- * 人员招聘实体
+ * 人才招聘实体
  * "rid":               数据id,
  * "positions":         职位,
  * "companyName":       公司名称,

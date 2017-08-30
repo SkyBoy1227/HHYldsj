@@ -30,11 +30,13 @@ dependencies {
     compile project(':b_library')
     compile fileTree(include: '*.jar', dir: 'libs')
     compile 'id.zelory:compressor:1.0.4'
-    compile 'com.android.support:appcompat-v7:26+'
+    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
     compile 'com.squareup.okhttp:okhttp-ws:2.7.5'
     compile 'com.jakewharton:butterknife:5.1.1'
     compile 'com.android.support.constraint:constraint-layout:+'
-    compile project(':okhttphelper')
     compile 'com.alibaba:fastjson:1.2.31'
+    compile 'com.youth.banner:banner:1.4.9'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile project(':okhttphelper')
 }

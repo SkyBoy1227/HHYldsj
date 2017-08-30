@@ -15,7 +15,7 @@ import butterknife.InjectView;
 
 /**
  * Created by 晏琦云 on 2017/3/16.
- * 工作台人员招聘展示
+ * 工作台人才招聘展示
  */
 public class RecruitDetailActivity extends ActivityFragmentSupport {
 
@@ -74,7 +74,7 @@ public class RecruitDetailActivity extends ActivityFragmentSupport {
         super.initWidget();
         initWithBar();
         initWithCenterBar();
-        mCenterTextView.setText("人员招聘");
+        mCenterTextView.setText("人才招聘");
     }
 
     @Override

@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 /**
- * 工作台人员招聘展示〈一句话功能简述〉 〈功能详细描述〉
+ * 工作台人才招聘展示〈一句话功能简述〉 〈功能详细描述〉
  *
  * @author zhangxianwen
  * @version HDMNV100R001, 2015年12月21日

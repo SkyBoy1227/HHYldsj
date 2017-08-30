@@ -61,7 +61,7 @@
         android:background="@drawable/selector_textview"
         android:gravity="center"
         android:padding="@dimen/padding_big"
-        android:text="人员招聘"
+        android:text="人才招聘"
         android:textColor="#303030"
         android:textSize="16sp" />
 </LinearLayout>

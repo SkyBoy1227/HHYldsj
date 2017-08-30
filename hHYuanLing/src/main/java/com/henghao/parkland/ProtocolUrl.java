@@ -45,6 +45,17 @@ public class ProtocolUrl {
     }
 
     /************************
+     * 轮播图
+     **************************/
+
+    /**
+     * 轮播图请求地址
+     */
+    public static String CAROUSEL = "ylcx/carousel";
+
+    /************************ 轮播图 end **************************/
+
+    /************************
      * 用户相关
      **************************/
 
@@ -602,12 +613,12 @@ public class ProtocolUrl {
     public static final String RELEASE_QUERYBID = "release/queryBid";
 
     /**
-     * 人员招聘查询
+     * 人才招聘查询
      */
     public static final String FIND_RECRUIT = "ylcx/xqfb/find/recruit";
 
     /**
-     * 人员招聘查询
+     * 招标信息查询
      */
     public static final String FIND_BID = "ylcx/xqfb/find/bid";
 
