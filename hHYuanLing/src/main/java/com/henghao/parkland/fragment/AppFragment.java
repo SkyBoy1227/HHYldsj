@@ -140,7 +140,7 @@ public class AppFragment extends FragmentSupport {
         //获取屏幕高度
         DisplayMetrics dm = getResources().getDisplayMetrics();
         height = dm.heightPixels;
-        banner.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height / 4));
+        banner.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height / 3));
     }
 
     public void initWidget() {

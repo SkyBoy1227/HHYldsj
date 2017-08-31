@@ -17,13 +17,14 @@ import com.henghao.parkland.model.IdEntity;
  * "content":           工作内容,
  * "contact":           联系人,
  * "email":             邮箱,
- * "money":             月薪,
+ * "money":             月薪（范围）,
  * "experience":        工作经历,
  * "tel":               联系方式,
  * "evaluate":          自我评价,
  * "date":              发布日期,
  * "time":              发布时间
- * "type":              类型（招聘/应聘）
+ * "tp":                招聘性质（1为招聘/2为求职）
+ * "characters":        工作性质（1为全职/2为兼职）
  */
 public class RecruitEntity extends IdEntity {
 
@@ -63,10 +64,10 @@ public class RecruitEntity extends IdEntity {
     @Expose
     @SerializedName("email")
     private String email;
-    // 月薪
+    // 月薪（范围）
     @Expose
     @SerializedName("money")
-    private double money;
+    private String money;
     // 工作经历
     @Expose
     @SerializedName("experience")
@@ -87,8 +88,14 @@ public class RecruitEntity extends IdEntity {
     @Expose
     @SerializedName("time")
     private String time;
-    // 类型（招聘/应聘）
-    private String type;
+    // 招聘性质（1为招聘/2为求职）
+    @Expose
+    @SerializedName("tp")
+    private int tp;
+    // 工作性质（1为全职/2为兼职）
+    @Expose
+    @SerializedName("characters")
+    private int characters;
 
     public int getRid() {
         return rid;
@@ -162,11 +169,11 @@ public class RecruitEntity extends IdEntity {
         this.email = email;
     }
 
-    public double getMoney() {
+    public String getMoney() {
         return money;
     }
 
-    public void setMoney(double money) {
+    public void setMoney(String money) {
         this.money = money;
     }
 
@@ -210,11 +217,19 @@ public class RecruitEntity extends IdEntity {
         this.time = time;
     }
 
-    public String getType() {
-        return type;
+    public int getTp() {
+        return tp;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTp(int tp) {
+        this.tp = tp;
+    }
+
+    public int getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(int characters) {
+        this.characters = characters;
     }
 }

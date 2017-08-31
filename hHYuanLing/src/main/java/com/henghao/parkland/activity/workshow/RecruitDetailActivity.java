@@ -19,7 +19,6 @@ import butterknife.InjectView;
  */
 public class RecruitDetailActivity extends ActivityFragmentSupport {
 
-
     @InjectView(R.id.ll_layout1)
     LinearLayout layout1;
     @InjectView(R.id.ll_layout2)
@@ -54,6 +53,10 @@ public class RecruitDetailActivity extends ActivityFragmentSupport {
     TextView tvTel;
     @InjectView(R.id.tv_email)
     TextView tvEmail;
+    @InjectView(R.id.tv_tp)
+    TextView tvTp;
+    @InjectView(R.id.tv_characters)
+    TextView tvCharacters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,12 @@ public class RecruitDetailActivity extends ActivityFragmentSupport {
         super.initData();
         Bundle bundle = getIntent().getBundleExtra("bundle");
         RecruitEntity mEntity = (RecruitEntity) bundle.getSerializable(Constant.INTNET_DATA);
+        // 工作性质（1为全职/2为兼职）
+        if (mEntity.getCharacters() == 1) {
+            tvCharacters.setText("全职");
+        } else if (mEntity.getCharacters() == 2) {
+            tvCharacters.setText("兼职");
+        }
         tvPositions.setText(mEntity.getPositions());
         tvMoney.setText(mEntity.getMoney() + "");
         tvContact.setText(mEntity.getContact());
@@ -89,16 +98,12 @@ public class RecruitDetailActivity extends ActivityFragmentSupport {
         tvTime.setText(mEntity.getTime());
         tvTel.setText(mEntity.getTel());
         tvEmail.setText(mEntity.getEmail());
-        //根据信息的类型（招聘信息/应聘信息）显示不同的数据
+        //根据信息的类型（招聘信息/求职信息）显示不同的数据
         layout1.setVisibility(View.GONE);
         layout2.setVisibility(View.GONE);
         layout3.setVisibility(View.GONE);
-        if (mEntity.getType().equals("应聘")) {
-            //显示工作经历与自我评价
-            layout3.setVisibility(View.VISIBLE);
-            tvExperience.setText(mEntity.getExperience());
-            tvEvaluate.setText(mEntity.getEvaluate());
-        } else if (mEntity.getType().equals("招聘")) {
+        if (mEntity.getTp() == 1) {//招聘信息
+            tvTp.setText("招聘");
             //显示公司名称、公司地址、工作地址、公司简介、工作内容
             layout1.setVisibility(View.VISIBLE);
             layout2.setVisibility(View.VISIBLE);
@@ -107,6 +112,12 @@ public class RecruitDetailActivity extends ActivityFragmentSupport {
             tvWorkAdress.setText(mEntity.getWorkAdress());
             tvCompanyIntro.setText(mEntity.getCompanyIntro());
             tvContent.setText(mEntity.getContent());
+        } else if (mEntity.getTp() == 2) {//求职信息
+            tvTp.setText("求职");
+            //显示工作经历与自我评价
+            layout3.setVisibility(View.VISIBLE);
+            tvExperience.setText(mEntity.getExperience());
+            tvEvaluate.setText(mEntity.getEvaluate());
         }
     }
 }

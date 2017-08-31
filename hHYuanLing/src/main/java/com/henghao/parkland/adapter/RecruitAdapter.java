@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.benefit.buy.library.utils.tools.ToolsKit;
 import com.henghao.parkland.ActivityFragmentSupport;
 import com.henghao.parkland.Constant;
 import com.henghao.parkland.R;
@@ -57,16 +56,19 @@ public class RecruitAdapter extends ArrayAdapter<RecruitEntity> {
             holder = (ViewHolder) convertView.getTag();
         }
         RecruitEntity entity = getItem(position);
-        if (!ToolsKit.isEmpty(entity.getPositions()) && ToolsKit.isEmpty(entity.getCompanyName())) {
-            entity.setType("应聘");
-            holder.tvType.setText("应聘");
-            holder.tvCompanyName.setVisibility(View.GONE);
-            holder.tvWorkAdress.setVisibility(View.GONE);
-        } else {
-            entity.setType("招聘");
-            holder.tvType.setText("招聘");
+        if (entity.getTp() == 1) {
+            holder.tvTp.setText("招聘");
             holder.tvCompanyName.setVisibility(View.VISIBLE);
             holder.tvWorkAdress.setVisibility(View.VISIBLE);
+        } else if (entity.getTp() == 2) {
+            holder.tvTp.setText("求职");
+            holder.tvCompanyName.setVisibility(View.GONE);
+            holder.tvWorkAdress.setVisibility(View.GONE);
+        }
+        if (entity.getCharacters() == 1) {
+            holder.tvCharacters.setText("全职");
+        } else if (entity.getCharacters() == 2) {
+            holder.tvCharacters.setText("兼职");
         }
         holder.tvPositions.setText(entity.getPositions());
         holder.tvWorkAdress.setText(entity.getWorkAdress());
@@ -74,7 +76,7 @@ public class RecruitAdapter extends ArrayAdapter<RecruitEntity> {
         holder.tvTel.setText(entity.getTel());
         holder.tvContact.setText(entity.getContact());
         holder.tvCompanyName.setText(entity.getCompanyName());
-        holder.tvMoney.setText(entity.getMoney() + "");
+        holder.tvMoney.setText(entity.getMoney());
         viewClick(holder, convertView, position);
         return convertView;
     }
@@ -96,8 +98,10 @@ public class RecruitAdapter extends ArrayAdapter<RecruitEntity> {
 
 
     static class ViewHolder {
-        @InjectView(R.id.tv_type)
-        TextView tvType;
+        @InjectView(R.id.tv_tp)
+        TextView tvTp;
+        @InjectView(R.id.tv_characters)
+        TextView tvCharacters;
         @InjectView(R.id.tv_positions)
         TextView tvPositions;
         @InjectView(R.id.tv_companyName)
