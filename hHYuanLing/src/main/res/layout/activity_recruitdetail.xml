@@ -2,280 +2,279 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/padding_normal"
+    android:background="@color/white"
     android:fillViewport="true"
     android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/padding_normal"
         android:orientation="vertical">
-        <!--人员招聘详情界面-->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="#346890" />
-
+        <!--人才招聘详情界面-->
+        <!--求职界面-->
         <LinearLayout
+            android:id="@+id/ll_employee"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_tp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="@dimen/padding_normal"
-                android:text="招聘性质"
-                android:textColor="@color/red"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tv_characters"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="@dimen/padding_normal"
-                android:text="工作性质"
-                android:textColor="#458AD8"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dip"
-            android:background="@color/line" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_positions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/padding_normal"
-                android:text="职位"
-                android:textColor="#2C4000"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tv_money"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:background="#7ECDFF"
                 android:padding="@dimen/padding_normal"
-                android:text="月薪"
-                android:textColor="@color/red"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dip"
-            android:background="@color/line" />
-
-        <LinearLayout
-            android:id="@+id/ll_layout1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_normal">
+                android:text="个人信息"
+                android:textColor="@color/white"
+                android:textSize="@dimen/gj_f" />
 
             <TextView
-                android:id="@+id/tv_companyName"
+                android:id="@+id/tv_contact_employee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/padding_normal"
+                android:padding="@dimen/padding_normal"
+                android:text="联系人："
+                android:textSize="@dimen/gj_d" />
+
+            <TextView
+                android:id="@+id/tv_positions_employee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_normal"
+                android:text="求职职位："
+                android:textColor="@color/text_color_b"
+                android:textSize="@dimen/gj_d" />
+
+            <TextView
+                android:id="@+id/tv_characters_employee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_normal"
+                android:text="工作性质："
+                android:textSize="@dimen/gj_d" />
+
+            <TextView
+                android:id="@+id/tv_money_employee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_normal"
+                android:text="月薪："
+                android:textColor="@color/text_color_b"
+                android:textSize="@dimen/gj_d" />
+
+            <TextView
+                android:id="@+id/tv_email_employee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_normal"
+                android:text="邮箱："
+                android:textColor="@color/text_color_b"
+                android:textSize="@dimen/gj_d" />
+
+            <TextView
+                android:id="@+id/tv_tel_employee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_normal"
+                android:text="联系电话："
+                android:textColor="@color/text_color_b"
+                android:textSize="@dimen/gj_d" />
+
+            <TextView
+                android:id="@+id/tv_date_employee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_normal"
+                android:text="发布时间：2017-03-15"
+                android:textColor="@color/text_color_b"
+                android:textSize="@dimen/gj_d" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#7ECDFF"
+                android:padding="@dimen/padding_normal"
+                android:text="工作经历"
+                android:textColor="@color/white"
+                android:textSize="@dimen/gj_f" />
+
+            <TextView
+                android:id="@+id/tv_experience_employee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_normal"
+                android:text="工作经历"
+                android:textColor="@color/text_color_b"
+                android:textSize="@dimen/gj_d" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#7ECDFF"
+                android:padding="@dimen/padding_normal"
+                android:text="自我评价"
+                android:textColor="@color/white"
+                android:textSize="@dimen/gj_f" />
+
+            <TextView
+                android:id="@+id/tv_evaluate_employee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_normal"
+                android:text="自我评价"
+                android:textColor="@color/text_color_b"
+                android:textSize="@dimen/gj_d" />
+        </LinearLayout>
+        <!--招聘界面-->
+        <LinearLayout
+            android:id="@+id/ll_employer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#7ECDFF"
+                android:padding="@dimen/padding_normal"
+                android:text="公司介绍"
+                android:textColor="@color/white"
+                android:textSize="@dimen/gj_f" />
+
+            <TextView
+                android:id="@+id/tv_companyName_employer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_normal"
                 android:text="公司名称"
-                android:textColor="@color/text_color_b"
-                android:textSize="12sp" />
+                android:textColor="@color/blue"
+                android:textSize="@dimen/gj_g" />
 
             <TextView
-                android:id="@+id/tv_companyAdress"
+                android:id="@+id/tv_companyAdress_employer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/padding_normal"
-                android:text="公司地址"
+                android:padding="@dimen/padding_normal"
+                android:text="公司地址："
                 android:textColor="@color/text_color_b"
-                android:textSize="12sp" />
+                android:textSize="@dimen/gj_d" />
 
             <TextView
-                android:id="@+id/tv_workAdress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/padding_normal"
-                android:text="工作地址"
-                android:textColor="@color/text_color_b"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_layout2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:padding="@dimen/padding_normal">
-
-            <View
                 android:layout_width="match_parent"
-                android:layout_height="1dip"
-                android:background="@color/line" />
+                android:layout_height="wrap_content"
+                android:background="#7ECDFF"
+                android:padding="@dimen/padding_normal"
+                android:text="公司描述"
+                android:textColor="@color/white"
+                android:textSize="@dimen/gj_f" />
 
             <TextView
+                android:id="@+id/tv_companyIntro_employer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginRight="@dimen/padding_normal"
-                android:text="公司简介"
-                android:textColor="#458AD8"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_companyIntro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding_normal"
-                android:text="公司简介"
+                android:padding="@dimen/padding_normal"
+                android:text="公司简介："
                 android:textColor="@color/text_color_b"
-                android:textSize="12sp" />
+                android:textSize="@dimen/gj_d" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginRight="@dimen/padding_normal"
-                android:text="工作内容"
-                android:textColor="#458AD8"
-                android:textSize="12sp" />
+                android:background="#7ECDFF"
+                android:padding="@dimen/padding_normal"
+                android:text="联系方式"
+                android:textColor="@color/white"
+                android:textSize="@dimen/gj_f" />
 
             <TextView
-                android:id="@+id/tv_content"
+                android:id="@+id/tv_contact_employer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding_normal"
-                android:text="工作内容"
+                android:padding="@dimen/padding_normal"
+                android:text="联系人："
+                android:textSize="@dimen/gj_d" />
+
+            <TextView
+                android:id="@+id/tv_tel_employer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_normal"
+                android:text="联系电话："
                 android:textColor="@color/text_color_b"
-                android:textSize="12sp" />
+                android:textSize="@dimen/gj_d" />
+
+            <TextView
+                android:id="@+id/tv_email_employer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_normal"
+                android:text="邮箱："
+                android:textColor="@color/text_color_b"
+                android:textSize="@dimen/gj_d" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#7ECDFF"
+                android:padding="@dimen/padding_normal"
+                android:text="招聘职位"
+                android:textColor="@color/white"
+                android:textSize="@dimen/gj_f" />
+
+            <TextView
+                android:id="@+id/tv_positions_employer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_normal"
+                android:text="职位："
+                android:textColor="@color/text_color_b"
+                android:textSize="@dimen/gj_d" />
+
+            <TextView
+                android:id="@+id/tv_characters_employer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_normal"
+                android:text="工作性质："
+                android:textSize="@dimen/gj_d" />
+
+            <TextView
+                android:id="@+id/tv_workAdress_employer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_normal"
+                android:text="工作地址："
+                android:textColor="@color/text_color_b"
+                android:textSize="@dimen/gj_d" />
+
+            <TextView
+                android:id="@+id/tv_money_employer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_normal"
+                android:text="月薪："
+                android:textColor="@color/text_color_b"
+                android:textSize="@dimen/gj_d" />
+
+            <TextView
+                android:id="@+id/tv_date_employer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_normal"
+                android:text="发布时间："
+                android:textColor="@color/text_color_b"
+                android:textSize="@dimen/gj_d" />
+
+            <TextView
+                android:id="@+id/tv_content_employer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_normal"
+                android:text="工作内容："
+                android:textColor="@color/text_color_b"
+                android:textSize="@dimen/gj_d" />
+
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dip"
-            android:background="@color/line" />
-
-        <LinearLayout
-            android:id="@+id/ll_layout3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:padding="@dimen/padding_normal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginRight="@dimen/padding_normal"
-                android:text="工作经历"
-                android:textColor="#458AD8"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_experience"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding_normal"
-                android:text="工作经历"
-                android:textColor="@color/text_color_b"
-                android:textSize="12sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginRight="@dimen/padding_normal"
-                android:text="自我评价"
-                android:textColor="#458AD8"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_evaluate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding_normal"
-                android:text="自我评价"
-                android:textColor="@color/text_color_b"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dip"
-            android:background="@color/line" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="@dimen/padding_normal">
-
-            <TextView
-                android:id="@+id/tv_contact"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/padding_normal"
-                android:text="王先生"
-                android:textColor="#458AD8"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/padding_normal"
-                android:text="2017-03-15"
-                android:textColor="@color/text_color_b"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/padding_normal"
-                android:text="16:23"
-                android:textColor="@color/text_color_b"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_tel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="联系电话"
-                android:textColor="#CD2626"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding_normal"
-            android:text="邮箱"
-            android:textColor="@color/text_color_b"
-            android:textSize="12sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dip"
-            android:background="@color/line" />
-
     </LinearLayout>
 </ScrollView>

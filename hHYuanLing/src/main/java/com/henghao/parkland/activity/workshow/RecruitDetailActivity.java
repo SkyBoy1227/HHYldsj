@@ -19,44 +19,52 @@ import butterknife.InjectView;
  */
 public class RecruitDetailActivity extends ActivityFragmentSupport {
 
-    @InjectView(R.id.ll_layout1)
-    LinearLayout layout1;
-    @InjectView(R.id.ll_layout2)
-    LinearLayout layout2;
-    @InjectView(R.id.ll_layout3)
-    LinearLayout layout3;
-    @InjectView(R.id.tv_positions)
-    TextView tvPositions;
-    @InjectView(R.id.tv_money)
-    TextView tvMoney;
-    @InjectView(R.id.tv_companyName)
-    TextView tvCompanyName;
-    @InjectView(R.id.tv_companyAdress)
-    TextView tvCompanyAdress;
-    @InjectView(R.id.tv_workAdress)
-    TextView tvWorkAdress;
-    @InjectView(R.id.tv_companyIntro)
-    TextView tvCompanyIntro;
-    @InjectView(R.id.tv_content)
-    TextView tvContent;
-    @InjectView(R.id.tv_experience)
-    TextView tvExperience;
-    @InjectView(R.id.tv_evaluate)
-    TextView tvEvaluate;
-    @InjectView(R.id.tv_contact)
-    TextView tvContact;
-    @InjectView(R.id.tv_date)
-    TextView tvDate;
-    @InjectView(R.id.tv_time)
-    TextView tvTime;
-    @InjectView(R.id.tv_tel)
-    TextView tvTel;
-    @InjectView(R.id.tv_email)
-    TextView tvEmail;
-    @InjectView(R.id.tv_tp)
-    TextView tvTp;
-    @InjectView(R.id.tv_characters)
-    TextView tvCharacters;
+    @InjectView(R.id.tv_contact_employee)
+    TextView tvContactEmployee;
+    @InjectView(R.id.tv_positions_employee)
+    TextView tvPositionsEmployee;
+    @InjectView(R.id.tv_characters_employee)
+    TextView tvCharactersEmployee;
+    @InjectView(R.id.tv_money_employee)
+    TextView tvMoneyEmployee;
+    @InjectView(R.id.tv_email_employee)
+    TextView tvEmailEmployee;
+    @InjectView(R.id.tv_tel_employee)
+    TextView tvTelEmployee;
+    @InjectView(R.id.tv_date_employee)
+    TextView tvDateEmployee;
+    @InjectView(R.id.tv_experience_employee)
+    TextView tvExperienceEmployee;
+    @InjectView(R.id.tv_evaluate_employee)
+    TextView tvEvaluateEmployee;
+    @InjectView(R.id.ll_employee)
+    LinearLayout llEmployee;
+    @InjectView(R.id.tv_companyName_employer)
+    TextView tvCompanyNameEmployer;
+    @InjectView(R.id.tv_companyAdress_employer)
+    TextView tvCompanyAdressEmployer;
+    @InjectView(R.id.tv_companyIntro_employer)
+    TextView tvCompanyIntroEmployer;
+    @InjectView(R.id.tv_contact_employer)
+    TextView tvContactEmployer;
+    @InjectView(R.id.tv_tel_employer)
+    TextView tvTelEmployer;
+    @InjectView(R.id.tv_email_employer)
+    TextView tvEmailEmployer;
+    @InjectView(R.id.tv_positions_employer)
+    TextView tvPositionsEmployer;
+    @InjectView(R.id.tv_characters_employer)
+    TextView tvCharactersEmployer;
+    @InjectView(R.id.tv_workAdress_employer)
+    TextView tvWorkAdressEmployer;
+    @InjectView(R.id.tv_content_employer)
+    TextView tvContentEmployer;
+    @InjectView(R.id.tv_money_employer)
+    TextView tvMoneyEmployer;
+    @InjectView(R.id.tv_date_employer)
+    TextView tvDateEmployer;
+    @InjectView(R.id.ll_employer)
+    LinearLayout llEmployer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +84,8 @@ public class RecruitDetailActivity extends ActivityFragmentSupport {
     public void initWidget() {
         super.initWidget();
         initWithBar();
+        mLeftTextView.setVisibility(View.VISIBLE);
+        mLeftTextView.setText("返回");
         initWithCenterBar();
         mCenterTextView.setText("人才招聘");
     }
@@ -85,39 +95,39 @@ public class RecruitDetailActivity extends ActivityFragmentSupport {
         super.initData();
         Bundle bundle = getIntent().getBundleExtra("bundle");
         RecruitEntity mEntity = (RecruitEntity) bundle.getSerializable(Constant.INTNET_DATA);
+        llEmployee.setVisibility(View.GONE);
+        llEmployer.setVisibility(View.GONE);
         // 工作性质（1为全职/2为兼职）
         if (mEntity.getCharacters() == 1) {
-            tvCharacters.setText("全职");
+            tvCharactersEmployee.setText("工作性质：全职");
+            tvCharactersEmployer.setText("工作性质：全职");
         } else if (mEntity.getCharacters() == 2) {
-            tvCharacters.setText("兼职");
+            tvCharactersEmployee.setText("工作性质：兼职");
+            tvCharactersEmployer.setText("工作性质：兼职");
         }
-        tvPositions.setText(mEntity.getPositions());
-        tvMoney.setText(mEntity.getMoney() + "");
-        tvContact.setText(mEntity.getContact());
-        tvDate.setText(mEntity.getDate());
-        tvTime.setText(mEntity.getTime());
-        tvTel.setText(mEntity.getTel());
-        tvEmail.setText(mEntity.getEmail());
         //根据信息的类型（招聘信息/求职信息）显示不同的数据
-        layout1.setVisibility(View.GONE);
-        layout2.setVisibility(View.GONE);
-        layout3.setVisibility(View.GONE);
         if (mEntity.getTp() == 1) {//招聘信息
-            tvTp.setText("招聘");
-            //显示公司名称、公司地址、工作地址、公司简介、工作内容
-            layout1.setVisibility(View.VISIBLE);
-            layout2.setVisibility(View.VISIBLE);
-            tvCompanyName.setText(mEntity.getCompanyName());
-            tvCompanyAdress.setText(mEntity.getCompanyAdress());
-            tvWorkAdress.setText(mEntity.getWorkAdress());
-            tvCompanyIntro.setText(mEntity.getCompanyIntro());
-            tvContent.setText(mEntity.getContent());
+            llEmployer.setVisibility(View.VISIBLE);
+            tvCompanyAdressEmployer.setText("公司地址：" + mEntity.getCompanyAdress());
+            tvCompanyIntroEmployer.setText("公司简介：" + mEntity.getCompanyIntro());
+            tvContactEmployer.setText("联系人：" + mEntity.getContact());
+            tvTelEmployer.setText("联系电话：" + mEntity.getTel());
+            tvEmailEmployer.setText("邮箱：" + mEntity.getEmail());
+            tvPositionsEmployer.setText("职位：" + mEntity.getPositions());
+            tvWorkAdressEmployer.setText("工作地址：" + mEntity.getWorkAdress());
+            tvMoneyEmployer.setText("月薪：" + mEntity.getMoney());
+            tvDateEmployer.setText("发布时间：" + mEntity.getDate() + mEntity.getTime());
+            tvContentEmployer.setText("工作内容：" + mEntity.getContent());
         } else if (mEntity.getTp() == 2) {//求职信息
-            tvTp.setText("求职");
-            //显示工作经历与自我评价
-            layout3.setVisibility(View.VISIBLE);
-            tvExperience.setText(mEntity.getExperience());
-            tvEvaluate.setText(mEntity.getEvaluate());
+            llEmployee.setVisibility(View.VISIBLE);
+            tvContactEmployee.setText("联系人：" + mEntity.getContact());
+            tvPositionsEmployee.setText("求职职位：" + mEntity.getPositions());
+            tvMoneyEmployee.setText("月薪：" + mEntity.getMoney());
+            tvEmailEmployee.setText("邮箱：" + mEntity.getEmail());
+            tvTelEmployee.setText("联系电话：" + mEntity.getTel());
+            tvDateEmployee.setText("发布时间：" + mEntity.getDate() + mEntity.getTime());
+            tvExperienceEmployee.setText("工作经历：" + mEntity.getExperience());
+            tvEvaluateEmployee.setText("自我评价：" + mEntity.getEvaluate());
         }
     }
 }

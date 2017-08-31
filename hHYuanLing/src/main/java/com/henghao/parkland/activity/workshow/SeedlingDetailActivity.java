@@ -65,6 +65,8 @@ public class SeedlingDetailActivity extends ActivityFragmentSupport {
     public void initWidget() {
         super.initWidget();
         initWithBar();
+        mLeftTextView.setVisibility(View.VISIBLE);
+        mLeftTextView.setText("返回");
         initWithCenterBar();
         mCenterTextView.setText("苗木信息");
     }

@@ -59,11 +59,9 @@ public class RecruitAdapter extends ArrayAdapter<RecruitEntity> {
         if (entity.getTp() == 1) {
             holder.tvTp.setText("招聘");
             holder.tvCompanyName.setVisibility(View.VISIBLE);
-            holder.tvWorkAdress.setVisibility(View.VISIBLE);
         } else if (entity.getTp() == 2) {
             holder.tvTp.setText("求职");
             holder.tvCompanyName.setVisibility(View.GONE);
-            holder.tvWorkAdress.setVisibility(View.GONE);
         }
         if (entity.getCharacters() == 1) {
             holder.tvCharacters.setText("全职");
@@ -71,10 +69,7 @@ public class RecruitAdapter extends ArrayAdapter<RecruitEntity> {
             holder.tvCharacters.setText("兼职");
         }
         holder.tvPositions.setText(entity.getPositions());
-        holder.tvWorkAdress.setText(entity.getWorkAdress());
         holder.tvDate.setText(entity.getDate());
-        holder.tvTel.setText(entity.getTel());
-        holder.tvContact.setText(entity.getContact());
         holder.tvCompanyName.setText(entity.getCompanyName());
         holder.tvMoney.setText(entity.getMoney());
         viewClick(holder, convertView, position);
@@ -102,20 +97,14 @@ public class RecruitAdapter extends ArrayAdapter<RecruitEntity> {
         TextView tvTp;
         @InjectView(R.id.tv_characters)
         TextView tvCharacters;
-        @InjectView(R.id.tv_positions)
-        TextView tvPositions;
         @InjectView(R.id.tv_companyName)
         TextView tvCompanyName;
-        @InjectView(R.id.tv_workAdress)
-        TextView tvWorkAdress;
-        @InjectView(R.id.tv_contact)
-        TextView tvContact;
-        @InjectView(R.id.tv_tel)
-        TextView tvTel;
-        @InjectView(R.id.tv_date)
-        TextView tvDate;
+        @InjectView(R.id.tv_positions)
+        TextView tvPositions;
         @InjectView(R.id.tv_money)
         TextView tvMoney;
+        @InjectView(R.id.tv_date)
+        TextView tvDate;
 
         ViewHolder(View view) {
             ButterKnife.inject(this, view);
