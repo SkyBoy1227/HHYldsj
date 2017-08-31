@@ -1,22 +1,20 @@
 package com.henghao.parkland.activity;
 
 import android.content.Intent;
-import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.ValueCallback;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.henghao.parkland.ActivityFragmentSupport;
-import com.henghao.parkland.Constant;
 import com.henghao.parkland.R;
-
-import java.io.File;
+import com.henghao.parkland.utils.webview.BaseWebChromeClient;
+import com.henghao.parkland.utils.webview.DefaultWebChromeClient;
+import com.henghao.parkland.utils.webview.WebChromeClientAboveFive;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -32,6 +30,8 @@ public class WebviewActivity extends ActivityFragmentSupport {
     private String title;
     private ValueCallback mUploadMessage;
     private String mCameraFilePath;
+    private DefaultWebChromeClient defaultWebChromeClient;// 兼容android5.0以下版本的WebChromeClient类
+    private WebChromeClientAboveFive webChromeClientAboveFive;// 兼容android5.0及以上的WebChromeClient类
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,8 @@ public class WebviewActivity extends ActivityFragmentSupport {
         this.mActivityFragmentView.getNavitionBarView().setVisibility(View.VISIBLE);
         setContentView(this.mActivityFragmentView);
         ButterKnife.inject(this);
+        defaultWebChromeClient = new DefaultWebChromeClient(this);
+        webChromeClientAboveFive = new WebChromeClientAboveFive(this);
         url = getIntent().getStringExtra("url");
         title = getIntent().getStringExtra("title");
         initWidget();
@@ -79,24 +81,29 @@ public class WebviewActivity extends ActivityFragmentSupport {
                 return super.shouldOverrideUrlLoading(view, url);
             }
         });
-        webView.setWebChromeClient(new WebChromeClient() {
-            // For Android 3.0+
-            public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {
-                if (mUploadMessage != null) return;
-                mUploadMessage = uploadMsg;
-                startActivityForResult(createDefaultOpenableIntent(), FILECHOOSER_RESULTCODE);
-            }
-
-            // For Android < 3.0
-            public void openFileChooser(ValueCallback<Uri> uploadMsg) {
-                openFileChooser(uploadMsg, "");
-            }
-
-            // For Android  > 4.1.1
-            public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {
-                openFileChooser(uploadMsg, acceptType);
-            }
-        });
+//        webView.setWebChromeClient(new WebChromeClient() {
+//            // For Android 3.0+
+//            public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {
+//                if (mUploadMessage != null) return;
+//                mUploadMessage = uploadMsg;
+//                startActivityForResult(createDefaultOpenableIntent(), FILECHOOSER_RESULTCODE);
+//            }
+//
+//            // For Android < 3.0
+//            public void openFileChooser(ValueCallback<Uri> uploadMsg) {
+//                openFileChooser(uploadMsg, "");
+//            }
+//
+//            // For Android  > 4.1.1
+//            public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {
+//                openFileChooser(uploadMsg, acceptType);
+//            }
+//        });
+        if (Build.VERSION.SDK_INT >= 21) {
+            webView.setWebChromeClient(webChromeClientAboveFive);
+        } else {
+            webView.setWebChromeClient(defaultWebChromeClient);
+        }
         //打开本包内asset目录下的1.html文件
         if (url.contains("http://")) {
             webView.loadUrl(url);
@@ -106,42 +113,42 @@ public class WebviewActivity extends ActivityFragmentSupport {
         }
     }
 
-    private Intent createDefaultOpenableIntent() {
-        // Create and return a chooser with the default OPENABLE
-        // actions including the camera, camcorder and sound
-        // recorder where available.
-        Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-        i.addCategory(Intent.CATEGORY_OPENABLE);
-        i.setType("*/*");
-
-        Intent chooser = createChooserIntent(createCameraIntent(), createCamcorderIntent(),
-                createSoundRecorderIntent());
-        chooser.putExtra(Intent.EXTRA_INTENT, i);
-        return chooser;
-    }
-
-    private Intent createChooserIntent(Intent... intents) {
-        Intent chooser = new Intent(Intent.ACTION_CHOOSER);
-        chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, intents);
-        chooser.putExtra(Intent.EXTRA_TITLE, "File Chooser");
-        return chooser;
-    }
-
-    private Intent createCameraIntent() {
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        mCameraFilePath = Constant.CACHE_DIR_PATH + File.separator +
-                System.currentTimeMillis() + ".jpg";
-        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(mCameraFilePath)));
-        return cameraIntent;
-    }
-
-    private Intent createCamcorderIntent() {
-        return new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-    }
-
-    private Intent createSoundRecorderIntent() {
-        return new Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION);
-    }
+//    private Intent createDefaultOpenableIntent() {
+//        // Create and return a chooser with the default OPENABLE
+//        // actions including the camera, camcorder and sound
+//        // recorder where available.
+//        Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+//        i.addCategory(Intent.CATEGORY_OPENABLE);
+//        i.setType("*/*");
+//
+//        Intent chooser = createChooserIntent(createCameraIntent(), createCamcorderIntent(),
+//                createSoundRecorderIntent());
+//        chooser.putExtra(Intent.EXTRA_INTENT, i);
+//        return chooser;
+//    }
+//
+//    private Intent createChooserIntent(Intent... intents) {
+//        Intent chooser = new Intent(Intent.ACTION_CHOOSER);
+//        chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, intents);
+//        chooser.putExtra(Intent.EXTRA_TITLE, "File Chooser");
+//        return chooser;
+//    }
+//
+//    private Intent createCameraIntent() {
+//        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        mCameraFilePath = Constant.CACHE_DIR_PATH + File.separator +
+//                System.currentTimeMillis() + ".jpg";
+//        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(mCameraFilePath)));
+//        return cameraIntent;
+//    }
+//
+//    private Intent createCamcorderIntent() {
+//        return new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+//    }
+//
+//    private Intent createSoundRecorderIntent() {
+//        return new Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION);
+//    }
 
     /*
      * 用onkeyDown监听不到返回键
@@ -163,20 +170,12 @@ public class WebviewActivity extends ActivityFragmentSupport {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == FILECHOOSER_RESULTCODE) {
-            if (null == mUploadMessage) return;
-            Uri result = data == null || resultCode != RESULT_OK ? null
-                    : data.getData();
-            File cameraFile = new File(mCameraFilePath);
-            if (cameraFile.exists()) {
-                result = Uri.fromFile(cameraFile);
-                // Broadcast to the media scanner that we have a new photo
-                // so it will be added into the gallery for the user.
-                sendBroadcast(
-                        new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, result));
+        if (requestCode == BaseWebChromeClient.FILECHOOSER_RESULTCODE) {
+            if (Build.VERSION.SDK_INT >= 21) {
+                webChromeClientAboveFive.onActivityResult(resultCode, data);
+            } else {
+                defaultWebChromeClient.onActivityResult(resultCode, data);
             }
-            mUploadMessage.onReceiveValue(result);
-            mUploadMessage = null;
         }
     }
 }
