@@ -19,8 +19,13 @@ import java.util.ArrayList;
  * "address":       供应商地址,
  * "supplier":      供应商,
  * "breed":         品种,
- * "sub":           二级品种,
+ * "sub":           二级种类,
  * "picture":       文件路径（多数据）
+ * "dbh":           胸径
+ * "pdt":           蓬径
+ * "height":        高度
+ * "num":           数量
+ * "unit":          单位
  */
 
 public class SeedlingEntity extends IdEntity {
@@ -64,7 +69,7 @@ public class SeedlingEntity extends IdEntity {
     @Expose
     @SerializedName("breed")
     private String breed;
-    // 二级品种
+    // 二级种类
     @Expose
     @SerializedName("sub")
     private String sub;
@@ -72,6 +77,66 @@ public class SeedlingEntity extends IdEntity {
     @Expose
     @SerializedName("picture")
     private ArrayList<String> picture;
+    // 胸径
+    @Expose
+    @SerializedName("dbh")
+    private String dbh;
+    // 蓬径
+    @Expose
+    @SerializedName("pdt")
+    private String pdt;
+    // 高度
+    @Expose
+    @SerializedName("height")
+    private double height;
+    // 数量
+    @Expose
+    @SerializedName("num")
+    private double num;
+    // 单位
+    @Expose
+    @SerializedName("unit")
+    private String unit;
+
+    public String getDbh() {
+        return dbh;
+    }
+
+    public void setDbh(String dbh) {
+        this.dbh = dbh;
+    }
+
+    public String getPdt() {
+        return pdt;
+    }
+
+    public void setPdt(String pdt) {
+        this.pdt = pdt;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public double getNum() {
+        return num;
+    }
+
+    public void setNum(double num) {
+        this.num = num;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 
     public int getSid() {
         return sid;

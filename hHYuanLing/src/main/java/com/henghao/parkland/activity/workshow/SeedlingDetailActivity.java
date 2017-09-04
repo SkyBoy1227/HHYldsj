@@ -46,6 +46,14 @@ public class SeedlingDetailActivity extends ActivityFragmentSupport {
     TextView tvContent;
     @InjectView(R.id.gridView)
     NoScrollGridView gridView;
+    @InjectView(R.id.tv_dbh)
+    TextView tvDbh;
+    @InjectView(R.id.tv_pdt)
+    TextView tvPdt;
+    @InjectView(R.id.tv_height)
+    TextView tvHeight;
+    @InjectView(R.id.tv_num)
+    TextView tvNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,15 +89,19 @@ public class SeedlingDetailActivity extends ActivityFragmentSupport {
         if (urls != null) {
             gridView.setAdapter(mAdapter);
         }
-        tvAddress.setText(mEntity.getAddress());
+        tvAddress.setText("供应商地址：" + mEntity.getAddress());
         tvContact.setText(mEntity.getContact());
         tvContent.setText(mEntity.getContent());
         tvDate.setText(mEntity.getDate());
         tvTime.setText(mEntity.getTime());
         tvSub.setText(mEntity.getSub());
         tvTel.setText(mEntity.getTel());
-        tvSupplier.setText(mEntity.getSupplier());
+        tvSupplier.setText("供应商：" + mEntity.getSupplier());
         tvTitleName.setText(mEntity.getTitleName());
-        tvBreed.setText(mEntity.getBreed());
+        tvBreed.setText("品种：" + mEntity.getBreed());
+        tvDbh.setText("胸径：" + mEntity.getDbh());
+        tvPdt.setText("蓬径：" + mEntity.getPdt());
+        tvHeight.setText("高度：" + mEntity.getHeight());
+        tvNum.setText("数量：" + mEntity.getNum() + " " + mEntity.getUnit());
     }
 }

@@ -108,6 +108,7 @@ public class RecruitDetailActivity extends ActivityFragmentSupport {
         //根据信息的类型（招聘信息/求职信息）显示不同的数据
         if (mEntity.getTp() == 1) {//招聘信息
             llEmployer.setVisibility(View.VISIBLE);
+            tvCompanyNameEmployer.setText(mEntity.getCompanyName());
             tvCompanyAdressEmployer.setText("公司地址：" + mEntity.getCompanyAdress());
             tvCompanyIntroEmployer.setText("公司简介：" + mEntity.getCompanyIntro());
             tvContactEmployer.setText("联系人：" + mEntity.getContact());
@@ -116,7 +117,7 @@ public class RecruitDetailActivity extends ActivityFragmentSupport {
             tvPositionsEmployer.setText("职位：" + mEntity.getPositions());
             tvWorkAdressEmployer.setText("工作地址：" + mEntity.getWorkAdress());
             tvMoneyEmployer.setText("月薪：" + mEntity.getMoney());
-            tvDateEmployer.setText("发布时间：" + mEntity.getDate() + mEntity.getTime());
+            tvDateEmployer.setText("发布时间：" + mEntity.getDate() + " " + mEntity.getTime());
             tvContentEmployer.setText("工作内容：" + mEntity.getContent());
         } else if (mEntity.getTp() == 2) {//求职信息
             llEmployee.setVisibility(View.VISIBLE);
@@ -125,7 +126,7 @@ public class RecruitDetailActivity extends ActivityFragmentSupport {
             tvMoneyEmployee.setText("月薪：" + mEntity.getMoney());
             tvEmailEmployee.setText("邮箱：" + mEntity.getEmail());
             tvTelEmployee.setText("联系电话：" + mEntity.getTel());
-            tvDateEmployee.setText("发布时间：" + mEntity.getDate() + mEntity.getTime());
+            tvDateEmployee.setText("发布时间：" + mEntity.getDate() + " " + mEntity.getTime());
             tvExperienceEmployee.setText("工作经历：" + mEntity.getExperience());
             tvEvaluateEmployee.setText("自我评价：" + mEntity.getEvaluate());
         }
