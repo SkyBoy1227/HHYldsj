@@ -88,11 +88,11 @@ public class SeedlingEntity extends IdEntity {
     // 高度
     @Expose
     @SerializedName("height")
-    private double height;
+    private String height;
     // 数量
     @Expose
     @SerializedName("num")
-    private double num;
+    private String num;
     // 单位
     @Expose
     @SerializedName("unit")
@@ -114,19 +114,19 @@ public class SeedlingEntity extends IdEntity {
         this.pdt = pdt;
     }
 
-    public double getHeight() {
+    public String getHeight() {
         return height;
     }
 
-    public void setHeight(double height) {
+    public void setHeight(String height) {
         this.height = height;
     }
 
-    public double getNum() {
+    public String getNum() {
         return num;
     }
 
-    public void setNum(double num) {
+    public void setNum(String num) {
         this.num = num;
     }
 
