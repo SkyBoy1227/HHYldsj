@@ -38,9 +38,9 @@ public class ProtocolUrl {
             HZ_ROOT_URL = "http://172.16.0.121";
         } else {
             // 生产地址
-            ROOT_URL = "http://222.85.156.43:81";
+            ROOT_URL = "http://222.85.156.50:81";
             // 生产地址
-            HZ_ROOT_URL = "http://222.85.156.43:81";
+            HZ_ROOT_URL = "http://222.85.156.50:81";
         }
     }
 
