@@ -279,14 +279,14 @@ public class ProtocolUrl {
      * 任务安排
      **************************/
     /**
-     * 工作任务提交
+     * 工作任务
      */
-    public static final String ADD_WORK_TASK = "horizon/template/form/default.wf?formid=HZ90804e5e1852f8015e185ac79f00fc&loginName=";
+    public static final String ADD_WORK_TASK = "resource/skins/bootstrap/view/datatables/view.datatables.jsp?viewid=HZ90804e5e1852f8015e18679bce0251&loginName=";
 
     /**
-     * 工作安排提交
+     * 工作安排
      */
-    public static final String ADD_WORK_ARRANGE = "horizon/template/form/default.wf?formid=HZ90804e5e1852f8015e18c48c4b0ca7&loginName=";
+    public static final String ADD_WORK_ARRANGE = "resource/skins/bootstrap/view/datatables/view.datatables.jsp?viewid=HZ90804e5e1852f8015e18cec7430deb&loginName=";
 
     /**
      * 我的计划提交
