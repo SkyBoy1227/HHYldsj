@@ -68,23 +68,16 @@ public class ContractAdapter extends ArrayAdapter<AppGridEntity> {
                 Intent intent = new Intent();
                 switch (position) {
                     case 0:
-                        // 商务合同
-                        intent.putExtra("title", "商务合同");
-                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_SWHT) + mActivityFragmentSupport.getLoginUserName());
+                        // 主合同
+                        intent.putExtra("title", "主合同");
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_ZHT) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
                     case 1:
-                        // 劳务合同
-                        intent.putExtra("title", "劳务合同");
-                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_LWHT) + mActivityFragmentSupport.getLoginUserName());
-                        intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
-                        mActivityFragmentSupport.startActivity(intent);
-                        break;
-                    case 2:
-                        // 授权合同
-                        intent.putExtra("title", "授权合同");
-                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_SQHT) + mActivityFragmentSupport.getLoginUserName());
+                        // 从合同
+                        intent.putExtra("title", "从合同");
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_CHT) + mActivityFragmentSupport.getLoginUserName());
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;

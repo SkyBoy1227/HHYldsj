@@ -264,19 +264,14 @@ public class ProtocolUrl {
      **************************/
 
     /**
-     * 商务合同提交
+     * 主合同提交
      */
-    public static final String ADD_SWHT = "horizon/template/form/default.wf?formid=HZ90804e5e17f143015e180a6ec501f0&loginName=";
+    public static final String ADD_ZHT = "horizon/template/form/default.wf?formid=HZ8bb06261d0d4e60161da039d3864c8&loginName=";
 
     /**
-     * 劳务合同提交
+     * 从合同提交
      */
-    public static final String ADD_LWHT = "horizon/template/form/default.wf?formid=HZ90804e5e17f143015e183a3a5c05fc&loginName=";
-
-    /**
-     * 授权合同提交
-     */
-    public static final String ADD_SQHT = "horizon/template/form/default.wf?formid=HZ90804e5e17f143015e184ab31c07ea&loginName=";
+    public static final String ADD_CHT = "horizon/template/form/default.wf?formid=HZ8bb06261d0d4e60161db2dc5ab74f1&loginName=";
 
     /************************ 合同管理相关 end **************************/
 

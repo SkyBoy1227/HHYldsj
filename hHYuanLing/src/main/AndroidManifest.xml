@@ -139,11 +139,6 @@
             android:name=".activity.user.MyCenterActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Activity.Theme" />
-        <!-- activity 任务安排 -->
-        <activity
-            android:name=".activity.user.TaskActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Activity.Theme" />
         <!-- activity 合同管理 -->
         <activity
             android:name=".activity.user.ContractActivity"

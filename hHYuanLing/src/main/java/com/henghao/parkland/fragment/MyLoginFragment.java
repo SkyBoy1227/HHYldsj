@@ -25,7 +25,6 @@ import com.henghao.parkland.activity.user.LoginAndRegActivity;
 import com.henghao.parkland.activity.user.MyCenterActivity;
 import com.henghao.parkland.activity.user.QiandaoActivity;
 import com.henghao.parkland.activity.user.SettingActivity;
-import com.henghao.parkland.activity.user.TaskActivity;
 import com.henghao.parkland.utils.Requester;
 import com.lidroid.xutils.ViewUtils;
 
@@ -121,7 +120,7 @@ public class MyLoginFragment extends FragmentSupport {
     }
 
     @OnClick({R.id.tv_mywallet, R.id.tv_login, R.id.ll_updatename, R.id.image_setting,
-            R.id.tv_my_center, R.id.tv_qiandao, R.id.tv_myproject, R.id.tv_task, R.id.tv_compactmanage})
+            R.id.tv_my_center, R.id.tv_qiandao, R.id.tv_myproject, R.id.tv_compactmanage})
     public void onViewClicked(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
@@ -162,11 +161,6 @@ public class MyLoginFragment extends FragmentSupport {
             case R.id.tv_my_center:
                 //个人中心
                 intent.setClass(mActivity, MyCenterActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.tv_task:
-                //任务安排
-                intent.setClass(mActivity, TaskActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_qiandao:

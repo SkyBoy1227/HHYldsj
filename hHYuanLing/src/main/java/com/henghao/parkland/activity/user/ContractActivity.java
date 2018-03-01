@@ -56,18 +56,13 @@ public class ContractActivity extends ActivityFragmentSupport {
         //第一个
         AppGridEntity mEntity = new AppGridEntity();
         mEntity.setImageId(R.mipmap.icon_contract_one);
-        mEntity.setName("商务合同");
+        mEntity.setName("主合同");
         mList.add(mEntity);
         //第二个
         AppGridEntity mEntity2 = new AppGridEntity();
-        mEntity2.setImageId(R.mipmap.icon_contract_two);
-        mEntity2.setName("劳务合同");
+        mEntity2.setImageId(R.mipmap.icon_contract_three);
+        mEntity2.setName("从合同");
         mList.add(mEntity2);
-        //第三个
-        AppGridEntity mEntity3 = new AppGridEntity();
-        mEntity3.setImageId(R.mipmap.icon_contract_three);
-        mEntity3.setName("授权合同");
-        mList.add(mEntity3);
         mAdapter = new ContractAdapter(this, mList);
         this.gridview.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();

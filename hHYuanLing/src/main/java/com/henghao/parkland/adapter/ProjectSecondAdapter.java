@@ -142,6 +142,27 @@ public class ProjectSecondAdapter extends ArrayAdapter<AppGridEntity> {
                         intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
                         mActivityFragmentSupport.startActivity(intent);
                         break;
+                    case 4:
+                        // 工作任务
+                        intent.putExtra("title", "工作任务");
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_WORK_TASK) + mActivityFragmentSupport.getLoginUserName());
+                        intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
+                        mActivityFragmentSupport.startActivity(intent);
+                        break;
+                    case 5:
+                        // 工作安排
+                        intent.putExtra("title", "工作安排");
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_WORK_ARRANGE) + mActivityFragmentSupport.getLoginUserName());
+                        intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
+                        mActivityFragmentSupport.startActivity(intent);
+                        break;
+                    case 6:
+                        // 我的计划
+                        intent.putExtra("title", "我的计划");
+                        intent.putExtra("url", Requester.getRequestHZURL(mActivityFragmentSupport.getUserComp() + "/" + ProtocolUrl.ADD_MY_PLAN) + mActivityFragmentSupport.getLoginUserName());
+                        intent.setClass(mActivityFragmentSupport, WebviewActivity.class);
+                        mActivityFragmentSupport.startActivity(intent);
+                        break;
                 }
             }
         });
