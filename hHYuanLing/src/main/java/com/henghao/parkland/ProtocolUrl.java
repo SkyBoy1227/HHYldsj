@@ -271,7 +271,7 @@ public class ProtocolUrl {
     /**
      * 从合同提交
      */
-    public static final String ADD_CHT = "horizon/template/form/default.wf?formid=HZ8bb06261d0d4e60161db2dc5ab74f1&loginName=";
+    public static final String ADD_CHT = "horizon/template/form/default.wf?formid=HZ8bb06261d0d4e60161e0a1590d388e&loginName=";
 
     /************************ 合同管理相关 end **************************/
 
