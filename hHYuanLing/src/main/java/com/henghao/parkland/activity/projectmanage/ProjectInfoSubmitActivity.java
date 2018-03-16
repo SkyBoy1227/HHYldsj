@@ -19,7 +19,6 @@ import com.henghao.parkland.ProtocolUrl;
 import com.henghao.parkland.R;
 import com.henghao.parkland.fragment.XiangmuFragment;
 import com.henghao.parkland.model.entity.BaseEntity;
-import com.henghao.parkland.utils.Requester;
 import com.henghao.parkland.views.DateChooseWheelViewDialog;
 
 import org.json.JSONException;
@@ -113,7 +112,7 @@ public class ProjectInfoSubmitActivity extends ActivityFragmentSupport {
                 endTime = tvEndTime.getText().toString().trim();
                 if (checkData()) {
                     // 访问网络，提交项目信息
-                    addXmxxCall = Requester.addXmxx(getLoginUid(), getLoginUser().getDept(), name, principal, tel, Integer.parseInt(personNum), address, company, startTime, endTime, addXmxxCallBack);
+//                    addXmxxCall = Requester.addXmxx(getLoginUid(), getLoginUser().getDept(), name, principal, tel, Integer.parseInt(personNum), address, company, startTime, endTime, addXmxxCallBack);
                 }
                 break;
         }

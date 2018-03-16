@@ -269,37 +269,6 @@ public class Requester {
     }
 
     /**
-     * 项目信息提交
-     *
-     * @param uid       用户ID
-     * @param deptId    部门编号
-     * @param name      项目名称
-     * @param principal 项目负责人
-     * @param tel       联系方式
-     * @param personNum 项目人数
-     * @param address   项目地点
-     * @param company   施工单位
-     * @param startTime 开工时间
-     * @param endTime   竣工时间
-     * @param callback  回调
-     * @return
-     */
-    public static Call addXmxx(String uid, String deptId, String name, String principal, String tel, int personNum, String address, String company, String startTime, String endTime, BaseCallback callback) {
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("uid", uid);
-        params.put("deptId", deptId);
-        params.put("name", name);
-        params.put("principal", principal);
-        params.put("tel", tel);
-        params.put("personNum", personNum);
-        params.put("address", address);
-        params.put("company", company);
-        params.put("startTime", startTime);
-        params.put("endTime", endTime);
-        return OkHttpController.doRequest(getRequestURL(ProtocolUrl.ADD_XMXX), params, null, callback);
-    }
-
-    /**
      * 会审结果查询
      *
      * @param page     页数

@@ -158,11 +158,6 @@ public class ProtocolUrl {
      **************************/
 
     /**
-     * 项目信息提交
-     */
-    public static final String ADD_XMXX = "horizon/template/form/default.wf?formid=HZ90804e5e1719f9015e174e52b604fa&loginName=";
-
-    /**
      * 会审结果提交
      */
     public static final String ADD_HSJG = "horizon/template/form/default.wf?formid=HZ90804e5e1765cd015e17740b410153&loginName=";
@@ -178,9 +173,9 @@ public class ProtocolUrl {
     public static final String ADD_SGRY = "horizon/template/form/default.wf?formid=HZ90804e5e17f143015e17ff0702010f&loginName=";
 
     /**
-     * 开工报告提交
+     * 工程质量监督报告提交
      */
-    public static final String ADD_KGBG = "horizon/template/form/default.wf?formid=HZ90804e5e17f143015e180f811a028c&loginName=";
+    public static final String ADD_GCZLJDBG = "horizon/template/form/default.wf?formid=HZ8bb062620357050162098c3b7f460f&loginName=";
 
     /**
      * 设备信息提交
