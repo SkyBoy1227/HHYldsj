@@ -250,7 +250,7 @@ public class ProtocolUrl {
     /**
      * 项目信息查看
      */
-    public static final String FIND_XMXX = "resource/skins/bootstrap/view/datatables/view.datatables.jsp?viewid=HZ90804e5e1719f9015e176357c3064f&loginName=";
+    public static final String FIND_XMXX = "resource/skins/bootstrap/view/datatables/view.datatables.jsp?viewid=HZ8bb06261d0d4e60161da1575086608&loginName=";
 
     /************************ 项目管理相关 end **************************/
 
